@@ -17,7 +17,7 @@ const UserSchema = new Schema({
     max: 32
   },
   dateOfBirth: {
-    type: Date,
+    type: String,
     required: true
   },
   gender: {
