@@ -4,7 +4,7 @@
   "description": "Spotify Clone using graphql and mern stack",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +12,8 @@
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
-    "mongoose": "^5.9.2"
+    "graphql": "^14.6.0",
+    "mongoose": "^5.9.2",
+    "nodemon": "^2.0.2"
   }
 }
