@@ -4,6 +4,7 @@ const User = require("../models/User");
 const keys = require("../../config/keys");
 const validateSignupInput = require("../validation/signup");
 const validateLoginInput = require("../validation/login");
+
 const signup = async data => {
   try {
     const { message, isValid } = validateSignupInput(data);
