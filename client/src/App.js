@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import gql from "graphql-tag";
+import { Query } from "react-apollo";
 
-function App() {
+const FETCH_USERS = gql`
+  {
+    users {
+      _id
+      username
+      email
+    }
+  }
+`;
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Query query={FETCH_USERS}>
+      {({ loading, error, data }) => {
+        if (loading) return "Loading...";
+        if (error) return `Error! ${error.message}`;
+
+        return (
+          <ul>
+            {data.users.map(user => (
+              <li key={user._id}>{user.username}</li>
+            ))}
+          </ul>
+        );
+      }}
+    </Query>
   );
-}
+};
 
 export default App;

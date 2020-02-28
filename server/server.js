@@ -5,6 +5,7 @@ const db = require("../config/keys").MONGO_URI;
 const expressGraphQL = require("express-graphql");
 const Models = require("./models/index.js");
 const schema = require("./schema/schema");
+const cors = require("cors");
 
 const app = express();
 
@@ -19,6 +20,7 @@ mongoose
 
 // remember we use bodyParser to parse requests into json
 app.use(bodyParser.json());
+app.use(cors());
 app.use(
   "/graphql",
   expressGraphQL({
