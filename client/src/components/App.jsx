@@ -4,16 +4,18 @@ import Login from "./Login";
 import Signup from "./Signup";
 import AuthRoute from '../util/route_util';
 import Nav from "./Nav";
+import Player from "./Player";
+
 
 const App = () => {
   return (
     <div>
       <h1>Dotify</h1>
-      
       <Switch>
         <AuthRoute exact path="/login" component={Login} routeType="auth" />
         <AuthRoute exact path="/signup" component={Signup} routeType="auth" />
-        <Route path="/" component={Nav} />
+        <Route exact path="/" component={Nav} />
+        <Route exact path="/player" component={Player} />
       </Switch>
     </div>
   );

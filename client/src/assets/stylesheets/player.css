@@ -1,0 +1,117 @@
+.player-footer{
+  background: #282828;
+  height: 15vh;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.play-pause-buttons{
+display: flex;
+justify-content: center;
+height: 50px;
+}
+
+
+.timeline-time{
+position: relative;
+}
+
+
+.currentSongTime {
+color: #B3B3B3;
+margin-right: 10px;
+position: absolute;
+left: calc(50% - 305px);
+}
+
+.songDuration{
+color: #B3B3B3;
+position: absolute;
+bottom: 0px;
+margin-right: 10px;
+right: calc(50% - 305px);
+}
+
+.play, .pause{
+border: 1px solid #B3B3B3;
+border-radius: 50%;
+width: 30px;
+height: 30px;
+display: flex;
+justify-content: center;
+background-color: #282828;
+cursor: pointer;
+color: #B3B3B3;
+margin-right: 10px;
+padding: 1px;
+}
+
+.fa-play {
+  font-size: 12px;
+}
+
+.fa-pause{
+  font-size: 12px;
+}
+
+#timeline{
+width: 500px;
+height: 7px;
+border-radius: 15px;
+background: #B3B3B3;
+margin-left: calc(50% - 250px);
+display: inline-block;
+}
+
+#handle{
+width: 15px;
+height: 15px;
+border-radius: 50%;
+margin-top: -4px;
+background: white;
+cursor: pointer;
+}
+
+.volume{
+  display: flex;
+  margin-right: 15px;
+}
+
+.fa-volume-up{
+  color: white;
+  margin-top: 45px;
+  margin-right: 20px;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+
+.song-info {
+  display: flex;
+  flex-direction: column;
+}
+.song-name {
+  color: white;
+}
+
+.artist-name {
+  color: rgb(173, 173, 173);
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.fa-heart {
+  color: white;
+  margin-left: 20px;
+}
+
+.footer-center {
+  margin-top: 15px;
+}
