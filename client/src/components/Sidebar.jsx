@@ -6,25 +6,30 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="sidebar-title">
         <i className="fab fa-spotify"></i>
-        <div className="sidebar-dotify">
-          Dotify
-        </div>
+        <div className="sidebar-dotify">Dotify</div>
       </div>
-      <div>
-        <div>
-          <i className="fas fa-home"></i>
-          Home
+      <div className="static-links">
+        <div className="home">
+          <button className="home-buttons">
+            <i className="fas fa-home"></i>
+            Home
+          </button>
         </div>
-        <div>
-          <i class="fas fa-search"></i>
-          Search
+        <div className="search">
+          <button className="home-buttons">
+            <i class="fas fa-search"></i>
+            Search
+          </button>
         </div>
-        <div>
-          <i class="fas fa-book-open"></i>
-          Your Library
+        <div className="library">
+          <button className="home-buttons">
+            <i class="fas fa-book-open"></i>
+            Your Library
+          </button>
         </div>
       </div>
       <div className="playlist">
+        <span>Playlists</span>
         <div className="create">Create Playlist</div>
         <div className="liked-songs">Liked Songs</div>
         <hr className="playlist-divider" />

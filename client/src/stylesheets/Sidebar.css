@@ -18,3 +18,11 @@
   font-weight: 900;
 }
 
+.static-links > * {
+  padding: 0 8px;
+  height: 40px;
+}
+
+.playlist {
+  padding: 5px 24px;
+}
