@@ -27,6 +27,11 @@ export default {
     query IsUserLoggedIn {
       isLoggedIn @client
     }
+  `,
+  GET_CURRENT_USER: gql`
+    query GetCurrentUser {
+      username @client
+    }
   `
 } 
 

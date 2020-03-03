@@ -33,9 +33,11 @@ const client = new ApolloClient({
 });
 
 const token = localStorage.getItem("auth-token");
+const username = localStorage.getItem("username");
 cache.writeData({
   data: {
     isLoggedIn: Boolean(token),
+    username
   }
 });
 

@@ -10,7 +10,6 @@ import Player from "./Player";
 const App = () => {
   return (
     <div>
-      <h1>Dotify</h1>
       <Switch>
         <AuthRoute exact path="/login" component={Login} routeType="auth" />
         <AuthRoute exact path="/signup" component={Signup} routeType="auth" />

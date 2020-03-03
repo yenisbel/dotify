@@ -23,7 +23,10 @@ class Signup extends Component {
   updateCache(client, { data }) {
     console.log(data);
     client.writeData({
-      data: { isLoggedIn: data.signup.loggedIn }
+      data: { 
+        isLoggedIn: data.signup.loggedIn,
+        username: data.signup.username
+      }
     });
   }
 
