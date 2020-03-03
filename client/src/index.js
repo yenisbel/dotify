@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './assets/stylesheets/reset.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 
@@ -33,9 +33,11 @@ const client = new ApolloClient({
 });
 
 const token = localStorage.getItem("auth-token");
+const username = localStorage.getItem("username");
 cache.writeData({
   data: {
     isLoggedIn: Boolean(token),
+    username
   }
 });
 

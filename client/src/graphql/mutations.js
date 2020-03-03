@@ -32,6 +32,7 @@ export default {
     login(username: $username, password: $password) {
       token
       loggedIn
+      username
     }
   }
   `,

@@ -20,7 +20,10 @@ class Login extends Component {
   updateCache(client, { data }) {
     console.log(data);
     client.writeData({
-      data: { isLoggedIn: data.login.loggedIn }
+      data: { 
+        isLoggedIn: data.login.loggedIn,
+        username: data.login.username
+      }
     });
   }
 
@@ -29,8 +32,9 @@ class Login extends Component {
       <Mutation
         mutation={LOGIN_USER}
         onCompleted={data => {
-          const { token } = data.login;
+          const { token, username } = data.login;
           localStorage.setItem("auth-token", token);
+          localStorage.setItem("username", username);
           this.props.history.push("/");
         }}
         onError={err => {
