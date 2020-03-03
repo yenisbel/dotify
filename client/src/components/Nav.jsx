@@ -10,7 +10,19 @@ class Nav extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      dropdown: false
+      showDropdown: false
+    }
+    this.showDropDown = this.showDropDown.bind(this);
+    this.closeDropDown = this.closeDropDown.bind(this);
+  }
+
+  showDropDown = () => {
+    this.setState({ showDropdown: true })
+  }
+
+  closeDropDown = (e) => {
+    if (this.state.showDropdown && e.target.className !== "dropdown") {
+      this.setState({ showDropDown: false })
     }
   }
   
@@ -21,7 +33,7 @@ class Nav extends React.Component {
           <Query query={GET_CURRENT_USER}>
             {({ data }) => {
               return (
-                <div>
+                <div onClick={this.closeDropDown}>
                   <div className="static">
                     <Sidebar />
                     <div className="header-wrapper">
@@ -33,20 +45,39 @@ class Nav extends React.Component {
                           </div>
                         </div>
                         <div className="header-right">
-                          <h1>{data.username}</h1>
-                          <button
-                            onClick={e => {
-                              e.preventDefault();
-                              localStorage.removeItem("auth-token");
-                              localStorage.removeItem("username");
-                              client.writeData({
-                                data: { isLoggedIn: false }
-                              });
-                              this.props.history.push("/login");
-                            }}
+                          <button 
+                            className="username-btn"
+                            onClick={this.showDropDown}  
                           >
-                            Logout
+                            {data.username}
                           </button>
+                          {this.state.showDropdown 
+                            ? (
+                            <ul className="dropdown">
+                              <li>
+                                <button>Account</button>
+                              </li>
+                              <li>
+                                <button
+                                  onClick={e => {
+                                    e.preventDefault();
+                                    localStorage.removeItem("auth-token");
+                                    localStorage.removeItem("username");
+                                    client.writeData({
+                                      data: { isLoggedIn: false }
+                                    });
+                                    this.props.history.push("/login");
+                                  }}
+                                >
+                                  Log out
+                                </button>
+                              </li>
+                            </ul>
+                            )
+                            : (
+                              null
+                            )
+                          }
                         </div>
                       </div>
                     </div>

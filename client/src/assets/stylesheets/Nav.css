@@ -4,14 +4,26 @@
 
 .header-wrapper {
   width: 100%;
+  color: #b3b3b3;
 }
 
 .header {
-  background-color: aqua;
+  background-color: #131313;
   width: 100%;
   display: flex;
   justify-content: space-between;
   height: 60px;
+}
+
+.header-right {
+  background-color: #242424;
+}
+
+.username-btn {
+  padding: 4px 8px 4px 4px;
+  width: 85px;
+  border-radius: 15px;
+  text-align: center;
 }
 
 .player {
