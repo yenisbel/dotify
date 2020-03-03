@@ -21,6 +21,7 @@ const mutation = new GraphQLObjectType({
       args: {
         username: { type: GraphQLString },
         email: { type: GraphQLString },
+        confirmEmail: { type: GraphQLString },
         dateOfBirth: { type: GraphQLString },
         gender: { type: GraphQLString },
         password: { type: GraphQLString }
@@ -32,8 +33,8 @@ const mutation = new GraphQLObjectType({
     login: {
       type: UserType,
       args: {
-        username: {type: GraphQLString},
-        password: {type: GraphQLString}
+        username: { type: GraphQLString },
+        password: { type: GraphQLString }
       },
       resolve(_, args) {
         return AuthService.login(args);
@@ -44,7 +45,7 @@ const mutation = new GraphQLObjectType({
       args: {
         _id: { type: GraphQLID }
       },
-      resolve(_,args){
+      resolve(_, args) {
         return AuthService.logout(args);
       }
     },
@@ -53,7 +54,7 @@ const mutation = new GraphQLObjectType({
       args: {
         token: { type: GraphQLString }
       },
-      resolve(_,args){
+      resolve(_, args) {
         return AuthService.verifyUser(args);
       }
     },
@@ -62,7 +63,7 @@ const mutation = new GraphQLObjectType({
       args: {
         name: { type: GraphQLString },
         genre: { type: GraphQLString },
-        artist: { type: GraphQLID },
+        artist: { type: GraphQLID }
       },
       resolve(_, args) {
         return new Album(args).save();
@@ -114,9 +115,7 @@ const mutation = new GraphQLObjectType({
       resolve(_, args) {
         return new Song(args).save();
       }
-    },
-
-
+    }
   }
 });
 

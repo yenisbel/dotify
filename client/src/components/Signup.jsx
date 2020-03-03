@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Mutation } from "react-apollo";
+import { Link } from "react-router-dom";
 import Mutations from "../graphql/mutations";
 const { SIGNUP_USER } = Mutations;
 
@@ -8,11 +9,12 @@ class Signup extends Component {
     super(props);
 
     this.state = {
-      username: "",
       email: "",
+      confirmEmail: "",
+      username: "",
       password: "",
-      gender: "",
-      dateOfBirth: ""
+      dateOfBirth: "",
+      gender: ""
     };
   }
 
@@ -48,8 +50,9 @@ class Signup extends Component {
                 e.preventDefault();
                 signupUser({
                   variables: {
-                    username: this.state.username,
                     email: this.state.email,
+                    confirmEmail: this.state.confirmEmail,
+                    username: this.state.username,
                     password: this.state.password,
                     gender: this.state.gender,
                     dateOfBirth: this.state.dateOfBirth
@@ -58,15 +61,21 @@ class Signup extends Component {
               }}
             >
               <input
-                value={this.state.username}
-                onChange={this.update("username")}
-                placeholder={"username"}
-              />
-              <input
                 value={this.state.email}
                 onChange={this.update("email")}
                 placeholder="Email"
                 type="email"
+              />
+              <input
+                value={this.state.confirmEmail}
+                onChange={this.update("confirmEmail")}
+                placeholder="Confirm Email"
+                type="email"
+              />
+              <input
+                value={this.state.username}
+                onChange={this.update("username")}
+                placeholder={"What should we call you?"}
               />
               <input
                 value={this.state.password}
@@ -74,34 +83,42 @@ class Signup extends Component {
                 type="password"
                 placeholder="Password"
               />
+              <label>
+                Date Of Birth
+                <input
+                  value={this.state.dateOfBirth}
+                  placeholder="Date of Birth"
+                  onChange={this.update("dateOfBirth")}
+                  type="date"
+                />
+              </label>
               <input
+                name="gender"
                 value="Male"
                 onChange={this.update("gender")}
-                name="radiobutton"
                 type="radio"
+                id="male"
               />
-              <label htmlFor="gender">Male</label>
+              <label htmlFor="male">Male</label>
               <input
+                name="gender"
                 value="Female"
                 onChange={this.update("gender")}
-                name="radiobutton"
                 type="radio"
+                id="female"
               />
-              <label htmlFor="gender">Female</label>
+              <label htmlFor="female">Female</label>
               <input
-                value="Other"
+                name="gender"
+                value="Non-binary"
                 onChange={this.update("gender")}
-                name="radiobutton"
                 type="radio"
+                id="non-binary"
               />
-              <label htmlFor="gender">Non-binary</label>
-              <input
-                value={this.state.dateOfBirth}
-                placeholder="Date of Birth"
-                onChange={this.update("dateOfBirth")}
-                type="date"
-              />
+              <label htmlFor="non-binary">Non-binary</label>
               <button type="submit">Sign Up</button>
+              <span>Already have an account?</span>
+              <Link to="/login">Login</Link>
             </form>
           </div>
         )}
