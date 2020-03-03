@@ -92,7 +92,7 @@ class Signup extends Component {
               />
               <label htmlFor="gender">Female</label>
               <input
-                value="Other"
+                value="Non-binary"
                 onChange={this.update("gender")}
                 name="radiobutton"
                 type="radio"

@@ -4,6 +4,8 @@ import Login from "./Login";
 import Signup from "./Signup";
 import AuthRoute from '../util/route_util';
 import Nav from "./Nav";
+import Player from "./Player";
+
 
 const App = () => {
   return (
@@ -11,7 +13,8 @@ const App = () => {
       <Switch>
         <AuthRoute exact path="/login" component={Login} routeType="auth" />
         <AuthRoute exact path="/signup" component={Signup} routeType="auth" />
-        <AuthRoute path="/" component={Nav} />
+        <Route exact path="/" component={Nav} />
+        <Route exact path="/player" component={Player} />
       </Switch>
     </div>
   );
