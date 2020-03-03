@@ -1,5 +1,5 @@
 import React from "react";
-import "../stylesheets/Sidebar.css";
+import "../assets/stylesheets/Sidebar.css";
 
 const Sidebar = () => {
   return (
@@ -17,13 +17,13 @@ const Sidebar = () => {
         </div>
         <div className="search">
           <button className="home-buttons">
-            <i class="fas fa-search"></i>
+            <i className="fas fa-search"></i>
             Search
           </button>
         </div>
         <div className="library">
           <button className="home-buttons">
-            <i class="fas fa-book-open"></i>
+            <i className="fas fa-book-open"></i>
             Your Library
           </button>
         </div>
