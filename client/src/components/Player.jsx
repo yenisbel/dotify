@@ -21,11 +21,6 @@ class Player extends Component {
   }
 
   componentDidMount() {
-    // this.audioRef.addEventListener("timeupdate", () => {
-    //   let songRatio = this.audioRef.currentTime / this.audioRef.duration;
-    //   let position = (this.timeline.offsetWidth * songRatio) + this.timeline.offsetLeft;
-    //   this.positionHandle(position);
-    // });
     this.time = setInterval(this.tick, 1000);
   };
 
@@ -54,7 +49,7 @@ class Player extends Component {
 
   handleTimeline(e){
  
-    this.setState({time: e.target.value}) //inout range based on state
+    this.setState({time: e.target.value}) //input range based on state
     this.audioRef.currentTime = e.target.value; 
   }
 

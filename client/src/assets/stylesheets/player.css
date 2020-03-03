@@ -67,15 +67,6 @@ margin-left: calc(50% - 250px);
 display: inline-block;
 }
 
-#handle{
-width: 15px;
-height: 15px;
-border-radius: 50%;
-margin-top: -4px;
-background: white;
-cursor: pointer;
-}
-
 .volume{
   display: flex;
   margin-right: 15px;
@@ -114,4 +105,50 @@ cursor: pointer;
 
 .footer-center {
   margin-top: 15px;
+}
+
+/* #timeline {
+  width: 210px;
+  height: 30px;
+  overflow: hidden;
+  cursor: pointer;
+} */
+
+#timeline,
+#timeline::-webkit-slider-runnable-track,
+#timeline::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+#timeline::-webkit-slider-runnable-track {
+  width: 400px;
+  height: 10px;
+  background: #AAA;
+  border-radius: 0px;
+}
+#timeline::-webkit-slider-thumb {
+  position: relative;
+  height: 20px;
+  width: 20px;
+  margin-top: -5px;
+  background: steelblue;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+#timeline::-webkit-slider-thumb::after {
+  position: absolute;
+  content: '';
+  height: 10px; /* equal to height of runnable track */
+  width: 500px; /* make this bigger than the widest range input element */
+  left: -502px; /* this should be -2px - width */
+  top: 8px; /* don't change this */
+  background: green;
+} 
+#timeline::-webkit-slider-thumb::before {
+  position: absolute;
+  content: '';
+  height: 10px; /* equal to height of runnable track */
+  width: 500px; /* make this bigger than the widest range input element */
+  top: 8px; /* don't change this */
+  background: #777;
 }
