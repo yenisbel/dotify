@@ -8,12 +8,10 @@ import Nav from "./Nav";
 const App = () => {
   return (
     <div>
-      <h1>Dotify</h1>
-      
       <Switch>
         <AuthRoute exact path="/login" component={Login} routeType="auth" />
         <AuthRoute exact path="/signup" component={Signup} routeType="auth" />
-        <Route path="/" component={Nav} />
+        <AuthRoute path="/" component={Nav} />
       </Switch>
     </div>
   );

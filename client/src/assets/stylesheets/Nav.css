@@ -1,0 +1,23 @@
+.static {
+  display: flex;
+}
+
+.header-wrapper {
+  width: 100%;
+}
+
+.header {
+  background-color: aqua;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.player {
+  height: 90px;
+  background-color: gray;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
