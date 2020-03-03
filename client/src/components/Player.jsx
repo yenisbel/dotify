@@ -17,14 +17,15 @@ class Player extends Component {
     }
     this.tick = this.tick.bind(this);
     this.handleVolume = this.handleVolume.bind(this);
+    this.handleTimeline = this.handleTimeline.bind(this);
   }
 
   componentDidMount() {
-    this.audioRef.addEventListener("timeupdate", () => {
-      let songRatio = this.audioRef.currentTime / this.audioRef.duration;
-      let position = (this.timeline.offsetWidth * songRatio) + this.timeline.offsetLeft;
-      this.positionHandle(position);
-    });
+    // this.audioRef.addEventListener("timeupdate", () => {
+    //   let songRatio = this.audioRef.currentTime / this.audioRef.duration;
+    //   let position = (this.timeline.offsetWidth * songRatio) + this.timeline.offsetLeft;
+    //   this.positionHandle(position);
+    // });
     this.time = setInterval(this.tick, 1000);
   };
 
@@ -48,46 +49,14 @@ class Player extends Component {
       this.setState({volumeInitial: this.state.volume, volume: "0"})
       this.audioRef.volume = 0;
     }
-    // } else {
-    //   this.setState({volume: this.state.volumeInitial})
-    //   this.audioRef.volume = this.state.volumeInitial / 100;
-    // }
+
   }
-  //offsetLeft returns number of pixels that top left corner is off to the parent.
-  //offsetWidth returns the width of the visible area for an object, in pixels
-  positionHandle = (position) => {
-    console.log(position);
-    let timelineWidth = this.timeline.offsetWidth - this.handle.offsetWidth;
-    let handleLeft = position - this.timeline.offsetLeft;
-    console.log("handleLeft:" + handleLeft);
-    if (handleLeft >= 0 && handleLeft <= timelineWidth) {
-      this.handle.style.marginLeft = handleLeft + "px";
-    }
 
-    if (handleLeft > timelineWidth) {
-      this.handle.style.marginLeft = timelineWidth + "px";
-    }
-
-    if (handleLeft < 0) {
-      this.handle.style.marginLeft = "0px";
-    }
-  };
-
-  mouseMove = (e) => {
-    console.log(e.pageX);
-    this.positionHandle(e.pageX);
-    this.audioRef.currentTime = ((e.pageX - this.timeline.offsetLeft) / this.timeline.offsetWidth) * this.audioRef.duration;
-  }; // dragging the handle
-
-  mouseDown = (e) => {
-    window.addEventListener('mousemove', this.mouseMove);
-    window.addEventListener('mouseup', this.mouseUp);
-  };
-
-  mouseUp = (e) => {
-    window.removeEventListener('mousemove', this.mouseMove);
-    window.removeEventListener('mouseup', this.mouseUp);
-  };
+  handleTimeline(e){
+ 
+    this.setState({time: e.target.value}) //inout range based on state
+    this.audioRef.currentTime = e.target.value; 
+  }
 
   getCurrentTime(){
     let totalSeconds = Math.floor(this.audioRef.currentTime)
@@ -140,15 +109,13 @@ class Player extends Component {
           <div className="timeline-time">
             <span className="currentSongTime">{this.getCurrentTime()}</span>
             <audio ref={audio => this.audioRef = audio} src={song} id="song" preload="metadata"></audio>
-            <div id="timeline" onClick={this.mouseMove} ref={(timeline) => {this.timeline = timeline}}>
-              <div id="handle" onMouseDown={this.mouseDown} ref={(handle) => { this.handle = handle }}/>
-            </div>
+            <input type="range" id="timeline" name="timeline" min="0" max="100" value={this.audioRef.currentTime} onChange={this.handleTimeline}/>
             <span className="songDuration">{this.getSongDuration()}</span>
           </div>
         </div>
         <div className="volume">
           <i className="fas fa-volume-up"></i>
-          <input type="range" id="volume" name="volume" min="0" max="100" step="1" onChange={this.handleVolume}/>
+          <input type="range" id="volume" name="volume" min="0" max="100" onChange={this.handleVolume}/>
         </div>
       </div>
     )
