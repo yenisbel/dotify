@@ -114,12 +114,12 @@ display: inline-block;
   cursor: pointer;
 } */
 
-#timeline,
+/* #timeline,
 #timeline::-webkit-slider-runnable-track,
 #timeline::-webkit-slider-thumb {
   -webkit-appearance: none;
-}
-#timeline::-webkit-slider-runnable-track {
+} */
+/* #timeline::-webkit-slider-runnable-track {
   width: 400px;
   height: 10px;
   background: #AAA;
@@ -130,7 +130,7 @@ display: inline-block;
   height: 20px;
   width: 20px;
   margin-top: -5px;
-  background: steelblue;
+  background: white;
   border-radius: 50%;
   border: 2px solid white;
 }
@@ -138,17 +138,65 @@ display: inline-block;
 #timeline::-webkit-slider-thumb::after {
   position: absolute;
   content: '';
-  height: 10px; /* equal to height of runnable track */
-  width: 500px; /* make this bigger than the widest range input element */
-  left: -502px; /* this should be -2px - width */
-  top: 8px; /* don't change this */
+  height: 10px; 
+  width: 500px; 
+  left: -502px; 
+  top: 8px;
   background: green;
 } 
 #timeline::-webkit-slider-thumb::before {
   position: absolute;
   content: '';
-  height: 10px; /* equal to height of runnable track */
-  width: 500px; /* make this bigger than the widest range input element */
-  top: 8px; /* don't change this */
+  height: 10px; 
+  width: 500px; 
+  top: 8px; 
   background: #777;
+} */
+
+#timeline {
+  -webkit-appearance: none;
+  background-color: #B3B3B3;
+  height: 20px;
+  overflow: hidden;
+  width: 500px;
+}
+
+#timeline::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  height: 20px;
+}
+
+#timeline::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background: white;
+  border-radius: 50%;
+  box-shadow: -210px 0 0 200px #1FD75F;
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  border: 0;
+}
+
+#timeline::-moz-range-thumb {
+  background: #333;
+  border-radius: 50%;
+  box-shadow: -1010px 0 0 1000px #1FD75F;
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  border: 0;
+}
+
+#timeline::-moz-range-track {
+  background-color: #ddd;
+}
+#timeline::-moz-range-progress {
+  background-color: #666;
+  height: 20px
+}
+#timeline::-ms-fill-upper {
+  background-color: #ddd;
+}
+#timeline::-ms-fill-lower {
+  background-color: #666;
 }
