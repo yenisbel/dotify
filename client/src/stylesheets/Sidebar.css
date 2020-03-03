@@ -1,6 +1,20 @@
 .sidebar {
   min-width: 230px;
-  background-color: pink;
+  background-color: black;
   height: 100vh;
+  color: #b3b3b3;
+  font-family: "Noto Sans";
+}
+
+.sidebar-title {
+  color: white;
+  font-size: 37px;
+  display: flex;
+  padding: 24px 0 18px 24px;
+}
+
+.sidebar-title .sidebar-dotify {
+  font-size: 24px;
+  font-weight: 900;
 }
 

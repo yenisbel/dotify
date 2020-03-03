@@ -6,7 +6,9 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="sidebar-title">
         <i className="fab fa-spotify"></i>
-        Dotify
+        <div className="sidebar-dotify">
+          Dotify
+        </div>
       </div>
       <div>
         <div>
