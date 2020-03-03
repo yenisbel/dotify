@@ -1,41 +1,60 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
 import { Query, ApolloConsumer } from "react-apollo";
+import "../stylesheets/Nav.css";
+import Sidebar from "./Sidebar";
 import Queries from "../graphql/queries";
-const { IS_LOGGED_IN } = Queries;
+const { GET_CURRENT_USER } = Queries;
 
-const Nav = props => {
-  return (
-    <ApolloConsumer>
-      {client => (
-        <Query query={IS_LOGGED_IN}>
-          {({ data }) => {
-            if (data.isLoggedIn) {
-              return (
-                <button
-                  onClick={e => {
-                    e.preventDefault();
-                    localStorage.removeItem("auth-token");
-                    client.writeData({ data: { isLoggedIn: false } });
-                    props.history.push("/");
-                  }}
-                >
-                  Logout
-                </button>
-              );
-            } else {
+
+class Nav extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      dropdown: false
+    }
+  }
+  
+  render() {
+    return (
+      <ApolloConsumer>
+        {client => (
+          <Query query={GET_CURRENT_USER}>
+            {({ data }) => {
               return (
                 <div>
-                  <Link to="/login">Login</Link>
+                  <div className="static">
+                    <Sidebar />
+                    <div className="header-wrapper">
+                      <div className="header">
+                        <div className="header-left">back forward</div>
+                        <div className="header-right">
+                          <h1>{data.username}</h1>
+                          <button
+                            onClick={e => {
+                              e.preventDefault();
+                              localStorage.removeItem("auth-token");
+                              localStorage.removeItem("username");
+                              client.writeData({
+                                data: { isLoggedIn: false }
+                              });
+                              this.props.history.push("/login");
+                            }}
+                          >
+                            Logout
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="player">PLAYER</div>
                 </div>
               );
-            }
-          }}
-        </Query>
-      )}
-    </ApolloConsumer>
-  );
+            }}
+          </Query>
+        )}
+      </ApolloConsumer>
+    )
+  }
 };
 
 export default Nav;
