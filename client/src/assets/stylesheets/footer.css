@@ -1,0 +1,42 @@
+
+.container {
+  background: black;
+  height: 150px;
+}
+
+.inner-container {
+  display: flex;
+  font-family: Circular, Helvetica, Arial, sans-serif;
+  color: whitesmoke;
+  justify-content: space-between;
+  margin: 0 12.5%;
+}
+
+.footer-links > h3 {
+  margin-top: 40px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.github-img, .linkedin-img {
+  display: flex;
+  margin: 13px 0px;
+}
+
+.github-img > a, .linkedin-img > a {
+  text-decoration: none;
+  color: #A5A5A5;
+  font-size: 13px;
+  align-self: center;
+}
+
+.github-img > a:hover, .linkedin-img > a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .inner-container {
+    margin: 0 18.5%;
+  }
+}
+
