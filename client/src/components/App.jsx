@@ -5,6 +5,7 @@ import Signup from "./Signup";
 import AuthRoute from '../util/route_util';
 import Nav from "./Nav";
 import Player from "./Player";
+import Splash from "./Splash";
 
 
 const App = () => {
@@ -14,6 +15,8 @@ const App = () => {
         <AuthRoute exact path="/login" component={Login} routeType="auth" />
         <AuthRoute exact path="/signup" component={Signup} routeType="auth" />
         <Route path="/" component={Nav} />
+        {/* <Route exact path="/" component={Nav} /> */}
+        <Route exact path="/" component={Splash} />
         <Route exact path="/player" component={Player} />
       </Switch>
     </div>
