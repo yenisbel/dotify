@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.main {
+  font-family: "Noto Sans";
+}
+
 .header-wrapper {
   width: 100%;
   color: #b3b3b3;
@@ -13,17 +17,59 @@
   display: flex;
   justify-content: space-between;
   height: 60px;
+  align-items: center;
 }
 
-.header-right {
-  background-color: #242424;
+.undoredo {
+  display: flex;
+  width: 80px;
+  margin-left: 35px;
+}
+
+.undoredo > * {
+  background-color: yellow;
+  text-align: center;
+  width: 31px;
+  height: 30px;
+  border-radius: 50% 50%;
+}
+
+.undo {
+  margin-right: 16px;
+}
+
+.list {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  width: 100px;
+  background-color: tomato;
 }
 
 .username-btn {
+  background-color: #313131;
   padding: 4px 8px 4px 4px;
-  width: 85px;
+  height: 24px;
+  width: 90px;
   border-radius: 15px;
   text-align: center;
+  font-size: 12px;
+  color: white;
+  margin-right: 45px;
+}
+
+.header-button {
+  display: flex;
+  justify-content: space-around;
+}
+
+.button-name {
+  padding-top: 2px;
+}
+
+.dropdown-triangle {
+  font-size: 17px;
 }
 
 .player {
