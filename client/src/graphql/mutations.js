@@ -6,7 +6,9 @@ export default {
     $email: String!,
     $confirmEmail: String!, 
     $password: String!, 
-    $dateOfBirth: String!, 
+    $birthMonth: String!,
+    $birthYear: Int!,
+    $birthDay: Int!,
     $gender: String!
   ) {
     signup(
@@ -14,7 +16,9 @@ export default {
       email: $email, 
       confirmEmail: $confirmEmail,
       password: $password, 
-      dateOfBirth: $dateOfBirth, 
+      birthMonth: $birthMonth,
+      birthYear: $birthYear,
+      birthDay: $birthDay, 
       gender: $gender
     ) {
       username
@@ -23,7 +27,9 @@ export default {
       token
       loggedIn
       gender
-      dateOfBirth
+      birthMonth
+      birthYear
+      birthDay
     }
   }
   `,

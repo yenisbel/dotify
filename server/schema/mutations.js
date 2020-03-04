@@ -22,7 +22,9 @@ const mutation = new GraphQLObjectType({
         username: { type: GraphQLString },
         email: { type: GraphQLString },
         confirmEmail: { type: GraphQLString },
-        dateOfBirth: { type: GraphQLString },
+        birthMonth: { type: GraphQLString },
+        birthYear: { type: GraphQLInt },
+        birthDay: { type: GraphQLInt },
         gender: { type: GraphQLString },
         password: { type: GraphQLString }
       },

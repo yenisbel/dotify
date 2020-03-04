@@ -13,7 +13,9 @@ const signup = async data => {
       throw new Error(message);
     }
 
-    const { username, email, password, gender, dateOfBirth } = data;
+    const { 
+      username, email, password, gender, birthYear, birthMonth, birthDay 
+    } = data;
 
     const existingUser = await User.findOne({ email });
 
@@ -23,11 +25,12 @@ const signup = async data => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = new User(
-      {
+    const user = new User({
         username,
         gender,
-        dateOfBirth,
+        birthDay,
+        birthYear,
+        birthMonth,
         email,
         password: hashedPassword
       },

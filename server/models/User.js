@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const currentYear = new Date().getFullYear();
+
 const UserSchema = new Schema({
   email: {
     type: String,
@@ -12,13 +14,25 @@ const UserSchema = new Schema({
   },
   password: {
     type: String,
-    required: true,
-    min: 8,
-    max: 32
-  },
-  dateOfBirth: {
-    type: String,
     required: true
+  },
+  birthMonth: {
+    type: String,
+    required: true,
+    enum: ["January", "February", "March", "April", "May", "June", "July",
+    "August", "September", "October", "November", "December"]
+  },
+  birthYear: {
+    type: Number,
+    required: true,
+    max: currentYear - 13,
+    min: currentYear - 125
+  },
+  birthDay: {
+    type: Number,
+    required: true,
+    max: 31,
+    min: 1
   },
   gender: {
     type: String,
@@ -26,5 +40,7 @@ const UserSchema = new Schema({
     enum: ["Male", "Female", "Non-Binary"]
   }
 });
+
+
 
 module.exports = mongoose.model("users", UserSchema);

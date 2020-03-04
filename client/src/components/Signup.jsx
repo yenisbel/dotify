@@ -13,7 +13,9 @@ class Signup extends Component {
       confirmEmail: "",
       username: "",
       password: "",
-      dateOfBirth: "",
+      birthMonth: "Month",
+      birthYear: "",
+      birthDay: "",
       gender: ""
     };
   }
@@ -58,7 +60,9 @@ class Signup extends Component {
                     username: this.state.username,
                     password: this.state.password,
                     gender: this.state.gender,
-                    dateOfBirth: this.state.dateOfBirth
+                    birthMonth: this.state.birthMonth,
+                    birthYear: parseInt(this.state.birthYear),
+                    birthDay: parseInt(this.state.birthDay)
                   }
                 });
               }}
@@ -88,12 +92,38 @@ class Signup extends Component {
               />
               <label>
                 Date Of Birth
-                <input
-                  value={this.state.dateOfBirth}
-                  placeholder="Date of Birth"
-                  onChange={this.update("dateOfBirth")}
-                  type="date"
-                />
+                <div className="date-container">
+                  <select 
+                    value={this.state.birthMonth}
+                    onChange={this.update("birthMonth")}
+                  >
+                    <option value="Month">Month</option>
+                    <option value="January">January</option>
+                    <option value="February">February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                  </select>
+                  <input 
+                    type="number"
+                    value={this.state.birthDay}
+                    placeholder="Day"
+                    onChange={this.update("birthDay")}
+                  />
+                  <input
+                    value={this.state.birthYear}
+                    placeholder="Year"
+                    onChange={this.update("birthYear")}
+                    type="number"
+                  />
+                </div>
               </label>
               <input
                 name="gender"
@@ -112,10 +142,7 @@ class Signup extends Component {
               />
               <label htmlFor="female">Female</label>
               <input
-<<<<<<< HEAD
                 name="gender"
-=======
->>>>>>> master
                 value="Non-binary"
                 onChange={this.update("gender")}
                 type="radio"
