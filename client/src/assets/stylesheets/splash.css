@@ -2,10 +2,6 @@
   position: relative;
 }
 
-.main-header {
-  position: absolute;
-}
-
 .home-div {
   background-image: url(../images/static_background.png);
   background-size: 100% 100%;
