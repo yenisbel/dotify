@@ -9,7 +9,8 @@ class Login extends Component {
 
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      errors: ""
     };
   }
 
@@ -37,8 +38,9 @@ class Login extends Component {
           localStorage.setItem("username", username);
           this.props.history.push("/");
         }}
-        onError={err => {
-          console.log(err);
+        onError={errorsArray => {
+          console.log(errorsArray);
+          this.setState({ errors: errorsArray.message.slice(15) });
         }}
         update={(client, data) => this.updateCache(client, data)}
       >
@@ -68,6 +70,7 @@ class Login extends Component {
               />
               <button type="submit">Log In</button>
             </form>
+            <span>{this.state.errors}</span>
           </div>
         )}
       </Mutation>
