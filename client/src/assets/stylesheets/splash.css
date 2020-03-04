@@ -2,6 +2,14 @@
   position: relative;
 }
 
+.main-header {
+  position: absolute;
+}
+
+#logo {
+  font-family: "Noto Sans";
+}
+
 .home-div {
   background-image: url(../images/static_background.png);
   background-size: 100% 100%;

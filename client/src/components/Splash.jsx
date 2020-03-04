@@ -10,38 +10,45 @@ class Splash extends React.Component {
 
   render() {
     return (
-      <> 
-      <div className="home-div">
-        <header className='main-header'>
-          <div className='header-logo'>
-            <a href="/">
-              <i id="logo" className="fab fa-spotify"> Dotify</i>
-            </a>
-          </div>
-          <div className='header-no-session'>
-            <div className='link-container'>
-              <a href='#' target="_blank">Premium</a>
-              <a href='#' target="_blank">Help</a>
-              <a href='#' target="_blank">Download</a>
-              <p className='link-divider'>｜</p>
-              <Link to='/signup' className='session-links'>Sign Up</Link>
-              <Link to='/login' className='session-links'>Log In</Link>
+      <>
+        <div className="home-div">
+          <header className="main-header">
+            <div className="header-logo">
+              <div className="sidebar-title">
+                <Link to="/" className="sidebar-title-link">
+                  <i className="fab fa-spotify"></i>
+                  <div id="splash-logo" className="sidebar-dotify">Dotify</div>
+                </Link>
+              </div>
+            </div>
+            <div className="header-no-session">
+              <div className="link-container">
+                <button>Premium</button>
+                <button>Help</button>
+                <button>Download</button>
+                <p className="link-divider">｜</p>
+                <Link to="/signup" className="session-links">
+                  Sign Up
+                </Link>
+                <Link to="/login" className="session-links">
+                  Log In
+                </Link>
+              </div>
+            </div>
+          </header>
+          <br />
+          <div className="greeting-div">
+            <h1 className="greeting">Music for everyone.</h1>
+            <h4 className="greeting-msg">
+              Millions of songs. No credit card needed.
+            </h4>
+            <div className="demo-button-div">
+              <button className="demo-button">GET DOTIFY FREE</button>
             </div>
           </div>
-        </header> 
-        <br/> 
-        <div className="greeting-div">
-          <h1 className="greeting">Music for everyone.</h1>
-          <h4 className="greeting-msg">Millions of songs. No credit card needed.</h4>
-          <div className="demo-button-div">
-            <button
-              className="demo-button">GET DOTIFY FREE
-            </button>
-          </div>
         </div>
-      </div>
       </>
-    )
+    );
   }
 }
 

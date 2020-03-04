@@ -10,7 +10,19 @@ class Nav extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      dropdown: false
+      showDropdown: false
+    }
+    this.showDropdown = this.showDropdown.bind(this);
+    this.closeDropdown = this.closeDropdown.bind(this);
+  }
+
+  showDropdown = () => {
+    this.setState({ showDropdown: true })
+  }
+
+  closeDropdown = (e) => {
+    if (this.state.showDropdown && e.target.className !== "dropdown") {
+      this.setState({ showDropdown: false })
     }
   }
   
@@ -21,32 +33,60 @@ class Nav extends React.Component {
           <Query query={GET_CURRENT_USER}>
             {({ data }) => {
               return (
-                <div>
+                <div onClick={this.closeDropdown} className="main">
                   <div className="static">
                     <Sidebar />
                     <div className="header-wrapper">
                       <div className="header">
                         <div className="header-left">
                           <div className="undoredo">
-                            <i className="fas fa-undo"></i>
-                            <i className="fas fa-redo"></i>
+                            <button className="undo">
+                              <div>
+                                <i className="fas fa-undo"></i>
+                              </div>
+                            </button>
+                            <button className="redo">
+                              <div>
+                                <i className="fas fa-redo"></i>
+                              </div>
+                            </button>
                           </div>
                         </div>
                         <div className="header-right">
-                          <h1>{data.username}</h1>
                           <button
-                            onClick={e => {
-                              e.preventDefault();
-                              localStorage.removeItem("auth-token");
-                              localStorage.removeItem("username");
-                              client.writeData({
-                                data: { isLoggedIn: false }
-                              });
-                              this.props.history.push("/login");
-                            }}
+                            className="username-btn"
+                            onClick={this.showDropdown}
                           >
-                            Logout
+                            <div className="header-button">
+                              <div className="button-name">{data.username}</div>
+                              <div className="dropdown-triangle">
+                                {this.state.showDropdown ? (
+                                  <i className="fas fa-caret-up"></i>
+                                ) : (
+                                  <i className="fas fa-caret-down"></i>
+                                )}
+                              </div>
+                            </div>
                           </button>
+                          {this.state.showDropdown ? (
+                            <div className="dropdown list">
+                              <button className="dropdown">Account</button>
+                              <hr className="dropdown-hr"/>
+                              <button
+                                onClick={e => {
+                                  e.preventDefault();
+                                  localStorage.removeItem("auth-token");
+                                  localStorage.removeItem("username");
+                                  client.writeData({
+                                    data: { isLoggedIn: false }
+                                  });
+                                  this.props.history.push("/splash");
+                                }}
+                              >
+                                Log out
+                              </button>
+                            </div>
+                          ) : null}
                         </div>
                       </div>
                     </div>
