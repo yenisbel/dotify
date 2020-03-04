@@ -12,15 +12,15 @@ class Nav extends React.Component {
     this.state = {
       showDropdown: false
     }
-    this.showDropDown = this.showDropDown.bind(this);
-    this.closeDropDown = this.closeDropDown.bind(this);
+    this.showDropdown = this.showDropdown.bind(this);
+    this.closeDropdown = this.closeDropdown.bind(this);
   }
 
-  showDropDown = () => {
+  showDropdown = () => {
     this.setState({ showDropdown: true })
   }
 
-  closeDropDown = (e) => {
+  closeDropdown = (e) => {
     if (this.state.showDropdown && e.target.className !== "dropdown") {
       this.setState({ showDropdown: false })
     }
@@ -33,7 +33,7 @@ class Nav extends React.Component {
           <Query query={GET_CURRENT_USER}>
             {({ data }) => {
               return (
-                <div onClick={this.closeDropDown} className="main">
+                <div onClick={this.closeDropdown} className="main">
                   <div className="static">
                     <Sidebar />
                     <div className="header-wrapper">
@@ -55,36 +55,37 @@ class Nav extends React.Component {
                         <div className="header-right">
                           <button
                             className="username-btn"
-                            onClick={this.showDropDown}
+                            onClick={this.showDropdown}
                           >
                             <div className="header-button">
                               <div className="button-name">{data.username}</div>
                               <div className="dropdown-triangle">
-                                <i className="fas fa-caret-down"></i>
+                                {this.state.showDropdown ? (
+                                  <i className="fas fa-caret-up"></i>
+                                ) : (
+                                  <i className="fas fa-caret-down"></i>
+                                )}
                               </div>
                             </div>
                           </button>
                           {this.state.showDropdown ? (
-                            <ul className="dropdown list">
-                              <li>
-                                <button className="dropdown">Account</button>
-                              </li>
-                              <li>
-                                <button
-                                  onClick={e => {
-                                    e.preventDefault();
-                                    localStorage.removeItem("auth-token");
-                                    localStorage.removeItem("username");
-                                    client.writeData({
-                                      data: { isLoggedIn: false }
-                                    });
-                                    this.props.history.push("/login");
-                                  }}
-                                >
-                                  Log out
-                                </button>
-                              </li>
-                            </ul>
+                            <div className="dropdown list">
+                              <button className="dropdown">Account</button>
+                              <hr className="dropdown-hr"/>
+                              <button
+                                onClick={e => {
+                                  e.preventDefault();
+                                  localStorage.removeItem("auth-token");
+                                  localStorage.removeItem("username");
+                                  client.writeData({
+                                    data: { isLoggedIn: false }
+                                  });
+                                  this.props.history.push("/login");
+                                }}
+                              >
+                                Log out
+                              </button>
+                            </div>
                           ) : null}
                         </div>
                       </div>
