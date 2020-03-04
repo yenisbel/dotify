@@ -14,6 +14,10 @@ const SongSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "albums",
     required: true
+  },
+  url: {
+    type: String,
+    required: true
   }
 });
 
