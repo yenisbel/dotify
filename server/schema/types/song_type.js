@@ -28,7 +28,8 @@ const SongType = new GraphQLObjectType({
           return song.artist;
         })
       }
-    }
+    },
+    url:{ type: GraphQLString }
   })
 });
   

@@ -80,7 +80,7 @@ class Nav extends React.Component {
                                   client.writeData({
                                     data: { isLoggedIn: false }
                                   });
-                                  this.props.history.push("/login");
+                                  this.props.history.push("/splash");
                                 }}
                               >
                                 Log out
