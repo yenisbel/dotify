@@ -3,14 +3,14 @@ const validText = require("./valid-text");
 
 module.exports = function validateSignupInput(data) {
   const currentYear = new Date().getFullYear();
+  const validMonths = ["January", "February", "March", "April", "May", "June", 
+  "July", "August", "September", "October", "November", "December"];
 
   data.email = validText(data.email) ? data.email : "";
   data.confirmEmail = validText(data.confirmEmail) ? data.confirmEmail : "";
   data.username = validText(data.username) ? data.username : "";
   data.password = validText(data.password) ? data.password : "";
   data.birthMonth = validText(data.birthMonth) ? data.birthMonth : "";
-  // data.birthYear = validText(data.birthYear) ? data.birthYear : "";
-  // data.birthDay = validText(data.birthDay) ? data.birthDay : "";
   data.gender = validText(data.gender) ? data.gender : "";
 
   if (Validator.isEmpty(data.email)) {
@@ -45,13 +45,13 @@ module.exports = function validateSignupInput(data) {
     return { message: "Your password is too short", isValid: false };
   }
 
-  if (Validator.isEmpty(data.birthMonth)) {
-    return { message: "Choose a month", isValid: false };
+  if (!validMonths.includes(data.birthMonth)) {
+    return { message: "Choose a month", isValid: false }
   }
-
+  
   // Check if birthYear is a number and is within 125 years ago to now
   if (
-    isNaN(data.birthYear) || 
+    !data.birthYear || 
     data.birthYear < currentYear - 125 || 
     data.birthYear > currentYear 
   ) {
@@ -62,7 +62,7 @@ module.exports = function validateSignupInput(data) {
     return { message: "Sorry, but you don't meet dotify's age requirement" };
   }
 
-  if (isNaN(data.birthDay || data.birthDay < 1 || data.birthDay > 31)) {
+  if (!data.birthDay || data.birthDay < 1 || data.birthDay > 31) {
     return { message: "Enter a valid day of the month", isValid: false };
   }
 

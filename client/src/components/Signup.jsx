@@ -16,7 +16,8 @@ class Signup extends Component {
       birthMonth: "Month",
       birthYear: "",
       birthDay: "",
-      gender: ""
+      gender: "",
+      errors: ""
     };
   }
 
@@ -34,6 +35,13 @@ class Signup extends Component {
     });
   }
 
+  handleError(errorsArray) {
+    // const errorsString = "";
+    // errorsArray.forEach(error => {
+    //   errorsString = errorsString.concat()
+    // })
+  }
+
   render() {
     return (
       <Mutation
@@ -43,8 +51,9 @@ class Signup extends Component {
           localStorage.setItem("auth-token", token);
           this.props.history.push("/");
         }}
-        onError={err => {
-          console.log(err);
+        onError={errorsArray => {
+          console.log(errorsArray);
+          this.setState({ errors: errorsArray.message.slice(15) });
         }}
         update={(client, data) => this.updateCache(client, data)}
       >
@@ -61,8 +70,8 @@ class Signup extends Component {
                     password: this.state.password,
                     gender: this.state.gender,
                     birthMonth: this.state.birthMonth,
-                    birthYear: parseInt(this.state.birthYear),
-                    birthDay: parseInt(this.state.birthDay)
+                    birthYear: parseInt(this.state.birthYear) || 0,
+                    birthDay: parseInt(this.state.birthDay) || 0
                   }
                 });
               }}
@@ -153,6 +162,7 @@ class Signup extends Component {
               <span>Already have an account?</span>
               <Link to="/login">Login</Link>
             </form>
+            <span>{this.state.errors}</span>
           </div>
         )}
       </Mutation>
