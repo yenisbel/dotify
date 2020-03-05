@@ -32,6 +32,91 @@ export default {
     query GetCurrentUser {
       username @client
     }
+  `,
+  FETCH_SONGS: gql`
+    query fetchSongs{
+      songs{
+        _id
+        title
+        artist
+        album
+        url
+      }
+    }
+  `,
+  FETCH_SONG: gql`
+    query fetchSong($id: ID!){
+      song(_id: $id){
+        _id
+        title
+        artist
+        album
+        url
+      }
+    }
+  `,
+  FETCH_ARTISTS: gql`
+    query fetchArtists{
+      artists{
+        _id
+        name
+      }
+    }
+  `,
+  FETCH_ARTIST: gql`
+    query fetchArtist($id: ID!){
+      artist(_id: $id){
+        _id
+        name
+        albums{
+          _id
+          name
+          genre
+          url,
+          songs{
+            _id
+            title
+            url
+          }
+        }
+      }
+    }
+  `,
+  FETCH_ALBUMS: gql`
+    query fetchAlbums{
+      albums{
+        _id
+        name
+        genre
+        artist{
+          _id
+          name
+        }
+        url
+        songs{
+          _id
+          title
+        }
+      }
+    }
+  `,
+  FETCH_ALBUM: gql`
+    query fetchAlbum($id: ID!){
+      album(_id: $id){
+        name
+        url
+        songs {
+          _id
+          title
+          url
+        }
+        artist{
+          _id
+          name
+        }
+      }
+    }
   `
-} 
+}
+
 

@@ -14,10 +14,14 @@ const AlbumSchema = new Schema({
     type: String,
     required: true
   },
-  song: [{
+  songs: [{
     type: Schema.Types.ObjectId,
     ref: "songs"
-  }]
+  }],
+  url: {
+    type: String,
+    required: true
+  }
 });
 
 AlbumSchema.statics.findSongs = function(albumId){
