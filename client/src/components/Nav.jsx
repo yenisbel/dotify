@@ -3,7 +3,7 @@ import { Query, ApolloConsumer } from "react-apollo";
 import "../assets/stylesheets/Nav.css";
 import Sidebar from "./Sidebar";
 import Queries from "../graphql/queries";
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 const { GET_CURRENT_USER } = Queries;
 
 
@@ -37,7 +37,7 @@ class Nav extends React.Component {
               return (
                 <div onClick={this.closeDropdown} className="main">
                   <div className="static">
-                    <Sidebar />
+                    <Sidebar props={this.props}/>
                     <div className="header-wrapper">
                       <div className="header">
                         <div className="header-left">
@@ -104,4 +104,4 @@ class Nav extends React.Component {
   }
 };
 
-export default Nav;
+export default withRouter(Nav);

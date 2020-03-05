@@ -34,6 +34,10 @@
   border-radius: 50% 50%;
 }
 
+.undoredo > *:hover {
+  color: white;
+}
+
 .undo {
   margin-right: 16px;
 }
