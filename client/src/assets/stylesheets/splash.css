@@ -2,6 +2,13 @@
   position: relative;
 }
 
+.main-header {
+  position: absolute;
+}
+
+#splash-logo {
+  font-family: "Noto Sans";
+}
 
 .home-div {
   background-image: url(../images/static_background.png);

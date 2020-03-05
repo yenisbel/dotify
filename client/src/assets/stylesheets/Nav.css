@@ -2,7 +2,7 @@
   display: flex;
 }
 
-#splash-logo {
+.main {
   font-family: "Noto Sans";
 }
 
@@ -32,6 +32,10 @@
   width: 31px;
   height: 30px;
   border-radius: 50% 50%;
+}
+
+.undoredo > *:hover {
+  color: white;
 }
 
 .undo {
