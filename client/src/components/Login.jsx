@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Mutation } from "react-apollo";
 import "../assets/stylesheets/auth.css";
 import Mutations from "../graphql/mutations";
@@ -48,8 +49,12 @@ class Login extends Component {
         {loginUser => (
           <div>
             <header className="auth-header">
-              <i className="fab fa-spotify"></i>
-              <h1>Spotify</h1>
+              <Link to="/splash">
+                <div className="logo-container">
+                  <i className="fab fa-spotify"></i>
+                  <h1>Dotify</h1>
+                </div>
+              </Link>
             </header>
             <div className="auth-container">
               <form
@@ -75,10 +80,10 @@ class Login extends Component {
                     type="password"
                     placeholder="Password"
                   />
+                  <p>{this.state.errors}</p>
                   <button type="submit">Log In</button>
                 </div>
               </form>
-              <span>{this.state.errors}</span>
             </div>
           </div>
         )}

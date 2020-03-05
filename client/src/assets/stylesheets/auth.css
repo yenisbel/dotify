@@ -1,22 +1,92 @@
 .input-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
+.input-container input {
+  width: 100%;
+  height: 30px;
+  padding: 6px 12px;
+  border: 1px solid #d9dadc;
+  border-radius: 0;
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #222326;
+  width: 400px;
+  margin-bottom: 10px;
+  font-family: sans-serif;
+}
+
+.input-container input:focus {
+  border-color: #919496;
+}
+
+.input-container button {
+  padding: 16px 14px 18px;
+  color: #fff;
+  background-color: #1db954;
+  font-size: 15px;
+  line-height: 1;
+  border-radius: 500px;
+  transition-property: background-color,border-color,color,box-shadow,filter;
+  transition-duration: .3s;
+  border-width: 0;
+  letter-spacing: 2px;
+  min-width: 160px;
+  text-transform: uppercase;
+  white-space: normal;
+  font-family: sans-serif;
+  margin-bottom: 0;
+  font-weight: 700;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  margin-top: 10px;
+  width: 300px;
+}
+
+.input-container button:hover {
+  background-color: #1ed760;
+}
 .auth-container {
   display: flex;
   justify-content: center;
-  align-items: center;
   height: 100vh;
 }
 
 .auth-header {
   border-bottom: 1px solid #d9dadc;
-  padding: 25px 0 10px;
-  margin-bottom: 30px;
+  padding: 25px 0 25px;
+  margin-bottom: 40px;
   text-align: center;
 }
 
 .auth-header h1 {
   display: inline-block;
+  font-family: "Noto Sans";
+  font-size: 36px;
+  font-weight: 900; 
+}
+
+.auth-header i {
+  font-weight: 400;
+  font-size: 60px;
+  margin-right: 10px;
+}
+
+.input-container p {
+  color: #eb1e32;
+  font-family: sans-serif;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
