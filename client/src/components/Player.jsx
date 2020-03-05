@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { Mutation } from "react-apollo";
 import Mutations from "../graphql/mutations";
 import song from "../assets/music/test.mp3";
+import song2 from "../assets/music/Count-To-Nine.mp3";
+import song3 from "../assets/music/33.mp3";
 import PlayerCSS from "../assets/stylesheets/player.css";
+import image from "../assets/images/album-cover.png";
 
 class Player extends Component {
   constructor(props){
@@ -13,16 +16,62 @@ class Player extends Component {
     this.state = {
       time: '',
       volume: '',
-      muted: false
+      muted: false,
+      playing: false,
+      filledHeart: false,
+      loop: false
     }
     this.tick = this.tick.bind(this);
     this.handleVolume = this.handleVolume.bind(this);
     this.handleTimeline = this.handleTimeline.bind(this);
+    this.togglePlay = this.togglePlay.bind(this);
+    this.toggleHeart = this.toggleHeart.bind(this);
+    this.handleLoop = this.handleLoop.bind(this);
   }
 
   componentDidMount() {
     this.time = setInterval(this.tick, 1000);
   };
+
+  // componentDidUpdate(){
+  //   const pause = document.getElementById("pause");
+  //   const play = document.getElementById("play")
+  //   if (this.audioRef.currentTime === this.audioRef.duration){
+  //     pause.style.zIndex = "1";
+  //     play.style.zIndex = "0";
+  //   }
+  // }
+
+  togglePlay(){
+    const pause = document.getElementById("pause");
+    const play = document.getElementById("play")
+    if (this.state.playing){
+      this.audioRef.pause();
+      this.setState({playing: false });
+      play.style.zIndex = "1";
+      pause.style.zIndex = "0";
+  
+    } else {
+      this.audioRef.play();
+      this.setState({playing: true });
+      pause.style.zIndex = "1";
+      play.style.zIndex = "0";
+    }
+  };
+
+  toggleHeart(){
+    const empty = document.getElementById("empty-heart");
+    const filled = document.getElementById("fill-heart");
+    if (!this.state.filledHeart){
+      this.setState({ filledHeart: true})
+      empty.style.opacity = "1";
+      filled.style.opacity = "0";
+    } else {
+      this.setState({filledHeart: false})
+      filled.style.opacity = "1";
+      empty.style.opacity = "0";
+    }
+  }
 
   tick(){
     this.setState({ time: new Date()});
@@ -75,42 +124,88 @@ class Player extends Component {
     }
   }
 
-  play = () => {
-    this.audioRef.play()
-  };
+  // play = () => {
+  //   this.audioRef.play()
+  // };
 
-  pause = () => {
-    debugger;
-    this.audioRef.pause()
-  }
+  // pause = () => {
+  //   debugger;
+  //   this.audioRef.pause()
+  // }
+
+  handleLoop(){
+    const repeat = document.getElementById("repeat");
+    if (!this.state.loop) {
+      this.audioRef.loop = true
+      this.setState({loop: true})
+      repeat.style.color = "#1FD75F";
+    } else {
+      this.audioRef.loop = false
+      this.setState({loop: false})
+      repeat.style.color = "#707070";
+    }
+  };
 
   render () {
     return (
       <div className="player-footer">
         <div className="footer-left">
+          <img className="album-cover" src={image}/>
           <div className="song-info">
             <span className="song-name">Saw You In A Dream</span>
             <span className="artist-name">The Japanese House</span>
           </div>
-          <i className="far fa-heart"></i>
+          <button onClick={this.toggleHeart}><i id="empty-heart" className="far fa-heart"></i></button>
+          <button onClick={this.toggleHeart}><i id="fill-heart" className="fas fa-heart"></i></button>
         </div>
         <div className="footer-center">
           <div className="play-pause-buttons">
-            <button onClick={this.play} className="play"><i className="fas fa-play"></i></button>
-            <button onClick={this.pause} className="pause"><i className="fas fa-pause"></i></button>
+            <button><i className="fas fa-random"></i></button>
+            <button><i className="fas fa-step-backward"></i></button>
+            <button onClick={this.togglePlay} id="play"  className="play"><i className="fas fa-play"></i></button>
+            <button onClick={this.togglePlay} id="pause" className="pause"><i className="fas fa-pause"></i></button>
+            <button><i className="fas fa-step-forward"></i></button>
+            <button onClick={this.handleLoop}><i id="repeat" className="fas fa-sync"></i></button>
           </div>
           {/* method 2: */}
           {/* <p onClick={e => this.audio.play()} className="play">Play</p> */}
           <div className="timeline-time">
             <span className="currentSongTime">{this.getCurrentTime()}</span>
-            <audio ref={audio => this.audioRef = audio} src={song} id="song" preload="metadata"></audio>
-            <input type="range" id="timeline" name="timeline" min="0" max="100" value={this.audioRef.currentTime} onChange={this.handleTimeline}/>
+            <audio ref={audio => this.audioRef = audio} src={song2} id="song" preload="metadata"></audio>
+            <input 
+              type="range" 
+              id="timeline" 
+              name="timeline" 
+              min="0" 
+              max={this.audioRef.duration}
+              value={this.audioRef.currentTime} 
+              onChange={this.handleTimeline}
+              // style={{
+              //   backgroundImage: '-webkit-gradient(linear, left top, right top, '
+              //     + 'color-stop(' + (this.audioRef.currentTime) + ', #666666), '
+              //     + 'color-stop(' + (this.audioRef.currrentTime) + ', #666666)'
+              //     + ')'
+              // }}
+              />
             <span className="songDuration">{this.getSongDuration()}</span>
           </div>
         </div>
         <div className="volume">
           <i className="fas fa-volume-up"></i>
-          <input type="range" id="volume" name="volume" min="0" max="100" onChange={this.handleVolume}/>
+          <input 
+            type="range" 
+            id="volume" 
+            name="volume" 
+            min="0" 
+            max="100" 
+            onChange={this.handleVolume} 
+            style={{
+            backgroundImage: '-webkit-gradient(linear, left top, right top, '
+              + 'color-stop(' + (this.audioRef.volume) + ', #1FD75F), '
+              + 'color-stop(' + (this.audioRef.volume) + ', #666666)'
+              + ')'
+            }}
+            />
         </div>
       </div>
     )

@@ -1,0 +1,91 @@
+.app-div {
+  position: relative;
+}
+
+
+.home-div {
+  background-image: url(../images/static_background.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  margin: auto;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+.greeting-div {
+  display: flex;
+  margin: auto;
+  font-family: Circular,Helvetica Neue,Helvetica,Arial,sans-serif;
+  color: white;
+  flex-direction: column;
+  text-align: center;
+}
+
+.greeting {
+  font-size: 70px;
+  font-weight: bolder;
+  padding-bottom: 20px;
+  margin: auto;
+}
+
+.greeting-msg {
+  margin: auto;
+  padding-bottom: 20px;
+  font-size: 18px;
+  font-weight: unset;
+}
+
+.demo-button-div {
+  margin: auto;
+  display: flex;
+  width: 250px;
+  height: 48px;
+}
+
+.demo-button {
+  display: flex;
+  margin: auto;
+  padding-left: 50px;
+  padding-right: 50px;
+  height: 48px;
+  font-family: inherit;
+  font-weight: bold;
+  background-color: #FF9933;
+  border-radius: 500px;
+  cursor: pointer;
+}
+
+.demo-button:hover {
+  background-color: #FFCC33;
+}
+
+@media (max-width: 900px) {
+  .home-div {
+    background-image: url(../images/smallbackground.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    margin: auto;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+  }
+
+  .greeting-div {
+    width: 70%;
+  }
+
+  .greeting {
+    font-size: 60px;
+  }
+  
+  .greeting-msg {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 700px) {
+  .greeting {
+    font-size: 48px;
+  }
+}
