@@ -11,7 +11,7 @@ const AlbumType = new GraphQLObjectType({
     name: { type: GraphQLString },
     genre: { type: GraphQLString },
     artist: {
-      type: require("./album_type"),
+      type: require("./artist_type"),
       resolve(parentValue) {
         return Album.findById(parentValue._id)
         .populate("artist")
