@@ -1,0 +1,33 @@
+.main-root-section {
+  height: 85%;
+  width: 88%;
+  background-color: #202020;
+  overflow: auto;
+  position: fixed;
+  top: 60px;
+  left: 230px;
+ }
+  
+ .main-root-section h2 {
+  font-family: Circular,Helvetica Neue,Helvetica,Arial,sans-serif;
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 50px 0 35px 20px;
+ }
+  
+ .content-container {
+  height: fit-content;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+ }
+  
+ .tile-container {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+ }
+ 

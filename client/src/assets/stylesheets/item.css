@@ -1,0 +1,54 @@
+.music-card {
+  flex: 1 1 auto;
+  width: 180px;
+  height: 250px;
+  background-color: #272727;
+  border-radius: 5px;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+  margin-right: 20px;
+  margin-bottom: 20px;
+ }
+  
+ .music-card-artwork {
+  width: 140px;
+  height: 140px;
+ }
+  
+ .mc-name {
+  margin-top: 12px;
+   font-size: 12pt;
+  color: white
+ }
+  
+ .mc-name:hover {
+  text-decoration: underline;
+ }
+  
+ .mc-owner {
+  margin-top: 5px;
+  font-size: 10pt;
+  color: gray;
+ }
+  
+ .play-icon {
+  color: white;
+  position: absolute;
+  display: none;
+  bottom: 17px;
+  right: 17px;
+  background-color:#026faa;
+  padding: 6px;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+ }
+  
+ .music-card:hover .play-icon {
+  display: block;
+ }
+ 

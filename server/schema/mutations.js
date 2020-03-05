@@ -8,10 +8,12 @@ const UserType = require("./types/user_type");
 const SongType = require("./types/song_type");
 const ArtistType = require("./types/artist_type");
 const AlbumType = require("./types/album_type");
+const PlaylistType = require("./types/playlist_type");
 
 const Song = mongoose.model("songs");
 const Artist = mongoose.model("artists");
 const Album = mongoose.model("albums");
+const Playlist = mongoose.model("playlists");
 
 const mutation = new GraphQLObjectType({
   name: "Mutation",
@@ -126,6 +128,16 @@ const mutation = new GraphQLObjectType({
             .exec()
           return song
         });
+      }
+    },
+    newPlaylist: {
+      type: PlaylistType,
+      args: {
+        name: { type: GraphQLString },
+        creator: { type: GraphQLID }
+      },
+      resolve(_, args) {
+        return new Playlist(args).save().then(playlist)
       }
     }
   }

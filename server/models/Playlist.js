@@ -5,10 +5,10 @@ const PlaylistSchema = new Schema({
     type: String,
     required: true
   },
-  creator: [{
+  creator: {
     type: Schema.Types.ObjectId,
     ref: "users"
-  }],
+  },
   songs: [{
     type: Schema.Types.ObjectId,
     ref: "songs"
