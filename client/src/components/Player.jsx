@@ -1,9 +1,14 @@
 import React, { Component } from "react";
-import { Mutation } from "react-apollo";
+import { Mutation, ApolloConsumer } from "react-apollo";
 import Mutations from "../graphql/mutations";
 import song from "../assets/music/test.mp3";
 import PlayerCSS from "../assets/stylesheets/player.css";
 import image from "../assets/images/album-cover.png";
+import { withRouter } from "react-router-dom";
+
+import Queries from "../graphql/queries";
+const { FETCH_ALBUM, FETCH_ARTISTS } = Queries;
+
 
 class Player extends Component {
   constructor(props){
@@ -17,7 +22,12 @@ class Player extends Component {
       muted: false,
       playing: false,
       filledHeart: false,
-      loop: false
+      loop: false,
+      songUrl: '',
+      albumCoverUrl: '',
+      songTitle: '',
+      artistName: ''
+
     }
     this.tick = this.tick.bind(this);
     this.handleVolume = this.handleVolume.bind(this);
@@ -29,7 +39,9 @@ class Player extends Component {
 
   componentDidMount() {
     this.time = setInterval(this.tick, 1000);
+    // this.readCache()
   };
+
 
   togglePlay(){
     const pause = document.getElementById("pause");
@@ -135,8 +147,43 @@ class Player extends Component {
     }
   };
 
+  // checkCache(client) {
+  //   const song = client.cache.data.data
+  //   // console.log(song)
+  // }
+
+  readCache(cache) {
+    let result;
+    try {
+      result = cache.readQuery({
+        query: FETCH_ALBUM,
+        variables: { id: this.props.match.params.id }
+      })
+    } catch (err) {
+      console.log(err);
+    }
+    if (result) {
+      console.log(result)
+      this.setState({songUrl: result.album.songs[0].url})
+      this.setState({ albumCoverUrl: result.album.url })
+      this.setState({songTitle: result.album.songs[0].title})
+      this.setState({artistName: result.album.artist.name})
+      // return potato.album.songs[1].url
+      // set the state for the other ones
+    }
+  }
+
   render () {
-    return (
+    return <ApolloConsumer>
+      {
+        (client, data) => {
+          // this.checkCache(client);
+          if (!this.state.songUrl){
+            this.readCache(client.cache);
+            return null;
+          }
+          // debugger;
+          return (
       <div className="player-footer">
         <div className="footer-left">
           <img className="album-cover" src={image}/>
@@ -160,14 +207,14 @@ class Player extends Component {
           {/* <p onClick={e => this.audio.play()} className="play">Play</p> */}
           <div className="timeline-time">
             <span className="currentSongTime">{this.getCurrentTime()}</span>
-            <audio ref={audio => this.audioRef = audio} src={song} id="song" preload="metadata"></audio>
+            <audio ref={audio => this.audioRef = audio} src={this.state.songUrl} id="song" preload="metadata"></audio>
             <input 
               type="range" 
               id="timeline" 
               name="timeline" 
               min="0" 
-              max={this.audioRef.duration}
-              value={this.audioRef.currentTime} 
+              max={this.audioRef.duration ? this.audioRef.duration : 0}
+              value={this.audioRef.currentTime ? this.audioRef.currentTime : 0} 
               onChange={this.handleTimeline}
               // style={{
               //   backgroundImage: '-webkit-gradient(linear, left top, right top, '
@@ -198,10 +245,77 @@ class Player extends Component {
         </div>
       </div>
     )
+        }
+      }
+
+    </ApolloConsumer>
+
+    // return (
+    //   <div className="player-footer">
+    //     <div className="footer-left">
+    //       <img className="album-cover" src={image}/>
+    //       <div className="song-info">
+    //         <span className="song-name">Saw You In A Dream</span>
+    //         <span className="artist-name">The Japanese House</span>
+    //       </div>
+    //       <button onClick={this.toggleHeart}><i id="empty-heart" className="far fa-heart"></i></button>
+    //       <button onClick={this.toggleHeart}><i id="fill-heart" className="fas fa-heart"></i></button>
+    //     </div>
+    //     <div className="footer-center">
+    //       <div className="play-pause-buttons">
+    //         <button><i className="fas fa-random"></i></button>
+    //         <button><i className="fas fa-step-backward"></i></button>
+    //         <button onClick={this.togglePlay} id="play"  className="play"><i className="fas fa-play"></i></button>
+    //         <button onClick={this.togglePlay} id="pause" className="pause"><i className="fas fa-pause"></i></button>
+    //         <button><i className="fas fa-step-forward"></i></button>
+    //         <button onClick={this.handleLoop}><i id="repeat" className="fas fa-sync"></i></button>
+    //       </div>
+    //       {/* method 2: */}
+    //       {/* <p onClick={e => this.audio.play()} className="play">Play</p> */}
+    //       <div className="timeline-time">
+    //         <span className="currentSongTime">{this.getCurrentTime()}</span>
+    //         <audio ref={audio => this.audioRef = audio} src={song} id="song" preload="metadata"></audio>
+    //         <input 
+    //           type="range" 
+    //           id="timeline" 
+    //           name="timeline" 
+    //           min="0" 
+    //           max={this.audioRef.duration}
+    //           value={this.audioRef.currentTime} 
+    //           onChange={this.handleTimeline}
+    //           // style={{
+    //           //   backgroundImage: '-webkit-gradient(linear, left top, right top, '
+    //           //     + 'color-stop(' + (this.audioRef.currentTime) + ', #666666), '
+    //           //     + 'color-stop(' + (this.audioRef.currrentTime) + ', #666666)'
+    //           //     + ')'
+    //           // }}
+    //           />
+    //         <span className="songDuration">{this.getSongDuration()}</span>
+    //       </div>
+    //     </div>
+    //     <div className="volume">
+    //       <i className="fas fa-volume-up"></i>
+    //       <input 
+    //         type="range" 
+    //         id="volume" 
+    //         name="volume" 
+    //         min="0" 
+    //         max="100" 
+    //         onChange={this.handleVolume} 
+    //         style={{
+    //         backgroundImage: '-webkit-gradient(linear, left top, right top, '
+    //           + 'color-stop(' + (this.audioRef.volume) + ', #1FD75F), '
+    //           + 'color-stop(' + (this.audioRef.volume) + ', #666666)'
+    //           + ')'
+    //         }}
+    //         />
+    //     </div>
+    //   </div>
+    // )
   }
 };
 
-export default Player; 
+export default withRouter(Player); 
 
 // on click button for each button. this.audio.play, .pause, first approach
 // second appraoch: using react refs

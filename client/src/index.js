@@ -38,7 +38,7 @@ cache.writeData({
   data: {
     isLoggedIn: Boolean(token),
     username
-  }
+    }
 });
 
 if (token) {
