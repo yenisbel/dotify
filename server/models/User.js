@@ -38,7 +38,15 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     enum: ["Male", "Female", "Non-binary"]
-  }
+  },
+  createdPlaylists: [{
+    type: Schema.Types.ObjectId,
+    ref: "playlists"
+  }],
+  likedPlaylists: [{
+    type: Schema.Types.ObjectId,
+    ref: "playlists"
+  }]
 });
 
 
