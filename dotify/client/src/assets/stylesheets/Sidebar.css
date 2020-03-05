@@ -1,0 +1,113 @@
+.sidebar {
+  min-width: 230px;
+  background-color: #040404;
+  height: 100vh;
+  color: #b3b3b3;
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 900;
+}
+
+.sidebar-title {
+  color: white;
+  font-size: 37px;
+  padding: 24px 0 25px 24px;
+}
+
+.sidebar-title-link {
+  display: flex;
+}
+
+.sidebar-title-link > .fa-spotify {
+  margin-right: 4px;
+}
+
+.sidebar-title .sidebar-dotify {
+  font-size: 24px;
+  font-weight: bolder;
+}
+
+.fa-home, .fa-search, .fa-book-open {
+  font-size: 22px;
+  margin-right: 16px;
+}
+
+.fa-search {
+  margin-right: 18px;
+}
+
+.static-links > * {
+  padding: 0 8px;
+  height: 40px;
+}
+
+.home-button-unselected, .search-button-unselected, .library-button-unselected {
+  padding: 0 16px;
+  width: 182px;
+  height: 40px;
+  /* background-color: brown; */
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+}
+
+.home-button-selected, .search-button-selected, .library-button-selected {
+  padding: 0 16px;
+  width: 182px;
+  height: 40px;
+  background-color: #2b2b2b;
+  color: white;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+}
+
+.home-button-unselected:hover, .search-button-unselected:hover, .library-button-unselected:hover {
+  color: white;
+}
+
+.playlist, .liked-song {
+  padding: 23px 24px 5px;
+}
+
+.create, .liked-songs {
+  display: flex;
+  margin: 11px 0 0;
+  align-items: center;
+  width: 180px;
+}
+
+.create:hover > *, .liked-songs:hover > * {
+  color: white;
+  opacity: 1;
+}
+
+.create-playlist, .liked {
+  letter-spacing: 1px;
+}
+
+.create-image {
+  height: 34px;
+  width: 35px;
+  margin: 0;
+  margin-right: 13px;
+  opacity: 0.8;
+}
+
+.liked-image {
+  height: 32px;
+  width: 33px;
+  margin: 0;
+  margin-right: 14px;
+  opacity: 0.8;
+}
+
+.playlist-divider {
+  border-color: rgb(61, 61, 61);
+  margin: 14px 0;
+}
+
+.playlist-title {
+  font-size: 11px;
+  letter-spacing: 2px;
+}
