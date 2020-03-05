@@ -96,7 +96,7 @@
 .player {
   height: 90px;
   background-color: gray;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
 }

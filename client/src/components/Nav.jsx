@@ -3,6 +3,8 @@ import { Query, ApolloConsumer } from "react-apollo";
 import "../assets/stylesheets/Nav.css";
 import Sidebar from "./Sidebar";
 import Queries from "../graphql/queries";
+import Feed from "./Feed";
+import Player from "./Player";
 import { withRouter } from "react-router-dom";
 const { GET_CURRENT_USER } = Queries;
 
@@ -29,6 +31,8 @@ class Nav extends React.Component {
   
   render() {
     return (
+      <>
+      <Feed/>
       <ApolloConsumer>
         {client => (
           <Query query={GET_CURRENT_USER}>
@@ -92,13 +96,17 @@ class Nav extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <div className="player">PLAYER</div>
+
+                
+                <div className="player"><Player/></div>
                 </div>
               );
             }}
           </Query>
+          
         )}
       </ApolloConsumer>
+      </>
     )
   }
 };
