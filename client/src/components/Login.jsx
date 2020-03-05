@@ -82,6 +82,12 @@ class Login extends Component {
                   />
                   <p>{this.state.errors}</p>
                   <button type="submit">Log In</button>
+                  <h3>Don't have an account ?</h3>
+                  <button className="signup-redirect">
+                  <Link to="signup"> 
+                    Sign Up for Dotify
+                  </Link>
+                  </button>
                 </div>
               </form>
             </div>
