@@ -1,0 +1,22 @@
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.auth-header {
+  border-bottom: 1px solid #d9dadc;
+  padding: 25px 0 10px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.auth-header h1 {
+  display: inline-block;
+}
