@@ -1,6 +1,8 @@
 import React from "react";
 import "../assets/stylesheets/Sidebar.css";
 import { Link } from "react-router-dom";
+import create from "../assets/images/create.png";
+import liked from "../assets/images/liked.png";
 
 const Sidebar = () => {
   return (
@@ -13,28 +15,34 @@ const Sidebar = () => {
       </div>
       <div className="static-links">
         <div className="home">
-          <button className="side-home-button">
+          <Link to="/" className="side-home-button">
             <i className="fas fa-home"></i>
             <div>Home</div> 
-          </button>
+          </Link>
         </div>
         <div className="search">
-          <button className="side-search-button">
+          <Link to="/search" className="side-search-button">
             <i className="fas fa-search"></i>
             <div>Search</div>
-          </button>
+          </Link>
         </div>
         <div className="library">
-          <button className="side-library-button">
+          <Link to="/collection" className="side-library-button">
             <i className="fas fa-book-open"></i>
             <div>Your Library</div>
-          </button>
+          </Link>
         </div>
       </div>
       <div className="playlist">
         <span>Playlists</span>
-        <div className="create">Create Playlist</div>
-        <div className="liked-songs">Liked Songs</div>
+        <div className="create">
+          <img src={create} className="create-image"/>
+          <div>Create Playlist</div> 
+        </div>
+        <div className="liked-songs">
+          <img src={liked} className="liked-image"/>
+          <div>Liked Songs</div> 
+        </div>
         <hr className="playlist-divider" />
       </div>
     </div>

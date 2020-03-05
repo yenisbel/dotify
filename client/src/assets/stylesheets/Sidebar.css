@@ -8,7 +8,7 @@
 .sidebar-title {
   color: white;
   font-size: 37px;
-  padding: 24px 0 18px 24px;
+  padding: 24px 0 25px 24px;
 }
 
 .sidebar-title-link {
@@ -36,8 +36,26 @@
   background-color: brown;
   border-radius: 5px;
   display: flex;
+  align-items: center;
 }
 
-.playlist {
+.playlist, .liked-song {
   padding: 5px 24px;
+}
+
+.create, .liked-songs {
+  display: flex;
+  margin: 10px 0;
+}
+
+.create-image {
+  height: 32px;
+  width: 32px;
+  margin: 0;
+}
+
+.liked-image {
+  height: 32px;
+  width: 32px;
+  margin: 0;
 }

@@ -3,6 +3,7 @@ import { Query, ApolloConsumer } from "react-apollo";
 import "../assets/stylesheets/Nav.css";
 import Sidebar from "./Sidebar";
 import Queries from "../graphql/queries";
+import { withRouter } from "react-router";
 const { GET_CURRENT_USER } = Queries;
 
 
@@ -27,6 +28,7 @@ class Nav extends React.Component {
   }
   
   render() {
+    console.log(this.props)
     return (
       <ApolloConsumer>
         {client => (
