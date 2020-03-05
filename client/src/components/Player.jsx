@@ -13,7 +13,6 @@ const { FETCH_ALBUM, FETCH_ARTISTS } = Queries;
 class Player extends Component {
   constructor(props) {
     super(props);
-
     // this.audio = new Audio(song)
     this.audioRef = React.createRef();
     this.state = {
@@ -23,11 +22,11 @@ class Player extends Component {
       playing: false,
       filledHeart: false,
       loop: false,
-      songUrl: '',
+      songUrl: this.props.currentSong.url,
       albumCoverUrl: '',
       songTitle: '',
-      artistName: ''
-
+      artistName: '',
+      songs: []
     }
     this.tick = this.tick.bind(this);
     this.handleVolume = this.handleVolume.bind(this);
@@ -42,10 +41,23 @@ class Player extends Component {
     // this.readCache()
   };
 
+  componentDidUpdate(oldProps){
+    if (oldProps.currentSong !== this.props.currentSong){
+      this.setState({songUrl: this.props.currentSong.url, songTitle: this.props.currentSong.title})
+    }
+  }
+
 
   togglePlay() {
     const pause = document.getElementById("pause");
-    const play = document.getElementById("play")
+    const play = document.getElementById("play");
+    // const song = document.getElementById("song");
+    // song.onended = function () {
+    //   this.audioRef.pause();
+    //   this.setState({ playing: false });
+    //   play.style.zIndex = "1";
+    //   pause.style.zIndex = "0";
+    // }
     if (this.state.playing) {
       this.audioRef.pause();
       this.setState({ playing: false });
@@ -154,6 +166,7 @@ class Player extends Component {
 
   readCache(cache) {
     let result;
+
     try {
       result = cache.readQuery({
         query: FETCH_ALBUM,
@@ -163,17 +176,28 @@ class Player extends Component {
       console.log(err);
     }
     if (result) {
-      console.log(result)
-      this.setState({ songUrl: result.album.songs[0].url })
-      this.setState({ songTitle: result.album.songs[0].title })
+      console.log(result.album.songs)
+      // let songs = result.albums.songs;
+
+      // for (let i= 0; i < result.album.songs.length; i++){
+      // }
+      this.setState({ songUrl: result.album.songs[1].url })
+      this.setState({ songTitle: result.album.songs[1].title })
       this.setState({ albumCoverUrl: result.album.url })
       this.setState({ artistName: result.album.artist.name })
       // return potato.album.songs[1].url
       // set the state for the other ones
+      // on end event listener
     }
   }
 
+  playNext(){
+    console.log("next")
+    //set the state.currentSong.url to whiever comes next
+  }
+
   render() {
+    console.log(this.props.artistName);
     return <ApolloConsumer>
       {
         (client, data) => {
@@ -186,10 +210,10 @@ class Player extends Component {
           return (
             <div className="player-footer">
               <div className="footer-left">
-                <img className="album-cover" src={this.state.albumCoverUrl} />
+                <img className="album-cover" src={this.props.albumTitle.url || this.state.albumCoverUrl} />
                 <div className="song-info">
                   <span className="song-name">{this.state.songTitle}</span>
-                  <span className="artist-name">{this.state.artistName}</span>
+                  <span className="artist-name">{this.props.artistName || this.state.artistName}</span>
                 </div>
                 <button onClick={this.toggleHeart}><i id="empty-heart" className="far fa-heart"></i></button>
                 <button onClick={this.toggleHeart}><i id="fill-heart" className="fas fa-heart"></i></button>
@@ -200,7 +224,7 @@ class Player extends Component {
                   <button><i className="fas fa-step-backward"></i></button>
                   <button onClick={this.togglePlay} id="play" className="play"><i className="fas fa-play"></i></button>
                   <button onClick={this.togglePlay} id="pause" className="pause"><i className="fas fa-pause"></i></button>
-                  <button><i className="fas fa-step-forward"></i></button>
+                  <button onClick={this.playNext}><i className="fas fa-step-forward"></i></button>
                   <button onClick={this.handleLoop}><i id="repeat" className="fas fa-sync"></i></button>
                 </div>
                 {/* method 2: */}
