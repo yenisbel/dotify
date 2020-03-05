@@ -6,10 +6,10 @@ module.exports = function validateLoginInput(data) {
   data.password = validText(data.password) ? data.password : "";
 
   if (Validator.isEmpty(data.username)) {
-    return { message: "Username field is required", isValid: false};
+    return { message: "Please enter your dotify username", isValid: false };
   }
   if (Validator.isEmpty(data.password)) {
-    return { message: "Password field is required", isValid: false};
+    return { message: "Please enter your password", isValid: false };
   }
   return {
     message: "",

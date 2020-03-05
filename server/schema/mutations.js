@@ -21,7 +21,10 @@ const mutation = new GraphQLObjectType({
       args: {
         username: { type: GraphQLString },
         email: { type: GraphQLString },
-        dateOfBirth: { type: GraphQLString },
+        confirmEmail: { type: GraphQLString },
+        birthMonth: { type: GraphQLString },
+        birthYear: { type: GraphQLInt },
+        birthDay: { type: GraphQLInt },
         gender: { type: GraphQLString },
         password: { type: GraphQLString }
       },
@@ -32,8 +35,8 @@ const mutation = new GraphQLObjectType({
     login: {
       type: UserType,
       args: {
-        username: {type: GraphQLString},
-        password: {type: GraphQLString}
+        username: { type: GraphQLString },
+        password: { type: GraphQLString }
       },
       resolve(_, args) {
         return AuthService.login(args);
@@ -44,7 +47,7 @@ const mutation = new GraphQLObjectType({
       args: {
         _id: { type: GraphQLID }
       },
-      resolve(_,args){
+      resolve(_, args) {
         return AuthService.logout(args);
       }
     },
@@ -53,7 +56,7 @@ const mutation = new GraphQLObjectType({
       args: {
         token: { type: GraphQLString }
       },
-      resolve(_,args){
+      resolve(_, args) {
         return AuthService.verifyUser(args);
       }
     },
@@ -124,9 +127,7 @@ const mutation = new GraphQLObjectType({
           return song
         });
       }
-    },
-
-
+    }
   }
 });
 
