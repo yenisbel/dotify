@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Mutation } from "react-apollo";
 import Mutations from "../graphql/mutations";
 import song from "../assets/music/test.mp3";
-import song2 from "../assets/music/Count-To-Nine.mp3";
-import song3 from "../assets/music/33.mp3";
 import PlayerCSS from "../assets/stylesheets/player.css";
 import image from "../assets/images/album-cover.png";
 
@@ -32,15 +30,6 @@ class Player extends Component {
   componentDidMount() {
     this.time = setInterval(this.tick, 1000);
   };
-
-  // componentDidUpdate(){
-  //   const pause = document.getElementById("pause");
-  //   const play = document.getElementById("play")
-  //   if (this.audioRef.currentTime === this.audioRef.duration){
-  //     pause.style.zIndex = "1";
-  //     play.style.zIndex = "0";
-  //   }
-  // }
 
   togglePlay(){
     const pause = document.getElementById("pause");
@@ -171,7 +160,7 @@ class Player extends Component {
           {/* <p onClick={e => this.audio.play()} className="play">Play</p> */}
           <div className="timeline-time">
             <span className="currentSongTime">{this.getCurrentTime()}</span>
-            <audio ref={audio => this.audioRef = audio} src={song2} id="song" preload="metadata"></audio>
+            <audio ref={audio => this.audioRef = audio} src={song} id="song" preload="metadata"></audio>
             <input 
               type="range" 
               id="timeline" 
