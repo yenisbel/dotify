@@ -1,15 +1,35 @@
 import gql from "graphql-tag";
 export default {
   SIGNUP_USER: gql `
-  mutation SignupUser($username: String!, $email: String!, $password: String!, $dateOfBirth: String!, $gender: String!) {
-    signup(username: $username, email: $email, password: $password, dateOfBirth: $dateOfBirth, gender: $gender) {
+  mutation SignupUser(
+    $username: String!, 
+    $email: String!,
+    $confirmEmail: String!, 
+    $password: String!, 
+    $birthMonth: String!,
+    $birthYear: Int!,
+    $birthDay: Int!,
+    $gender: String!
+  ) {
+    signup(
+      username: $username, 
+      email: $email, 
+      confirmEmail: $confirmEmail,
+      password: $password, 
+      birthMonth: $birthMonth,
+      birthYear: $birthYear,
+      birthDay: $birthDay, 
+      gender: $gender
+    ) {
       username
       email
       _id
       token
       loggedIn
       gender
-      dateOfBirth
+      birthMonth
+      birthYear
+      birthDay
     }
   }
   `,

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Mutation } from "react-apollo";
+import "../assets/stylesheets/auth.css";
 import Mutations from "../graphql/mutations";
 const { LOGIN_USER } = Mutations;
 
@@ -9,7 +11,8 @@ class Login extends Component {
 
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      errors: ""
     };
   }
 
@@ -37,37 +40,57 @@ class Login extends Component {
           localStorage.setItem("username", username);
           this.props.history.push("/");
         }}
-        onError={err => {
-          console.log(err);
+        onError={errorsArray => {
+          console.log(errorsArray);
+          this.setState({ errors: errorsArray.message.slice(15) });
         }}
         update={(client, data) => this.updateCache(client, data)}
       >
         {loginUser => (
           <div>
-            <form
-              onSubmit={e => {
-                e.preventDefault();
-                loginUser({
-                  variables: {
-                    username: this.state.username,
-                    password: this.state.password
-                  }
-                });
-              }}
-            >
-              <input
-                value={this.state.username}
-                onChange={this.update("username")}
-                placeholder="Username"
-              />
-              <input
-                value={this.state.password}
-                onChange={this.update("password")}
-                type="password"
-                placeholder="Password"
-              />
-              <button type="submit">Log In</button>
-            </form>
+            <header className="auth-header">
+              <Link to="/splash">
+                <div className="logo-container">
+                  <i className="fab fa-spotify"></i>
+                  <h1>Dotify</h1>
+                </div>
+              </Link>
+            </header>
+            <div className="auth-container">
+              <form
+                onSubmit={e => {
+                  e.preventDefault();
+                  loginUser({
+                    variables: {
+                      username: this.state.username,
+                      password: this.state.password
+                    }
+                  });
+                }}
+              >
+                <div className="input-container">
+                  <input
+                    value={this.state.username}
+                    onChange={this.update("username")}
+                    placeholder="Username"
+                  />
+                  <input
+                    value={this.state.password}
+                    onChange={this.update("password")}
+                    type="password"
+                    placeholder="Password"
+                  />
+                  <p>{this.state.errors}</p>
+                  <button type="submit">Log In</button>
+                  <h3>Don't have an account ?</h3>
+                  <button className="signup-redirect">
+                  <Link to="signup"> 
+                    Sign Up for Dotify
+                  </Link>
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         )}
       </Mutation>
