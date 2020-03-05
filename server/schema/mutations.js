@@ -65,19 +65,24 @@ const mutation = new GraphQLObjectType({
       args: {
         name: { type: GraphQLString },
         genre: { type: GraphQLString },
-        artist: { type: GraphQLID }
+        artist: { type: GraphQLID },
+        url: { type: GraphQLString }
       },
       resolve(_, args) {
-        return new Album(args).save();
+        return new Album(args).save().then(album => {
+          Artist.findByIdAndUpdate(args.artist, {$push: { albums: album._id}})
+          .exec()
+          return album;
+        });
       }
     },
     deleteAlbum: {
       type: AlbumType,
       args: {
-        id: { type: GraphQLID }
+        _id: { type: GraphQLID }
       },
       resolve(_, { _id }) {
-        return Album.remove({ id });
+        return Album.remove({ _id });
       }
     },
     newArtist: {
@@ -92,19 +97,19 @@ const mutation = new GraphQLObjectType({
     deleteArtist: {
       type: ArtistType,
       args: {
-        id: { type: GraphQLID }
+        _id: { type: GraphQLID }
       },
       resolve(_, { _id }) {
-        return Artist.remove({ id });
+        return Artist.remove({ _id });
       }
     },
     deleteSong: {
       type: SongType,
       args: {
-        id: { type: GraphQLID }
+        _id: { type: GraphQLID }
       },
       resolve(_, { _id }) {
-        return Song.remove({ id });
+        return Song.remove({ _id });
       }
     },
     newSong: {
@@ -112,10 +117,15 @@ const mutation = new GraphQLObjectType({
       args: {
         title: { type: GraphQLString },
         album: { type: GraphQLID },
-        artist: { type: GraphQLID }
+        artist: { type: GraphQLID },
+        url: { type: GraphQLString }
       },
       resolve(_, args) {
-        return new Song(args).save();
+        return new Song(args).save().then(song => {
+          Album.findByIdAndUpdate(args.album, { $push: { songs: song._id } })
+            .exec()
+          return song
+        });
       }
     }
   }

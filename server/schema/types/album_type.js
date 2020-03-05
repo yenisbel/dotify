@@ -25,7 +25,8 @@ const AlbumType = new GraphQLObjectType({
       resolve(parentValue){
         return Album.findSongs(parentValue._id);
       }
-    }
+    },
+    url: { type: GraphQLString }
   })
 });
 
