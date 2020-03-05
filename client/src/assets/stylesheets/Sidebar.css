@@ -29,6 +29,15 @@
   height: 40px;
 }
 
+.side-home-button, .side-search-button, .side-library-button {
+  padding: 0 16px;
+  width: 182px;
+  height: 40px;
+  background-color: brown;
+  border-radius: 5px;
+  display: flex;
+}
+
 .playlist {
   padding: 5px 24px;
 }

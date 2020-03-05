@@ -13,21 +13,21 @@ const Sidebar = () => {
       </div>
       <div className="static-links">
         <div className="home">
-          <Link to="/" className="home-buttons">
+          <button className="side-home-button">
             <i className="fas fa-home"></i>
-            Home
-          </Link>
+            <div>Home</div> 
+          </button>
         </div>
         <div className="search">
-          <Link to="/search" className="home-buttons">
+          <button className="side-search-button">
             <i className="fas fa-search"></i>
-            Search
-          </Link>
+            <div>Search</div>
+          </button>
         </div>
         <div className="library">
-          <button className="home-buttons">
+          <button className="side-library-button">
             <i className="fas fa-book-open"></i>
-            Your Library
+            <div>Your Library</div>
           </button>
         </div>
       </div>
