@@ -16,9 +16,9 @@ const App = () => {
         <AuthRoute exact path="/login" component={Login} routeType="auth" />
         <AuthRoute exact path="/signup" component={Signup} routeType="auth" />
         <AuthRoute exact path="/splash" component={Splash} routeType="auth" />
+        <Route path="/album/:id" component={AlbumShow} />
         <AuthRoute path="/" component={Nav} />
         <Route exact path="/player" component={Player}/>
-        <Route path="/album/:id" component={AlbumShow} />
       </Switch>
     </div>
   );
