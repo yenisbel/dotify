@@ -14,6 +14,7 @@ const Song = mongoose.model("songs");
 const Artist = mongoose.model("artists");
 const Album = mongoose.model("albums");
 const Playlist = mongoose.model("playlists");
+const User = mongoose.model("users");
 
 const mutation = new GraphQLObjectType({
   name: "Mutation",
@@ -130,14 +131,28 @@ const mutation = new GraphQLObjectType({
         });
       }
     },
-    newPlaylist: {
+    newCreatedPlaylist: {
       type: PlaylistType,
       args: {
         name: { type: GraphQLString },
         creator: { type: GraphQLID }
       },
       resolve(_, args) {
-        return new Playlist(args).save().then(playlist)
+        return new Playlist(args).save().then(createdPlaylist =>{
+          User.findByIdAndUpdate(args.creator, { $push: { createdPlaylists: createdPlaylist._id }})
+        });
+      }
+    },
+    newLikedPlaylist: {
+      type: PlaylistType,
+      args: {
+        name: { type: GraphQLString },
+        creator: { type: GraphQLID }
+      },
+      resolve(_, args) {
+        return new Playlist(args).save().then(likedPlaylist => {
+          User.findByIdAndUpdate(args.creator, { $push: { likedPlaylists: likedPlaylist._id } })
+        });
       }
     }
   }
