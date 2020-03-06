@@ -140,6 +140,8 @@ const mutation = new GraphQLObjectType({
       resolve(_, args) {
         return new Playlist(args).save().then(createdPlaylist =>{
           User.findByIdAndUpdate(args.creator, { $push: { createdPlaylists: createdPlaylist._id }})
+            .exec()
+          return createdPlaylist
         });
       }
     },
@@ -152,11 +154,13 @@ const mutation = new GraphQLObjectType({
       resolve(_, args) {
         return new Playlist(args).save().then(likedPlaylist => {
           User.findByIdAndUpdate(args.creator, { $push: { likedPlaylists: likedPlaylist._id } })
+            .exec()
+          return likedPlaylist
         });
       }
     },
     addPlaylistSong: {
-      type: SongType,
+      type: PlaylistType,
       args: {
         playlist: { type: GraphQLID },
         song: { type: GraphQLID }

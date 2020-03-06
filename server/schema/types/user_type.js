@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const graphql = require("graphql");
 const { 
-  GraphQLObjectType, GraphQLString, GraphQLID, GraphQLBoolean, GraphQLInt
+  GraphQLObjectType, GraphQLString, GraphQLID, GraphQLBoolean, GraphQLInt, GraphQLList
 } = graphql;
 const User = mongoose.model("users");
 
@@ -16,7 +16,7 @@ const UserType = new GraphQLObjectType({
     birthDay: { type: GraphQLInt },
     gender: { type: GraphQLString },
     createdPlaylists: { 
-      type: require("./playlist_type"),
+      type: new GraphQLList(require("./playlist_type")),
       resolve(parentValue) {
         return User.findById(parentValue._id)
         .populate("createdPlaylists")
@@ -26,12 +26,12 @@ const UserType = new GraphQLObjectType({
       }
     },
     likedPlaylists: {
-      type: require("./playlist_type"),
+      type: new GraphQLList(require("./playlist_type")),
       resolve(parentValue) {
         return User.findById(parentValue._id)
-          .populate("createdPlaylists")
+          .populate("likedPlaylists")
           .then(user => {
-            return user.createdPlaylists;
+            return user.likedPlaylists;
           })
       }
     },

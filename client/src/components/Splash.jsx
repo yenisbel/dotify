@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import "../assets/stylesheets/splash.css";
 import "../assets/stylesheets/header.css";
+import "../assets/stylesheets/footer.css";
 
 class Splash extends React.Component {
   constructor(props) {
@@ -47,22 +48,57 @@ class Splash extends React.Component {
             </div>
           </div>
         </div>
+        <footer className="container">
+          <div className="inner-container">
+            <div className="footer-links">
+              <h3>Cindy Kuo</h3>
+              <div className="github-img">
+                <i className="fab fa-github"></i>
+                <a href="https://github.com/ckuo15" target="_blank"> Github</a>
+              </div>
+              <div className="linkedin-img">
+                <i className="fab fa-linkedin"></i>
+                <a href="#"> LinkedIn</a>
+              </div>
+            </div>
+            <div className="footer-links">
+              <h3>Kieran Scannell</h3>
+              <div className="github-img">
+                <i className="fab fa-github"></i>
+                <a href="https://github.com/ktscannell" target="_blank"> Github</a>
+              </div>
+              <div className="linkedin-img">
+                <i className="fab fa-linkedin"></i>
+                <a href="#"> LinkedIn</a>
+              </div>
+            </div>
+            <div className="footer-links">
+              <h3>Max Lin</h3>
+              <div className="github-img">
+                <i className="fab fa-github"></i>
+                <a href="https://github.com/max821023" target="_blank"> Github</a>
+              </div>
+              <div className="linkedin-img">
+                <i className="fab fa-linkedin"></i>
+                <a href="#"> LinkedIn</a>
+              </div>
+            </div>
+            <div className="footer-links">
+              <h3>Yenisbel Valle</h3>
+              <div className="github-img">
+                <i className="fab fa-github"></i>
+                <a href="https://github.com/yenisbel" target="_blank"> Github</a>
+              </div>
+              <div className="linkedin-img">
+                <i className="fab fa-linkedin"></i>
+                <a href="#"> LinkedIn</a>
+              </div>
+            </div>
+          </div>
+        </footer>
       </>
     );
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     user: {username: "hunter", password: "hunter12"}
-//   }
-// }
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     processForm: user => dispatch(login(user)),
-//     closeModalForm: () => dispatch(closeModalForm()),
-//   };
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Splash);
 export default Splash;
