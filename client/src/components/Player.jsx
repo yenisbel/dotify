@@ -22,11 +22,10 @@ class Player extends Component {
       playing: false,
       filledHeart: false,
       loop: false,
-      songUrl: this.props.currentSong.url,
       albumCoverUrl: '',
-      songTitle: '',
       artistName: '',
-      songs: []
+      queue: [],
+      song: {songUrl: this.props.currentSong.url, songTitle: ''}
     }
     this.tick = this.tick.bind(this);
     this.handleVolume = this.handleVolume.bind(this);
@@ -34,6 +33,7 @@ class Player extends Component {
     this.togglePlay = this.togglePlay.bind(this);
     this.toggleHeart = this.toggleHeart.bind(this);
     this.handleLoop = this.handleLoop.bind(this);
+    this.playNext = this.playNext.bind(this);
   }
 
   componentDidMount() {
@@ -43,7 +43,7 @@ class Player extends Component {
 
   componentDidUpdate(oldProps){
     if (oldProps.currentSong !== this.props.currentSong){
-      this.setState({songUrl: this.props.currentSong.url, songTitle: this.props.currentSong.title})
+      this.setState({song: {songUrl: this.props.currentSong.url, songTitle: this.props.currentSong.title}})
     }
   }
 
@@ -51,13 +51,7 @@ class Player extends Component {
   togglePlay() {
     const pause = document.getElementById("pause");
     const play = document.getElementById("play");
-    // const song = document.getElementById("song");
-    // song.onended = function () {
-    //   this.audioRef.pause();
-    //   this.setState({ playing: false });
-    //   play.style.zIndex = "1";
-    //   pause.style.zIndex = "0";
-    // }
+    
     if (this.state.playing) {
       this.audioRef.pause();
       this.setState({ playing: false });
@@ -91,7 +85,6 @@ class Player extends Component {
   }
 
   handleVolume(e, mute) {
-    debugger;
     if (e) {
       let newVolume = (e.target.value < 1) ? 0 : e.target.value;
       this.setState({ volume: newVolume })
@@ -177,14 +170,31 @@ class Player extends Component {
     }
     if (result) {
       console.log(result.album.songs)
-      // let songs = result.albums.songs;
+      // let songs = result.albums.songs.url;
 
       // for (let i= 0; i < result.album.songs.length; i++){
+
       // }
-      this.setState({ songUrl: result.album.songs[1].url })
-      this.setState({ songTitle: result.album.songs[1].title })
-      this.setState({ albumCoverUrl: result.album.url })
-      this.setState({ artistName: result.album.artist.name })
+      // Array.from(
+      //   result.album.songs
+      // ).forEach(song => {
+      //   this.setState({queue: this.state.queue.concat(song.url)})
+      // })
+      this.setState({queue: result.album.songs.map(song => {
+        return {title: song.title, url: song.url}
+      })});
+
+      // this.setState({songs: result.album.songs})
+
+      this.setState({ song: {
+        songUrl: result.album.songs[0].url, 
+        songTitle: result.album.songs[0].title, 
+        },
+      albumCoverUrl: result.album.url,
+      artistName: result.album.artist.name
+      })
+     
+
       // return potato.album.songs[1].url
       // set the state for the other ones
       // on end event listener
@@ -192,17 +202,35 @@ class Player extends Component {
   }
 
   playNext(){
-    console.log("next")
+    // for (let i= 0; i < result.album.songs.length; i++){
+
+    // }
+    // console.log(this.state.songs);
+    const currentSongIndex = this.state.queue.findIndex(el => {
+      console.log(el, this.state.song);
+      return el.url === this.state.song.songUrl 
+      // this.state.song
+    });
+    this.setState({ song: { songUrl: this.state.queue[currentSongIndex+1] ? this.state.queue[currentSongIndex+1].url : this.state.queue[0].url, 
+                            songTitle: this.state.queue[currentSongIndex + 1] ? this.state.queue[currentSongIndex+1].title : this.state.queue[0].title}},
+                            () => {this.audioRef.play()})
+    
+    // this.setState({song: {songUrl: this.state.queue[currentSongIndex+1].url || this.state.queue[0].url, songTitle: this.state.queue[currentSongIndex+1].title || this.state.queue[0].title }})
+    // console.log(this.state.songs[currentSongIndex]);
     //set the state.currentSong.url to whiever comes next
+    console.log(currentSongIndex);
+    console.log(this.state.queue[currentSongIndex+1]);
+
   }
 
   render() {
-    console.log(this.props.artistName);
+    // console.log(this.props.artistName);
+    // console.log(this.state.queue);
     return <ApolloConsumer>
       {
         (client, data) => {
           // this.checkCache(client);
-          if (!this.state.songUrl) {
+          if (!this.state.song.songUrl) {
             this.readCache(client.cache);
             return null;
           }
@@ -212,7 +240,7 @@ class Player extends Component {
               <div className="footer-left">
                 <img className="album-cover" src={this.props.albumTitle.url || this.state.albumCoverUrl} />
                 <div className="song-info">
-                  <span className="song-name">{this.state.songTitle}</span>
+                  <span className="song-name">{this.state.song.songTitle}</span>
                   <span className="artist-name">{this.props.artistName || this.state.artistName}</span>
                 </div>
                 <button onClick={this.toggleHeart}><i id="empty-heart" className="far fa-heart"></i></button>
@@ -231,7 +259,7 @@ class Player extends Component {
                 {/* <p onClick={e => this.audio.play()} className="play">Play</p> */}
                 <div className="timeline-time">
                   <span className="currentSongTime">{this.getCurrentTime()}</span>
-                  <audio ref={audio => this.audioRef = audio} src={this.state.songUrl} id="song" preload="metadata"></audio>
+                  <audio ref={audio => this.audioRef = audio} src={this.state.song.songUrl} id="song" preload="metadata"></audio>
                   <input
                     type="range"
                     id="timeline"
