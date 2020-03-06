@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import Login from "./Login";
 import Signup from "./Signup";
 import AuthRoute from '../util/route_util';
-import Nav from "./Nav";
+import Main from "./Main";
 import Player from "./Player";
 import Splash from "./Splash";
 import AlbumShow from "./AlbumShow";
@@ -16,9 +16,7 @@ const App = () => {
         <AuthRoute exact path="/login" component={Login} routeType="auth" />
         <AuthRoute exact path="/signup" component={Signup} routeType="auth" />
         <AuthRoute exact path="/splash" component={Splash} routeType="auth" />
-        <Route path="/album/:id" component={AlbumShow} />
-        <AuthRoute path="/" component={Nav} />
-        <Route exact path="/player" component={Player}/>
+        <AuthRoute path="/" component={Main} />
       </Switch>
     </div>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import "../assets/stylesheets/Sidebar.css";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import create from "../assets/images/create.png";
 import liked from "../assets/images/liked.png";
 
@@ -70,4 +70,4 @@ const Sidebar = ({props}) => {
   );
 }
 
-export default Sidebar;
+export default withRouter(Sidebar);
