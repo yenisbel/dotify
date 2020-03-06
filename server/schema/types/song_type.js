@@ -10,7 +10,7 @@ const SongType = new GraphQLObjectType({
     _id: { type: GraphQLID },
     title: { type: GraphQLString },
     album: {
-      type: require("./song_type"),
+      type: require("./album_type"),
       resolve(parentValue) {
         return Song.findById(parentValue._id)
         .populate("album")
@@ -20,7 +20,7 @@ const SongType = new GraphQLObjectType({
       }
     },
     artist: {
-      type: require("./song_type"),
+      type: require("./artist_type"),
       resolve(parentValue) {
         return Song.findById(parentValue._id)
         .populate("artist")
