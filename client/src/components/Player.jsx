@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Mutation, ApolloConsumer } from "react-apollo";
+import { Mutation, ApolloConsumer, Query } from "react-apollo";
 import Mutations from "../graphql/mutations";
 import song from "../assets/music/test.mp3";
 import PlayerCSS from "../assets/stylesheets/player.css";
@@ -7,7 +7,7 @@ import image from "../assets/images/album-cover.png";
 import { withRouter } from "react-router-dom";
 
 import Queries from "../graphql/queries";
-const { FETCH_ALBUM, FETCH_ARTISTS } = Queries;
+const { FETCH_ALBUM, GET_CURRENT_ALBUM, GET_CURRENT_SONG } = Queries;
 
 
 class Player extends Component {
@@ -36,34 +36,36 @@ class Player extends Component {
     this.handleLoop = this.handleLoop.bind(this);
     this.playNext = this.playNext.bind(this);
     this.handleShuffle = this.handleShuffle.bind(this);
+    this.setAlbum = this.setAlbum.bind(this);
   }
 
   componentDidMount() {
     this.time = setInterval(this.tick, 1000);
-    console.log(this.props);
-    this.setState({
-      queue: this.props.albumTitle.songs.map(song => {
-        return { title: song.title, url: song.url }
-      })
-    });
+    // console.log(this.props);
+    // this.setState({
+    //   queue: this.props.albumTitle.songs.map(song => {
+    //     return { title: song.title, url: song.url }
+    //   })
+    // });
 
-    // this.setState({songs: result.album.songs})
+    // // this.setState({songs: result.album.songs})
 
-    this.setState({
-      song: {
-        songUrl: this.props.albumTitle.songs[0].url,
-        songTitle: this.props.albumTitle.songs[0].title,
-      },
-      albumCoverUrl: this.props.albumTitle.url,
-      artistName: this.props.albumTitle.artist.name
-    })
+    // this.setState({
+    //   song: {
+    //     songUrl: this.props.albumTitle.songs[0].url,
+    //     songTitle: this.props.albumTitle.songs[0].title,
+    //   },
+    //   albumCoverUrl: this.props.albumTitle.url,
+    //   artistName: this.props.albumTitle.artist.name
+    // })
     // this.readCache()
   };
 
   componentDidUpdate(oldProps){
-    if (oldProps.currentSong !== this.props.currentSong){
-      this.setState({song: {songUrl: this.props.currentSong.url, songTitle: this.props.currentSong.title}})
-    }
+    // if (oldProps.currentSong !== this.props.currentSong){
+    //   // this.setState({song: {songUrl: this.props.currentSong.url, songTitle: this.props.currentSong.title}})
+    // }
+    
   }
 
 
@@ -177,6 +179,7 @@ class Player extends Component {
   // }
 
   readCache(cache) {
+    // writeData
     let result;
 
     try {
@@ -235,32 +238,39 @@ class Player extends Component {
     // for (let i= 0; i < result.album.songs.length; i++){
 
     // }
-    // console.log(this.state.songs);
+    console.log(this.state.songs);
     const randomSong = this.state.queue[Math.floor(Math.random() * this.state.queue.length)];
     const currentSongIndex = this.state.queue.findIndex(el => {
       console.log(el, this.state.song);
-      return el.url === this.state.song.songUrl 
+      return el.url === this.state.currentSong.url 
       // this.state.song
     });
     if (this.state.shuffle){
-      this.setState({ song: { songUrl: randomSong.url,songTitle: randomSong.title}},() => {this.audioRef.play()})
+      this.setState({ currentSong: randomSong },() => {this.audioRef.play()})
     } else {
       this.setState({
-        song: {
-          songUrl: this.state.queue[currentSongIndex + 1] ? this.state.queue[currentSongIndex + 1].url : this.state.queue[0].url,
-          songTitle: this.state.queue[currentSongIndex + 1] ? this.state.queue[currentSongIndex + 1].title : this.state.queue[0].title
-        }
-      },
-        () => { this.audioRef.play() })
+        currentSong: this.state.queue[currentSongIndex + 1] ? this.state.queue[currentSongIndex + 1] : this.state.queue[0]},
+        () => { this.audioRef.play() }
+      )
     }
+  }
+
+    // write data with current song pointing to this
+    
+
+    // this.setState({
+    //   song: {
+    //     songUrl: this.props.albumTitle.songs[0].url,
+    //     songTitle: this.props.albumTitle.songs[0].title,
+    //   },
+    //   albumCoverUrl: this.props.albumTitle.url,
+    //   artistName: this.props.albumTitle.artist.name
+    // })
+
     
     // this.setState({song: {songUrl: this.state.queue[currentSongIndex+1].url || this.state.queue[0].url, songTitle: this.state.queue[currentSongIndex+1].title || this.state.queue[0].title }})
     // console.log(this.state.songs[currentSongIndex]);
     //set the state.currentSong.url to whiever comes next
-    console.log(currentSongIndex);
-    console.log(this.state.queue[currentSongIndex+1]);
-
-  }
 
   handleShuffle(){
     const shuffle = document.getElementById("shuffle");
@@ -278,25 +288,58 @@ class Player extends Component {
     // this.audioRef.play(randomSong.url)
   };
 
+  // this.checkCache(client);
+  // debugger;
+  //
+
+  setAlbum(data){
+    //map over songs and create que in state
+    // when we set state, set key of album to something (name)
+    console.log(data.currentAlbum.songs);
+    this.setState({
+      queue: data.currentAlbum.songs,
+      album: data.currentAlbum.url
+    })
+  }
+  // .map(song => { return { song: { songTitle: song.title, songUrl: song.url } } })
+
   render() {
     // console.log(this.props.artistName);
     // console.log(this.state.queue);
-    if (!this.state.song.songUrl) {
-      // this.readCache(client.cache);
-      return null;
-    }
-    return <ApolloConsumer>
+    // if (!this.state.song.songUrl) {
+    //   // this.readCache(client.cache);
+    //   return null;
+    // }
+    return <Query query={GET_CURRENT_ALBUM}>
       {
-        (client, data) => {
-          // this.checkCache(client);
-          // debugger;
+        ({loading, data, error}) => {
+          // check if key is set yet. use the data to set all the keys 
+          if (loading) return "loading";
+          if (error) return `${error}`;
+          if (!this.state.album && data){
+            this.setAlbum(data)
+          }
+          const albumCover = data ? data.currentAlbum.url : "";
+          const artistName = data ? data.currentAlbum.artist.name : "";
+          // console.log(data);
           return (
+          <Query query={GET_CURRENT_SONG}>
+            {
+            ({loading, data, error}) => {
+              if (!this.state.currentSong && data.currentSong){
+                this.setState({currentSong: data.currentSong})
+              }
+              if (loading || !this.state.currentSong) return null;
+              if (error) return `${error}`;
+              // console.log(data);
+              // console.log(this.state.currentSong);
+              return(
             <div className="player-footer">
               <div className="footer-left">
-                <img className="album-cover" src={this.props.albumTitle.url || this.state.albumCoverUrl} />
+                <img className="album-cover" src={albumCover} />
                 <div className="song-info">
-                  <span className="song-name">{this.state.song.songTitle}</span>
-                  <span className="artist-name">{this.props.artistName || this.state.artistName}</span>
+                  <span className="song-name">{this.state.currentSong.title}</span>
+                  <span className="artist-name">{artistName}</span>
                 </div>
                 <button onClick={this.toggleHeart}><i id="empty-heart" className="far fa-heart"></i></button>
                 <button onClick={this.toggleHeart}><i id="fill-heart" className="fas fa-heart"></i></button>
@@ -314,7 +357,7 @@ class Player extends Component {
                 {/* <p onClick={e => this.audio.play()} className="play">Play</p> */}
                 <div className="timeline-time">
                   <span className="currentSongTime">{this.getCurrentTime()}</span>
-                  <audio ref={audio => this.audioRef = audio} src={this.state.song.songUrl} id="song" preload="metadata" onEnded={this.togglePlay}></audio>
+                  <audio ref={audio => this.audioRef = audio} src={this.state.currentSong.url} id="song" preload="metadata" onEnded={this.togglePlay}></audio>
                   <input
                     type="range"
                     id="timeline"
@@ -351,11 +394,13 @@ class Player extends Component {
                 />
               </div>
             </div>
+              )
+        }}
+          </Query>
           )
         }
       }
-
-    </ApolloConsumer>
+    </Query>
 
     // return (
     //   <div className="player-footer">

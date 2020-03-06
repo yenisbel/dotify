@@ -98,7 +98,7 @@ class Nav extends React.Component {
                   </div>
 
                 
-                {/* <div className="player"><Player/></div> */}
+                <div className="player"><Player/></div>
                 </div>
               );
             }}

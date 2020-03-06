@@ -37,8 +37,8 @@
   
  .play-icon {
   color: white;
-  position: absolute;
-  display: none;
+  /* position: absolute; */
+  /* display: none; */
   bottom: 17px;
   right: 17px;
   background-color:#026faa;
@@ -48,7 +48,7 @@
   height: 35px;
  }
   
- .music-card:hover .play-icon {
+ /* .music-card:hover .play-icon {
   display: block;
- }
+ } */
  

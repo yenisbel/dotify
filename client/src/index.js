@@ -37,9 +37,24 @@ const username = localStorage.getItem("username");
 cache.writeData({
   data: {
     isLoggedIn: Boolean(token),
-    username
+    username,
+    currentSong: {
+      _id: "5e61356b92f664f411114216",
+      title: "Oh My God",
+      url: "https://dotify-aa-dev.s3.us-east-2.amazonaws.com/Oh+My+God.mp3"
+    },
+    currentAlbum: {
+      _id: "5e61353192f664f411114215",
+      songs: {_id: "", url:"", title:""},
+      artist: {
+        _id: "5e6134b292f664f411114214", 
+        name: "Alec Benjamin"},
+      url: "https://dotify-aa-dev.s3.us-east-2.amazonaws.com/ohMyGod_album.png"
     }
+  }
 });
+
+//preload song 
 
 if (token) {
   client
