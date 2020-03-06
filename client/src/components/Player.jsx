@@ -259,7 +259,7 @@ class Player extends Component {
                 {/* <p onClick={e => this.audio.play()} className="play">Play</p> */}
                 <div className="timeline-time">
                   <span className="currentSongTime">{this.getCurrentTime()}</span>
-                  <audio ref={audio => this.audioRef = audio} src={this.state.song.songUrl} id="song" preload="metadata"></audio>
+                  <audio ref={audio => this.audioRef = audio} src={this.state.song.songUrl} id="song" preload="metadata" onEnded={this.togglePlay}></audio>
                   <input
                     type="range"
                     id="timeline"
