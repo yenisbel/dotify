@@ -16,10 +16,16 @@ const PlaylistSchema = new Schema({
 });
 
 PlaylistSchema.statics.addPlaylistSong = (playlistId, songId) => {
-  //addCreatedPlaylistSong
   const Playlist = mongoose.model('playlists');
 
   return Playlist.findByIdAndUpdate(playlistId, { $push: { songs: songId }}, { new: true })
+    .then(playlist => playlist)
+};
+
+PlaylistSchema.statics.removePlaylistSong = (playlistId, songId) => {
+  const Playlist = mongoose.model('playlists');
+
+  return Playlist.findByIdAndRemove(playlistId, { $pull: { songs: songId } }, { new: true })
     .then(playlist => playlist)
 };
 

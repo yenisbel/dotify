@@ -165,10 +165,26 @@ const mutation = new GraphQLObjectType({
         playlist: { type: GraphQLID },
         song: { type: GraphQLID }
       },
-      resolve(_, { playlist, song}) {
+      resolve(_, { playlist, song }) {
         return Playlist.addPlaylistSong(playlist, song);
       }
-    }
+    },
+    removePlaylistSong: {
+      type: PlaylistType,
+      args: {
+        playlist: { type: GraphQLID },
+        song: { type: GraphQLID }
+      },
+      resolve(_, { playlist, song }) {
+        return Playlist.removePlaylistSong(playlist, song);
+      }
+    },
+    // deletePlaylist: {
+    //   type: PlaylistType,
+    //   args: {
+    //     playlist
+    //   }    
+    // }
   }
 });
 
