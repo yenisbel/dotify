@@ -25,7 +25,7 @@ class Player extends Component {
       albumCoverUrl: '',
       artistName: '',
       queue: [],
-      song: {songUrl: this.props.currentSong.url, songTitle: ''}
+      song: {songUrl: '', songTitle: ''}
     }
     this.tick = this.tick.bind(this);
     this.handleVolume = this.handleVolume.bind(this);

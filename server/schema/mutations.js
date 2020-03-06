@@ -154,6 +154,16 @@ const mutation = new GraphQLObjectType({
           User.findByIdAndUpdate(args.creator, { $push: { likedPlaylists: likedPlaylist._id } })
         });
       }
+    },
+    addPlaylistSong: {
+      type: SongType,
+      args: {
+        playlist: { type: GraphQLID },
+        song: { type: GraphQLID }
+      },
+      resolve(_, { playlist, song}) {
+        return Playlist.addPlaylistSong(playlist, song);
+      }
     }
   }
 });
