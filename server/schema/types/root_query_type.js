@@ -1,11 +1,14 @@
 const mongoose = require("mongoose");
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLNonNull } = graphql;
+const { 
+  GraphQLObjectType, GraphQLList, GraphQLID, GraphQLNonNull, GraphQLString 
+} = graphql;
 
 const UserType = require("./user_type");
 const SongType = require("./song_type");
 const ArtistType = require("./artist_type");
 const AlbumType = require("./album_type");
+const SearchType = require("./search_type");
 
 const User = mongoose.model("users");
 const Song = mongoose.model("songs");
@@ -67,6 +70,16 @@ const RootQueryType = new GraphQLObjectType({
         return Song.findById(args._id);
       }
     },
+    search: {
+      type: SearchType,
+      args: { searchTerm: { type: new GraphQLNonNull(GraphQLString) } },
+      async resolve(parentValue, args) {
+        const artists = await Artist.find({
+          name: { $regex: parentValue.searchTerm, $options: "i" }
+        });
+        return new Promise(resolve => resolve({ searchTerm: args.searchTerm }));
+      }
+    }
   })
 });
 
