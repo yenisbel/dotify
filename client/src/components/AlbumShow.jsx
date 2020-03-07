@@ -17,6 +17,14 @@ class AlbumShow extends Component {
     }
   }
 
+  // handlePlay(client, data){
+  //   client.writeData({
+  //     data: {
+  //       currentAlbum: 
+  //     }
+  //   })
+  // }
+
   updateCache(client, data){
     // debugger;
     // console.log(album);
@@ -56,6 +64,8 @@ class AlbumShow extends Component {
 
   render(){
     return (
+      <ApolloConsumer>
+
       <Query query={FETCH_ALBUM}
       variables={{id: this.props.match.params.id}} 
       >
@@ -63,7 +73,8 @@ class AlbumShow extends Component {
         {({ loading, error, data}) => {
           if (loading) return <p>Loading...</p>;
           if (error) return <p>Error</p>;
-          console.log("hello")
+          // console.log("hello")
+          //data.album
           return <div>
               <ul>
                 {/* return <ApolloConsumer> */}
@@ -74,6 +85,7 @@ class AlbumShow extends Component {
                       {data.album.songs.map((song) => (
                         <li key={song._id}>
                           <p onClick={e => this.setState({ currentSong: song })}>{song.title}</p>
+                          {/* <p onClick={this.handlePlay(client, data)}>PLay</p> */}
                         </li>
                       ))}
                     {/* } */}
@@ -88,6 +100,8 @@ class AlbumShow extends Component {
           </div>
         }}
     </Query>
+      </ApolloConsumer>
+
     )
   }
 };

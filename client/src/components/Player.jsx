@@ -234,20 +234,32 @@ class Player extends Component {
   //     () => { this.audioRef.play() })
   // }
 
-  playNext(){
+  playNext(client){
     // for (let i= 0; i < result.album.songs.length; i++){
 
     // }
-    console.log(this.state.songs);
+    // console.log(this.state.songs);
     const randomSong = this.state.queue[Math.floor(Math.random() * this.state.queue.length)];
     const currentSongIndex = this.state.queue.findIndex(el => {
-      console.log(el, this.state.song);
+      // console.log(el, this.state.song);
       return el.url === this.state.currentSong.url 
       // this.state.song
     });
+    // console.log(this.state.queue[currentSongIndex + 1]);
     if (this.state.shuffle){
+      client.writeData({
+        data: {
+          currentSong: randomSong
+        }
+      })
       this.setState({ currentSong: randomSong },() => {this.audioRef.play()})
     } else {
+      client.writeData({
+        data: {
+          currentSong: this.state.queue[currentSongIndex + 1] ? this.state.queue[currentSongIndex + 1] : this.state.queue[0]
+        }
+      })
+        // .then(() => this.audioRef.play())
       this.setState({
         currentSong: this.state.queue[currentSongIndex + 1] ? this.state.queue[currentSongIndex + 1] : this.state.queue[0]},
         () => { this.audioRef.play() }
@@ -295,7 +307,7 @@ class Player extends Component {
   setAlbum(data){
     //map over songs and create que in state
     // when we set state, set key of album to something (name)
-    console.log(data.currentAlbum.songs);
+    // console.log(data.currentAlbum.songs);
     this.setState({
       queue: data.currentAlbum.songs,
       album: data.currentAlbum.url
@@ -316,23 +328,27 @@ class Player extends Component {
           // check if key is set yet. use the data to set all the keys 
           if (loading) return "loading";
           if (error) return `${error}`;
-          if (!this.state.album && data){
+          if ((!this.state.album && data) || (this.state.album !== data.currentAlbum.url)){
             this.setAlbum(data)
           }
           const albumCover = data ? data.currentAlbum.url : "";
           const artistName = data ? data.currentAlbum.artist.name : "";
           // console.log(data);
           return (
-          <Query query={GET_CURRENT_SONG}>
+            <ApolloConsumer>
+              {(client) => {
+                
+  
+          return <Query query={GET_CURRENT_SONG}>
             {
             ({loading, data, error}) => {
-              if (!this.state.currentSong && data.currentSong){
+              if ((!this.state.currentSong && data.currentSong) || (this.state.currentSong.url !== data.currentSong.url)){
                 this.setState({currentSong: data.currentSong})
               }
               if (loading || !this.state.currentSong) return null;
               if (error) return `${error}`;
               // console.log(data);
-              // console.log(this.state.currentSong);
+              console.log(this.state.currentSong);
               return(
             <div className="player-footer">
               <div className="footer-left">
@@ -350,7 +366,7 @@ class Player extends Component {
                   <button><i className="fas fa-step-backward"></i></button>
                   <button onClick={this.togglePlay} id="play" className="play"><i className="fas fa-play"></i></button>
                   <button onClick={this.togglePlay} id="pause" className="pause"><i className="fas fa-pause"></i></button>
-                  <button onClick={this.playNext}><i className="fas fa-step-forward"></i></button>
+                  <button onClick={() => this.playNext(client)}><i className="fas fa-step-forward"></i></button>
                   <button onClick={this.handleLoop}><i id="repeat" className="fas fa-sync"></i></button>
                 </div>
                 {/* method 2: */}
@@ -396,7 +412,9 @@ class Player extends Component {
             </div>
               )
         }}
-          </Query>
+          </Query> 
+           }}
+            </ApolloConsumer>
           )
         }
       }
