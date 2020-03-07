@@ -1,6 +1,6 @@
 .player-footer{
   background: #282828;
-  height: 15vh;
+  height: 90px;
   display: flex;
   justify-content: space-between;
   position: fixed;

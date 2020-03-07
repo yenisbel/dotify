@@ -11,12 +11,12 @@ class Main extends React.Component {
     return (
       <div>
         <Nav />
-        {/* <div className="player"><Player /></div> */}
-        {/* <Switch> */}
+        <div className="player"><Player /></div>
+        <Switch>
           <Route path="/album/:id" component={AlbumShow} />
           <Feed/>
           {/* <Route path="/search" component={}/> */}
-        {/* </Switch> */}
+        </Switch>
       </div>
     )
   }
