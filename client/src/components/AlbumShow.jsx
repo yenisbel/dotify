@@ -3,6 +3,7 @@ import { Mutation, Query, ApolloConsumer } from "react-apollo";
 import Queries from "../graphql/queries";
 import Player from "./Player";
 import gql from "graphql-tag";
+import "../assets/stylesheets/albumShow.css";
 // import { ApolloClient } from 'apollo-client';
 
 
@@ -74,7 +75,7 @@ class AlbumShow extends Component {
           if (error) return <p>Error</p>;
           // console.log("hello")
           //data.album
-          return <div>
+          return <div className="albumShow">
               <ul>
                 {/* return <ApolloConsumer> */}
                   {/* { */}

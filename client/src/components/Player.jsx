@@ -35,6 +35,7 @@ class Player extends Component {
     this.toggleHeart = this.toggleHeart.bind(this);
     this.handleLoop = this.handleLoop.bind(this);
     this.playNext = this.playNext.bind(this);
+    this.playPrev = this.playPrev.bind(this);
     this.handleShuffle = this.handleShuffle.bind(this);
     this.setAlbum = this.setAlbum.bind(this);
   }
@@ -235,17 +236,11 @@ class Player extends Component {
   // }
 
   playNext(client){
-    // for (let i= 0; i < result.album.songs.length; i++){
-
-    // }
-    // console.log(this.state.songs);
+   
     const randomSong = this.state.queue[Math.floor(Math.random() * this.state.queue.length)];
     const currentSongIndex = this.state.queue.findIndex(el => {
-      // console.log(el, this.state.song);
       return el.url === this.state.currentSong.url 
-      // this.state.song
     });
-    // console.log(this.state.queue[currentSongIndex + 1]);
     if (this.state.shuffle){
       client.writeData({
         data: {
@@ -259,7 +254,6 @@ class Player extends Component {
           currentSong: this.state.queue[currentSongIndex + 1] ? this.state.queue[currentSongIndex + 1] : this.state.queue[0]
         }
       })
-        // .then(() => this.audioRef.play())
       this.setState({
         currentSong: this.state.queue[currentSongIndex + 1] ? this.state.queue[currentSongIndex + 1] : this.state.queue[0]},
         () => { this.audioRef.play() }
@@ -267,7 +261,33 @@ class Player extends Component {
     }
   }
 
-    // write data with current song pointing to this
+  playPrev(client){
+    const randomSong = this.state.queue[Math.floor(Math.random() * this.state.queue.length)];
+    const currentSongIndex = this.state.queue.findIndex(el => {
+      return el.url === this.state.currentSong.url
+    });
+    // console.log(this.state.queue[currentSongIndex + 1]);
+    if (this.state.shuffle) {
+      client.writeData({
+        data: {
+          currentSong: randomSong
+        }
+      })
+      this.setState({ currentSong: randomSong }, () => { this.audioRef.play() })
+    } else {
+      client.writeData({
+        data: {
+          currentSong: this.state.queue[currentSongIndex - 1] ? this.state.queue[currentSongIndex - 1] : this.state.queue[this.state.queue.length-1]
+        }
+      })
+      this.setState({
+        currentSong: this.state.queue[currentSongIndex - 1] ? this.state.queue[currentSongIndex - 1] : this.state.queue[this.state.queue.length - 1]
+      },
+        () => { this.audioRef.play() }
+      )
+    }
+  }
+
     
 
     // this.setState({
@@ -363,7 +383,7 @@ class Player extends Component {
               <div className="footer-center">
                 <div className="play-pause-buttons">
                   <button onClick={this.handleShuffle}><i id="shuffle" className="fas fa-random"></i></button>
-                  <button><i className="fas fa-step-backward"></i></button>
+                  <button onClick={() => this.playPrev(client)}><i className="fas fa-step-backward"></i></button>
                   <button onClick={this.togglePlay} id="play" className="play"><i className="fas fa-play"></i></button>
                   <button onClick={this.togglePlay} id="pause" className="pause"><i className="fas fa-pause"></i></button>
                   <button onClick={() => this.playNext(client)}><i className="fas fa-step-forward"></i></button>
