@@ -66,7 +66,7 @@ const Sidebar = ({props}) => {
           <div className="liked">Liked Songs</div> 
         </button>
         <hr className="playlist-divider" />
-        <PlaylistIndex />
+        <PlaylistIndex props={props}/>
       </div>
     </div>
   );

@@ -159,7 +159,9 @@ export default {
     query fetchPlaylist($id: ID!) {
       playlist(_id: $id) {
         name
-        creator
+        creator {
+          username
+        }
         songs {
           _id
           title

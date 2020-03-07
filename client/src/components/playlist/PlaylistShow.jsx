@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Mutation, Query, ApolloConsumer } from "react-apollo";
+import "../../assets/stylesheets/playlistShow.css";
 import Queries from "../../graphql/queries";
 import Player from "../Player";
 
@@ -23,9 +24,9 @@ class AlbumShow extends Component {
         {({ loading, error, data }) => {
           if (loading) return <p>Loading...</p>;
           if (error) return <p>Error</p>;
-          console.log(data)
+
           return (
-            <div>
+            <div className="playlist-show">
               <ul>
                 {data.playlist.songs.map((song) => (
                   <li key={song._id}>
