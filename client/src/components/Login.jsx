@@ -88,6 +88,16 @@ class Login extends Component {
                     Sign Up for Dotify
                   </Link>
                   </button>
+                  <button className="demo-login" onClick={() => {
+                    loginUser({
+                      variables: {
+                        username: "Demon",
+                        password: "password"
+                      }
+                    })
+                  }}>
+                    Try the demo
+                  </button>
                 </div>
               </form>
             </div>

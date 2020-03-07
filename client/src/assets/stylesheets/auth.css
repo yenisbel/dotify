@@ -113,6 +113,16 @@
   color: #1ed760;
 }
 
+button.demo-login {
+  background-color: rgb(185, 29, 29);
+  font-size: 15px;
+  font-family: sans-serif;
+}
+
+button.demo-login:hover {
+  background-color: #d84747;
+}
+
 .input-container span {
   font-size: 15px;
   font-family: sans-serif;
