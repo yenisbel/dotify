@@ -131,34 +131,34 @@ const mutation = new GraphQLObjectType({
         });
       }
     },
-    newCreatedPlaylist: {
+    newPlaylist: {
       type: PlaylistType,
       args: {
         name: { type: GraphQLString },
         creator: { type: GraphQLID }
       },
       resolve(_, args) {
-        return new Playlist(args).save().then(createdPlaylist =>{
-          User.findByIdAndUpdate(args.creator, { $push: { createdPlaylists: createdPlaylist._id }})
+        return new Playlist(args).save().then(newPlaylist =>{
+          User.findByIdAndUpdate(args.creator, { $push: { playlists: newPlaylist._id }})
             .exec()
-          return createdPlaylist
+          return newPlaylist
         });
       }
     },
-    newLikedPlaylist: {
-      type: PlaylistType,
-      args: {
-        name: { type: GraphQLString },
-        creator: { type: GraphQLID }
-      },
-      resolve(_, args) {
-        return new Playlist(args).save().then(likedPlaylist => {
-          User.findByIdAndUpdate(args.creator, { $push: { likedPlaylists: likedPlaylist._id } })
-            .exec()
-          return likedPlaylist
-        });
-      }
-    },
+    // newLikedPlaylist: {
+    //   type: PlaylistType,
+    //   args: {
+    //     name: { type: GraphQLString },
+    //     creator: { type: GraphQLID }
+    //   },
+    //   resolve(_, args) {
+    //     return new Playlist(args).save().then(likedPlaylist => {
+    //       User.findByIdAndUpdate(args.creator, { $push: { likedPlaylists: likedPlaylist._id } })
+    //         .exec()
+    //       return likedPlaylist
+    //     });
+    //   }
+    // },
     addPlaylistSong: {
       type: PlaylistType,
       args: {

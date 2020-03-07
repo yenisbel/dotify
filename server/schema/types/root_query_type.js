@@ -74,6 +74,23 @@ const RootQueryType = new GraphQLObjectType({
       resolve() {
         return Playlist.find({});
       }
+    },
+    // userPlaylists: {
+    //   type: new GraphQLList(PlaylistType),
+    //   args: { user: { type: new GraphQLNonNull(GraphQLID) } },
+    //   resolve(parent, { user }) {
+    //     return User.findById(user)
+    //       .then(user => {
+    //         return user.likedPlaylists.concat(user.createdPlaylists)
+    //       });
+    //   }
+    // },
+    playlist: {
+      type: PlaylistType,
+      args: { _id: { type: new GraphQLNonNull(GraphQLID) } },
+      resolve(parent, args) {
+        return Playlist.findById(args._id);
+      }
     }
   })
 });

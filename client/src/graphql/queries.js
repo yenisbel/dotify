@@ -143,7 +143,32 @@ export default {
         }
       }
     }
-  `
+  `,
+  FETCH_PLAYLISTS: gql`
+    query fetchPlaylists {
+      playlists {
+        _id
+        name
+        songs {
+          title
+        }
+      }
+    }
+  `,
+  FETCH_PLAYLIST: gql`
+    query fetchPlaylist($id: ID!) {
+      playlist(_id: $id) {
+        name
+        creator
+        songs {
+          _id
+          title
+          url
+        }
+      }
+    }
+  `,
+
 }
 
 

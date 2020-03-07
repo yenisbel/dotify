@@ -3,6 +3,7 @@ import "../assets/stylesheets/Sidebar.css";
 import { Link, withRouter } from "react-router-dom";
 import create from "../assets/images/create.png";
 import liked from "../assets/images/liked.png";
+import PlaylistIndex from "./playlist/PlaylistIndex";
 
 const Sidebar = ({props}) => {
   return (
@@ -65,6 +66,7 @@ const Sidebar = ({props}) => {
           <div className="liked">Liked Songs</div> 
         </button>
         <hr className="playlist-divider" />
+        <PlaylistIndex />
       </div>
     </div>
   );
