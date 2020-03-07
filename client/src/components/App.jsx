@@ -7,6 +7,7 @@ import Main from "./Main";
 import Player from "./Player";
 import Splash from "./Splash";
 import AlbumShow from "./AlbumShow";
+import Main from "./Main";
 
 
 const App = () => {
