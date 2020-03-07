@@ -1,5 +1,5 @@
 .main-root-section {
-  height: 85%;
+  height: calc(100% - 150px);
   width: 88%;
   background-color: #202020;
   overflow: auto;

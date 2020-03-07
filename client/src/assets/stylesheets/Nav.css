@@ -54,6 +54,7 @@
   border-radius: 4px;
   font-size: 14px;
   letter-spacing: 0.015em;
+  z-index: 1;
 }
 
 .list > button {

@@ -179,12 +179,15 @@ const mutation = new GraphQLObjectType({
         return Playlist.removePlaylistSong(playlist, song);
       }
     },
-    // deletePlaylist: {
-    //   type: PlaylistType,
-    //   args: {
-    //     playlist
-    //   }    
-    // }
+    deletePlaylist: {
+      type: PlaylistType,
+      args: {
+        playlist: { type: GraphQLID }
+      },
+      resolve(_, { playlist }) {
+        return Playlist.deletePlaylist(playlist);
+      }
+    }
   }
 });
 
