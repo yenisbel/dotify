@@ -32,7 +32,7 @@ class Nav extends React.Component {
   render() {
     return (
       <>
-      <Feed/>
+      {/* <Feed/> */}
       <ApolloConsumer>
         {client => (
           <Query query={GET_CURRENT_USER}>

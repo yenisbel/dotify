@@ -7,6 +7,7 @@ import Nav from "./Nav";
 import Player from "./Player";
 import Splash from "./Splash";
 import AlbumShow from "./AlbumShow";
+import Main from "./Main";
 
 
 const App = () => {
@@ -17,7 +18,7 @@ const App = () => {
         <AuthRoute exact path="/signup" component={Signup} routeType="auth" />
         <AuthRoute exact path="/splash" component={Splash} routeType="auth" />
         <Route path="/album/:id" component={AlbumShow} />
-        <AuthRoute path="/" component={Nav} />
+        <AuthRoute path="/" component={Main} />
         <Route exact path="/player" component={Player}/>
       </Switch>
     </div>

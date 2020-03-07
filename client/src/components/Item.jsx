@@ -21,8 +21,8 @@ class Item extends React.Component {
  
  render(){
    const{ album, _id} = this.props.album;
-   console.log(_id)
-   console.log(this.props.album)
+  //  console.log(_id)
+  //  console.log(this.props.album)
    return(
     <ApolloConsumer>
       {(client) => {
