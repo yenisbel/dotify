@@ -64,7 +64,6 @@ class AlbumShow extends Component {
 
   render(){
     return (
-      <ApolloConsumer>
 
       <Query query={FETCH_ALBUM}
       variables={{id: this.props.match.params.id}} 
@@ -100,7 +99,6 @@ class AlbumShow extends Component {
           </div>
         }}
     </Query>
-      </ApolloConsumer>
 
     )
   }
