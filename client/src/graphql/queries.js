@@ -149,6 +149,7 @@ export default {
     query search($filter: String!) {
       search(filter: $filter) {
         ... on AlbumType {
+          __typename
           _id
           name
           genre
@@ -164,10 +165,12 @@ export default {
           }
         }
         ... on ArtistType {
-          _id,
+          __typename
+          _id
           name
         }
         ... on PlaylistType {
+          __typename
           _id,
           name
         }
