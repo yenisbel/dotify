@@ -29,12 +29,13 @@ class PlaylistForm extends React.Component {
     try {
       playlists = cache.readQuery({ query: FETCH_PLAYLISTS });
     } catch (err) {
-      return;
+      console.log(err)
     }
   
     if (playlists) {
       let playlistsArray = playlists.playlists;
-      let newPlaylist = data.playlist;
+      let newPlaylist = data.newPlaylist;
+      debugger
       cache.writeQuery({
         query: FETCH_PLAYLISTS,
         data: { playlists: playlistsArray.concat(newPlaylist) }
@@ -57,20 +58,24 @@ class PlaylistForm extends React.Component {
                   <div className="modal-background">
                     <div className="modal-child create-playlist-center">
                       <form onSubmit={e => this.handleSubmit(e, newPlaylist, userId)} className="modal-child">
-                        <div onClick={this.props.closeModal}>X</div>
-                        <div className="modal-no-close">Create New Playlist</div>
-                        <div className="modal-no-close create-playlist-grey">
-                          <div className="modal-no-close">Playlist Name</div>
+                        <div onClick={this.props.closeModal} 
+                          className="playlist-form-center"
+                        >
+                          <i class="fas fa-times"></i>
+                        </div>
+                        <div className="playlist-form-center create-playlist-title">Create new playlist</div>
+                        <div className="create-playlist-grey">
+                          <div className="playlist-name">Playlist Name</div>
                           <input 
+                            className="playlist-input"
                             placeholder="New Playlist" 
-                            className="modal-no-close" 
                             onChange={e => this.setState({name: e.target.value})}
                             value={this.state.name}  
                           />
                         </div>
-                        <div className="modal-no-close create-playlist-buttons">
-                          <div>CANCEL</div>
-                          <button type="submit">CREATE</button>
+                        <div className="create-playlist-buttons">
+                          <div className="form-cancel">CANCEL</div>
+                          <button type="submit" className="form-create">CREATE</button>
                         </div>
                       </form>
                     </div>
