@@ -130,6 +130,7 @@ export default {
   FETCH_ALBUM: gql`
     query fetchAlbum($id: ID!){
       album(_id: $id){
+        _id
         name
         url
         songs {

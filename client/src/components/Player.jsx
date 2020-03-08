@@ -69,22 +69,25 @@ class Player extends Component {
     
   }
 
+  handlePlay(e){
+    this.setState({playing: true})
+  };
 
   togglePlay() {
-    const pause = document.getElementById("pause");
-    const play = document.getElementById("play");
-    
+    // const pause = document.getElementById("pause");
+    // const play = document.getElementById("play");
+    // debugger;
     if (this.state.playing) {
       this.audioRef.pause();
       this.setState({ playing: false });
-      play.style.zIndex = "1";
-      pause.style.zIndex = "0";
+      // play.style.zIndex = "1";
+      // pause.style.zIndex = "0";
 
     } else {
       this.audioRef.play();
       this.setState({ playing: true });
-      pause.style.zIndex = "1";
-      play.style.zIndex = "0";
+      // pause.style.zIndex = "1";
+      // play.style.zIndex = "0";
     }
   };
 
@@ -342,6 +345,8 @@ class Player extends Component {
     //   // this.readCache(client.cache);
     //   return null;
     // }
+    const playButton = <button onClick={this.togglePlay} id="play" className="play"><i className="fas fa-play"></i></button>;
+    const pauseButton = <button onClick={this.togglePlay} id="pause" className="pause"><i className="fas fa-pause"></i></button>;
     return <Query query={GET_CURRENT_ALBUM}>
       {
         ({loading, data, error}) => {
@@ -368,7 +373,7 @@ class Player extends Component {
               if (loading || !this.state.currentSong) return null;
               if (error) return `${error}`;
               // console.log(data);
-              console.log(this.state.currentSong);
+              // console.log(this.state.currentSong);
               return(
             <div className="player-footer">
               <div className="footer-left">
@@ -384,8 +389,9 @@ class Player extends Component {
                 <div className="play-pause-buttons">
                   <button onClick={this.handleShuffle}><i id="shuffle" className="fas fa-random"></i></button>
                   <button onClick={() => this.playPrev(client)}><i className="fas fa-step-backward"></i></button>
-                  <button onClick={this.togglePlay} id="play" className="play"><i className="fas fa-play"></i></button>
-                  <button onClick={this.togglePlay} id="pause" className="pause"><i className="fas fa-pause"></i></button>
+                  {this.state.playing ? pauseButton : playButton}
+                  {/* <button onClick={this.togglePlay} id="play" className="play"><i className="fas fa-play"></i></button>
+                  <button onClick={this.togglePlay} id="pause" className="pause"><i className="fas fa-pause"></i></button> */}
                   <button onClick={() => this.playNext(client)}><i className="fas fa-step-forward"></i></button>
                   <button onClick={this.handleLoop}><i id="repeat" className="fas fa-sync"></i></button>
                 </div>
@@ -393,7 +399,7 @@ class Player extends Component {
                 {/* <p onClick={e => this.audio.play()} className="play">Play</p> */}
                 <div className="timeline-time">
                   <span className="currentSongTime">{this.getCurrentTime()}</span>
-                  <audio ref={audio => this.audioRef = audio} src={this.state.currentSong.url} id="song" preload="metadata" onEnded={this.togglePlay}></audio>
+                  <audio ref={audio => this.audioRef = audio} src={this.state.currentSong.url} id="song" preload="metadata" onEnded={this.togglePlay} onPlay={e => this.handlePlay(e)} autoPlay></audio>
                   <input
                     type="range"
                     id="timeline"
