@@ -1,0 +1,5 @@
+/client/node_modules
+node_modules
+/config2/keys.js
+.git
+*docker-compose*
