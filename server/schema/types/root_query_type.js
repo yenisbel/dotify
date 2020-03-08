@@ -72,6 +72,29 @@ const RootQueryType = new GraphQLObjectType({
         return Song.findById(args._id);
       }
     },
+    playlists: {
+      type: new GraphQLList(PlaylistType),
+      resolve() {
+        return Playlist.find({});
+      }
+    },
+    search: {
+      type: new GraphQLList(SearchType),
+      args: { filter: { type: new GraphQLNonNull(GraphQLString) } },
+      async resolve(parentValue, args) {
+        const albums = await Album.find({ 
+          name: { $regex: args.filter, $options: "i" }
+        });
+        const artists = await Artist.find({
+          name: { $regex: args.filter, $options: "i" } 
+        });
+        const playlists = await Playlist.find( {
+          name: { $regex: args.filter, $options: "i" }
+        });
+        // const artists = await Artist.find({ name: args.filter });
+        return albums.concat(playlists).concat(artists);
+      }
+    }
     // search: {
     //   type: SearchType,
     //   args: { searchTerm: { type: new GraphQLNonNull(GraphQLString) } },
@@ -80,12 +103,6 @@ const RootQueryType = new GraphQLObjectType({
     //       name: { $regex: parentValue.searchTerm, $options: "i" }
     //     });
     //     return new Promise(resolve => resolve({ searchTerm: args.searchTerm }));
-    playlists: {
-      type: new GraphQLList(PlaylistType),
-      resolve() {
-        return Playlist.find({});
-      }
-    }
   })
 });
 
