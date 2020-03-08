@@ -91,18 +91,9 @@ const RootQueryType = new GraphQLObjectType({
         const playlists = await Playlist.find( {
           name: { $regex: args.filter, $options: "i" }
         });
-        // const artists = await Artist.find({ name: args.filter });
         return albums.concat(playlists).concat(artists);
       }
     }
-    // search: {
-    //   type: SearchType,
-    //   args: { searchTerm: { type: new GraphQLNonNull(GraphQLString) } },
-    //   async resolve(parentValue, args) {
-    //     const artists = await Artist.find({
-    //       name: { $regex: parentValue.searchTerm, $options: "i" }
-    //     });
-    //     return new Promise(resolve => resolve({ searchTerm: args.searchTerm }));
   })
 });
 
