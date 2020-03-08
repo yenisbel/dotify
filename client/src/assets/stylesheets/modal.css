@@ -14,3 +14,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.create-playlist-center {
+  height: 300px;
+  width: 100%;
+}

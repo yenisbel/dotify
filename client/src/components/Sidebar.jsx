@@ -4,6 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 import create from "../assets/images/create.png";
 import liked from "../assets/images/liked.png";
 import PlaylistIndex from "./playlist/PlaylistIndex";
+import PlaylistForm from "./playlist/PlaylistForm";
 
 class Sidebar extends React.Component {
   constructor(props) {
@@ -13,10 +14,19 @@ class Sidebar extends React.Component {
       showModal: false
     }
 
-    this.openModal = this.openModal.bind(this)
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
-  openModal
+  openModal = () => {
+    this.setState({ showModal: true })
+  }
+
+  closeModal = (e) => {
+    if (this.state.showModal && e.target.className !== "modal-no-close") {
+      this.setState({ showModal: false })
+    }
+  }
 
   render() {
     const { props } = this.props
@@ -84,6 +94,13 @@ class Sidebar extends React.Component {
           <hr className="playlist-divider" />
           <PlaylistIndex props={props}/>
         </div>
+        {this.state.showModal ? (
+          <div onClick={this.closeModal}>
+            <PlaylistForm />
+          </div>
+        ) : (
+          null
+        )}
       </div>
     )
   }

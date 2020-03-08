@@ -33,6 +33,11 @@ export default {
       username @client
     }
   `,
+  GET_CURRENT_USER_ID: gql`
+    query GetCurrentUser {
+      userId @client
+    }
+  `,
   GET_CURRENT_ALBUM: gql`
     query GetCurrentAlbum {
       currentAlbum @client{
