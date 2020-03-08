@@ -1,0 +1,18 @@
+version: "3"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    image: store
+    environment:
+      NODE_ENV: production
+      MONGO_URI: "mongodb+srv://dev:cDGVH0fm4wJQuI6J@cluster0-sedco.mongodb.net/dotify?retryWrites=true&w=majority"
+      secretOrKey: "36a14fe2-c485-45b0-b1b5-e28907fe389a"
+    ports:
+      - "5000:5000"
+
+
+
+
+  
