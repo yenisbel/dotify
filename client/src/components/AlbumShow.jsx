@@ -13,9 +13,6 @@ const { FETCH_ALBUM} = Queries;
 class AlbumShow extends Component {
   constructor(props){
     super(props)
-    this.state = {
-      currentSong: ''
-    }
   }
 
   handlePlay(client, data, song){
@@ -28,43 +25,6 @@ class AlbumShow extends Component {
     })
   }
 
-  updateCache(client, data){
-    // debugger;
-    // console.log(album);
-    // localStorage.setItem("albumName", album.name);
-    // localStorage.setItem("albumUrl", album.url);
-    // localStorage.setItem("artistName", album.artist.name);
-    // console.log(data);
-    // let album;
-    // console.log(_APOLLO_CLIENT_.cache.InMemoryCache.data.data)
-    
-    // try{
-    //   const album = client.readQuery({ query: FETCH_ALBUM });
-    // } catch (err){
-    //   return;
-    // }
-
-    // if (album){
-    //   const newAlbum = data.data.newAlbum;
-    //   cache.writeQuery({ query: FETCH_ALBUM})
-    // }
-  }
-
-  // readCache(cache){
-  //   let potato;
-  //   try {
-  //       potato = cache.readQuery({
-  //       query: FETCH_ALBUM,
-  //       variables: { id: this.props.match.params.id }
-  //     })
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  //   if (potato){
-  //     console.log(potato)
-  //   }
-  // }
-
   render(){
     return (
       <ApolloConsumer>
@@ -73,8 +33,6 @@ class AlbumShow extends Component {
             {({ loading, error, data}) => {
               if (loading) return <p>Loading...</p>;
               if (error) return <p>Error</p>;
-              // console.log("hello")
-              //data.album
               return <div className="albumShow">
                   <div className="left-side">
                     <img className="left-album-cover" src={data.album.url}></img>
@@ -98,7 +56,6 @@ class AlbumShow extends Component {
                           ))}
                       </ul>
                   </div>
-                  {/* <Player currentSong={this.state.currentSong} albumTitle={data.album} artistName={data.album.artist.name}/> */}
               </div>
             }}
           </Query>
@@ -109,7 +66,3 @@ class AlbumShow extends Component {
 };
 
 export default AlbumShow;
-
-//data.album.songs.url
-
-// onClick = { e => this.setState({ currentSong: song.url })

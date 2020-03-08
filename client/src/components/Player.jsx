@@ -62,32 +62,25 @@ class Player extends Component {
     // this.readCache()
   };
 
-  componentDidUpdate(oldProps){
-    // if (oldProps.currentSong !== this.props.currentSong){
-    //   // this.setState({song: {songUrl: this.props.currentSong.url, songTitle: this.props.currentSong.title}})
-    // }
+  // componentDidUpdate(oldProps){
+  //   // if (oldProps.currentSong !== this.props.currentSong){
+  //   //   // this.setState({song: {songUrl: this.props.currentSong.url, songTitle: this.props.currentSong.title}})
+  //   // }
     
-  }
+  // }
 
   handlePlay(e){
     this.setState({playing: true})
   };
 
   togglePlay() {
-    // const pause = document.getElementById("pause");
-    // const play = document.getElementById("play");
-    // debugger;
     if (this.state.playing) {
       this.audioRef.pause();
       this.setState({ playing: false });
-      // play.style.zIndex = "1";
-      // pause.style.zIndex = "0";
 
     } else {
       this.audioRef.play();
       this.setState({ playing: true });
-      // pause.style.zIndex = "1";
-      // play.style.zIndex = "0";
     }
   };
 
@@ -182,20 +175,20 @@ class Player extends Component {
   //   // console.log(song)
   // }
 
-  readCache(cache) {
-    // writeData
-    let result;
+  // readCache(cache) {
+  //   // writeData
+  //   let result;
 
-    try {
-      result = cache.readQuery({
-        query: FETCH_ALBUM,
-        variables: { id: this.props.match.params.id }
-      })
-    } catch (err) {
-      console.log(err);
-    }
-    if (result) {
-      console.log(result.album.songs)
+  //   try {
+  //     result = cache.readQuery({
+  //       query: FETCH_ALBUM,
+  //       variables: { id: this.props.match.params.id }
+  //     })
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  //   if (result) {
+  //     console.log(result.album.songs)
       // let songs = result.albums.songs.url;
 
       // for (let i= 0; i < result.album.songs.length; i++){
@@ -224,8 +217,8 @@ class Player extends Component {
       // return potato.album.songs[1].url
       // set the state for the other ones
       // on end event listener
-    }
-  }
+  //   }
+  // }
 
   // playPrev(){
   //   const currentSongIndex = this.state.queue.findIndex(el => { return el.url === this.state.song.songUrl});
