@@ -149,7 +149,7 @@ export default {
       search(filter: $filter) {
         ... on AlbumType {
           _id,
-          name,
+          name
         }
         ... on ArtistType {
           _id,
