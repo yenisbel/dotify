@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Queries from '../graphql/queries';
-const { SEARCH } = Queries;
+import "../assets/stylesheets/searchBar.css";
 
 export default class SearchBar extends Component {
   constructor(props) {
@@ -23,13 +22,17 @@ export default class SearchBar extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          value={this.state.filter}
-          onChange={this.handleChange}
-          className="search-bar"
-        >
-        </input>
+        <div className="search-bar-container">
+          <i className="fas fa-search search-bar-icon"></i>
+          <input
+            type="text"
+            value={this.state.filter}
+            onChange={this.handleChange}
+            className="search-bar"
+            placeholder="Search for Artists, Albums, or Playlists"
+          >
+          </input>
+        </div>
       </form>
     )
   }

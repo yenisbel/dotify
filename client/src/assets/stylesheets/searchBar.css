@@ -1,0 +1,29 @@
+.search-bar {
+  color: #000;
+  padding: 6px 48px;
+  height: 28px;
+  line-height: 40px;
+  width: 100%;
+  border: 0;
+  border-radius: 500px;
+  text-overflow: ellipsis;
+  background-color: white;
+  margin-left: 20px;
+  font-size: 14px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar-container {
+  position: relative;
+}
+
+.search-bar-icon {
+  position: absolute;
+  color: black;
+  left: 30px;
+  top: 10px;
+}

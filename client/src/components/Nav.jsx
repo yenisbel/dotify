@@ -54,10 +54,10 @@ class Nav extends React.Component {
                               </div>
                             </button>
                           </div>
-                        </div>
-                        <div className="header-middle">
                           <Route path="/search" component={SearchBar} />
                         </div>
+                        {/* <div className="header-middle">
+                        </div> */}
                         <div className="header-right">
                           <button
                             className="username-btn"
