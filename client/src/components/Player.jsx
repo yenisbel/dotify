@@ -348,7 +348,7 @@ class Player extends Component {
               if (loading || !this.state.currentSong) return null;
               if (error) return `${error}`;
               // console.log(data);
-              console.log(this.state.currentSong);
+              // console.log(this.state.currentSong);
               return(
             <div className="player-footer">
               <div className="footer-left">

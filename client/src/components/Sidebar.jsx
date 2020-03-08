@@ -22,10 +22,8 @@ class Sidebar extends React.Component {
     this.setState({ showModal: true })
   }
 
-  closeModal = (e) => {
-    if (this.state.showModal && e.target.className !== "modal-no-close") {
-      this.setState({ showModal: false })
-    }
+  closeModal(e) {
+    this.setState({ showModal: false })
   }
 
   render() {
@@ -95,8 +93,8 @@ class Sidebar extends React.Component {
           <PlaylistIndex props={props}/>
         </div>
         {this.state.showModal ? (
-          <div onClick={this.closeModal}>
-            <PlaylistForm />
+          <div>
+            <PlaylistForm closeModal={this.closeModal}/>
           </div>
         ) : (
           null
