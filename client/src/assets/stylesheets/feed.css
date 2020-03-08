@@ -1,6 +1,6 @@
 .main-root-section {
   height: calc(100% - 150px);
-  width: 88%;
+  width: 85%;
   background-color: #202020;
   overflow: auto;
   position: fixed;
