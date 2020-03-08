@@ -14,7 +14,7 @@ class Main extends React.Component {
         <div className="player"><Player /></div>
         <Switch>
           <Route path="/album/:id" component={AlbumShow} />
-          <Feed/>
+          <Feed />
           {/* <Route path="/search" component={}/> */}
         </Switch>
       </div>

@@ -148,8 +148,19 @@ export default {
     query search($filter: String!) {
       search(filter: $filter) {
         ... on AlbumType {
-          _id,
+          _id
           name
+          genre
+          artist{
+            _id
+            name
+          }
+          url
+          songs{
+            _id
+            title
+            url
+          }
         }
         ... on ArtistType {
           _id,
