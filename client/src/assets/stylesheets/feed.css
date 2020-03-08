@@ -1,19 +1,20 @@
 .main-root-section {
   height: calc(100% - 150px);
-  width: 88%;
+  width: 85%;
   background-color: #202020;
   overflow: auto;
   position: fixed;
   top: 60px;
   left: 230px;
+  font-family: 'Noto Sans';
 }
   
  .main-root-section h2 {
-  font-family: Circular,Helvetica Neue,Helvetica,Arial,sans-serif;
   color: #fff;
   font-size: 30px;
   font-weight: bold;
   padding: 50px 0 35px 20px;
+  font-family: 'Noto Sans';
 }
   
  .content-container {
