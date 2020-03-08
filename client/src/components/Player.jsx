@@ -401,12 +401,6 @@ class Player extends Component {
                     max={this.audioRef.duration ? this.audioRef.duration : 0}
                     value={this.audioRef.currentTime ? this.audioRef.currentTime : 0}
                     onChange={this.handleTimeline}
-                  // style={{
-                  //   backgroundImage: '-webkit-gradient(linear, left top, right top, '
-                  //     + 'color-stop(' + (this.audioRef.currentTime) + ', #666666), '
-                  //     + 'color-stop(' + (this.audioRef.currrentTime) + ', #666666)'
-                  //     + ')'
-                  // }}
                   />
                   <span className="songDuration">{this.getSongDuration()}</span>
                 </div>

@@ -113,7 +113,7 @@ display: inline-block;
 
 .volume{
   display: flex;
-  margin-right: 15px;
+  margin-right: 25px;
 }
 
 .fa-volume-up{
@@ -124,13 +124,16 @@ display: inline-block;
 
 .footer-left {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
-  margin-left: 25px;
+  width: 300px;
+  margin-left: 20px;
 }
 
 .song-info {
   display: flex;
   flex-direction: column;
+  width: 200px;
 }
 .song-name {
   color: white;
@@ -180,81 +183,6 @@ display: inline-block;
   font-size: 12px;
   margin-left: 25px;
 }
-
-/* #timeline {
-  width: 210px;
-  height: 30px;
-  overflow: hidden;
-  cursor: pointer;
-} */
-
-/* #timeline,
-#timeline::-webkit-slider-runnable-track,
-#timeline::-webkit-slider-thumb {
-  -webkit-appearance: none;
-}
-#timeline::-webkit-slider-runnable-track {
-  width: 400px;
-  height: 19px;
-  background: #AAA;
-  border-radius: 0px;
-  overflow: hidden;
-}
-#timeline::-webkit-slider-thumb {
-  position: relative;
-  height: 18px;
-  width: 18px;
-  margin-top: 0px;
-  background: white;
-  border-radius: 50%;
-  border: 2px solid white;
-  /* box-shadow: -210px 0 0 200px #1FD75F; */
-/* }
-
-#timeline::-webkit-slider-thumb::after {
-  position: absolute;
-  content: '';
-  height: 10px; 
-  width: 500px; 
-  left: -502px; 
-  top: 8px;
-  background: green;
-} 
-#timeline::-webkit-slider-thumb::before {
-  position: absolute;
-  content: '';
-  height: 10px; 
-  width: 500px; 
-  top: 8px; 
-  background: #777;
-} */
-
-/* #timeline {
-  -webkit-appearance: none;
-  background-color: #B3B3B3;
-  /* height: 10px;
-  overflow: hidden;
-  width: 500px;
-} 
-
-/* #timeline::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  height: 0;
-  width: 0;
-} */
-/* 
-#timeline:hover::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  background: white;
-  box-shadow: -210px 0 0 200px #1FD75F;
-  cursor: pointer;
-  border: 0;
-  border: 1px solid #CECECE;
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  margin-bottom: 5px;
-}  */
 
 #volume {
   -webkit-appearance: none;
