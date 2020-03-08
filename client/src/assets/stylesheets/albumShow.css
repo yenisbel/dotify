@@ -1,0 +1,109 @@
+.albumShow{
+    top: 100px;
+    position: absolute;
+    left: 300px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    font-family: 'Noto Sans';
+}
+
+.songInfo{
+  display: flex;
+  margin-bottom: 20px;
+  width: 50vw;
+  height: 6.5vh;
+  padding: 5px;
+  cursor: default;
+}
+
+.songInfo:hover{
+  display: flex;
+  margin-bottom: 20px;
+  background: rgba(128, 128, 128, 0.212);
+}
+
+.fa-itunes-note{
+  margin-right: 20px;
+  color: rgb(160, 158, 158);
+  cursor: pointer;
+}
+
+.right-artist-name{
+  color: rgb(160, 158, 158);
+  font-size: 15px;
+}
+
+.right-artist-name:hover{
+  color: white;
+  font-size: 15px;
+  text-decoration: underline;
+}
+
+.albumshow-song-title{
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.left-side{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 300px;
+  align-items: center;
+  margin-right: 50px;
+}
+
+.left-album-cover{
+  height: 270px;
+  width: 270px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.album-name{
+  font-weight: bold;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.left-artist-name{
+  color: rgb(160, 158, 158);
+  margin-bottom: 20px;
+}
+
+.album-show-play-button{
+  border: 1px solid #1FB854;
+  background: #1FB854;
+  border-radius: 30px 30px 30px 30px;
+  padding: 10px;
+  height: 15px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.album-show-play-button:hover{
+  border: 1px solid rgb(39, 218, 102);
+  background: rgb(39, 218, 102);
+  border-radius: 30px 30px 30px 30px;
+  padding: 10px;
+  height: 16px;
+  width: 82px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.song-count{
+  color: rgb(160, 158, 158);
+  font-size: 13px;
+}
