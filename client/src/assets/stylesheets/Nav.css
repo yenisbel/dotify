@@ -54,6 +54,7 @@
   border-radius: 4px;
   font-size: 14px;
   letter-spacing: 0.015em;
+  z-index: 1;
 }
 
 .list > button {
@@ -96,7 +97,7 @@
 .player {
   height: 90px;
   background-color: gray;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
 }

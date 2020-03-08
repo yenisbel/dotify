@@ -33,6 +33,32 @@ export default {
       username @client
     }
   `,
+  GET_CURRENT_ALBUM: gql`
+    query GetCurrentAlbum {
+      currentAlbum @client{
+        _id
+        url
+        songs {
+          _id
+          title
+          url
+        }
+        artist{
+          _id
+          name
+        }
+      }
+    }
+  `,
+  GET_CURRENT_SONG: gql`
+    query GetCurrentSong {
+      currentSong @client{
+        _id
+        title
+        url
+      }
+    }
+  `,
   FETCH_SONGS: gql`
     query fetchSongs{
       songs{
@@ -96,6 +122,7 @@ export default {
         songs{
           _id
           title
+          url
         }
       }
     }

@@ -12,7 +12,18 @@ const { FETCH_ALBUM, FETCH_ARTISTS } = Queries;
 class AlbumShow extends Component {
   constructor(props){
     super(props)
+    this.state = {
+      currentSong: ''
+    }
   }
+
+  // handlePlay(client, data){
+  //   client.writeData({
+  //     data: {
+  //       currentAlbum: 
+  //     }
+  //   })
+  // }
 
   updateCache(client, data){
     // debugger;
@@ -53,37 +64,42 @@ class AlbumShow extends Component {
 
   render(){
     return (
-      <div>
-        <ul>
-      
-            <Query query={FETCH_ALBUM}
-              variables={{id: this.props.match.params.id}} 
-            >
-                {({ loading, error, data}) => {
-                if (loading) return <p>Loading...</p>;
-                if (error) return <p>Error</p>;
-                return <ApolloConsumer>
-                  {
-                    (client) => {
-                      // debugger
-                      // this.readCache(client.cache);
-                      return data.album.songs.map((song) => (
-                            <li key={song._id}>
-                                <p>{song.title}</p>
-                            </li>
-                          ));
-                    }
-                  }
-                </ApolloConsumer>
-                  // if (loading) return <p>Loading...</p>;
-                  // if (error) return <p>Error</p>;
-                  // this.updateCache(data.album)
 
-                }}
-            </Query>
-        </ul>
-        <Player/>
-      </div>
+      <Query query={FETCH_ALBUM}
+      variables={{id: this.props.match.params.id}} 
+      >
+      
+        {({ loading, error, data}) => {
+          if (loading) return <p>Loading...</p>;
+          if (error) return <p>Error</p>;
+          // console.log("hello")
+          //data.album
+          return <div>
+              <ul>
+                {/* return <ApolloConsumer> */}
+                  {/* { */}
+                    {/* // (client) => { */}
+                      {/* // debugger
+                      // this.readCache(client.cache); */}
+                      {data.album.songs.map((song) => (
+                        <li key={song._id}>
+                          <p onClick={e => this.setState({ currentSong: song })}>{song.title}</p>
+                          {/* <p onClick={this.handlePlay(client, data)}>PLay</p> */}
+                        </li>
+                      ))}
+                    {/* } */}
+                  {/* } */}
+                {/* </ApolloConsumer> */}
+                  {/* // if (loading) return <p>Loading...</p>;
+                  // if (error) return <p>Error</p>;
+                  // this.updateCache(data.album) */}
+
+                </ul>
+            <Player currentSong={this.state.currentSong} albumTitle={data.album} artistName={data.album.artist.name}/>
+          </div>
+        }}
+    </Query>
+
     )
   }
 };

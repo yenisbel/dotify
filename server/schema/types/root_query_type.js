@@ -9,11 +9,13 @@ const SongType = require("./song_type");
 const ArtistType = require("./artist_type");
 const AlbumType = require("./album_type");
 const SearchType = require("./search_type");
+const PlaylistType = require("./playlist_type");
 
 const User = mongoose.model("users");
 const Song = mongoose.model("songs");
 const Artist = mongoose.model("artists");
 const Album = mongoose.model("albums");
+const Playlist = mongoose.model("playlists");
 
 const RootQueryType = new GraphQLObjectType({
   name: "RootQueryType",
@@ -70,14 +72,18 @@ const RootQueryType = new GraphQLObjectType({
         return Song.findById(args._id);
       }
     },
-    search: {
-      type: SearchType,
-      args: { searchTerm: { type: new GraphQLNonNull(GraphQLString) } },
-      async resolve(parentValue, args) {
-        const artists = await Artist.find({
-          name: { $regex: parentValue.searchTerm, $options: "i" }
-        });
-        return new Promise(resolve => resolve({ searchTerm: args.searchTerm }));
+    // search: {
+    //   type: SearchType,
+    //   args: { searchTerm: { type: new GraphQLNonNull(GraphQLString) } },
+    //   async resolve(parentValue, args) {
+    //     const artists = await Artist.find({
+    //       name: { $regex: parentValue.searchTerm, $options: "i" }
+    //     });
+    //     return new Promise(resolve => resolve({ searchTerm: args.searchTerm }));
+    playlists: {
+      type: new GraphQLList(PlaylistType),
+      resolve() {
+        return Playlist.find({});
       }
     }
   })

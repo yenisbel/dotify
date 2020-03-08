@@ -8,10 +8,13 @@ const UserType = require("./types/user_type");
 const SongType = require("./types/song_type");
 const ArtistType = require("./types/artist_type");
 const AlbumType = require("./types/album_type");
+const PlaylistType = require("./types/playlist_type");
 
 const Song = mongoose.model("songs");
 const Artist = mongoose.model("artists");
 const Album = mongoose.model("albums");
+const Playlist = mongoose.model("playlists");
+const User = mongoose.model("users");
 
 const mutation = new GraphQLObjectType({
   name: "Mutation",
@@ -126,6 +129,63 @@ const mutation = new GraphQLObjectType({
             .exec()
           return song
         });
+      }
+    },
+    newCreatedPlaylist: {
+      type: PlaylistType,
+      args: {
+        name: { type: GraphQLString },
+        creator: { type: GraphQLID }
+      },
+      resolve(_, args) {
+        return new Playlist(args).save().then(createdPlaylist =>{
+          User.findByIdAndUpdate(args.creator, { $push: { createdPlaylists: createdPlaylist._id }})
+            .exec()
+          return createdPlaylist
+        });
+      }
+    },
+    newLikedPlaylist: {
+      type: PlaylistType,
+      args: {
+        name: { type: GraphQLString },
+        creator: { type: GraphQLID }
+      },
+      resolve(_, args) {
+        return new Playlist(args).save().then(likedPlaylist => {
+          User.findByIdAndUpdate(args.creator, { $push: { likedPlaylists: likedPlaylist._id } })
+            .exec()
+          return likedPlaylist
+        });
+      }
+    },
+    addPlaylistSong: {
+      type: PlaylistType,
+      args: {
+        playlist: { type: GraphQLID },
+        song: { type: GraphQLID }
+      },
+      resolve(_, { playlist, song }) {
+        return Playlist.addPlaylistSong(playlist, song);
+      }
+    },
+    removePlaylistSong: {
+      type: PlaylistType,
+      args: {
+        playlist: { type: GraphQLID },
+        song: { type: GraphQLID }
+      },
+      resolve(_, { playlist, song }) {
+        return Playlist.removePlaylistSong(playlist, song);
+      }
+    },
+    deletePlaylist: {
+      type: PlaylistType,
+      args: {
+        playlist: { type: GraphQLID }
+      },
+      resolve(_, { playlist }) {
+        return Playlist.deletePlaylist(playlist);
       }
     }
   }
