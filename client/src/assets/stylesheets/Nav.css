@@ -9,6 +9,7 @@
 .header-wrapper {
   width: 100%;
   color: #b3b3b3;
+  background: #1a1a1a;
 }
 
 .header {
@@ -92,12 +93,4 @@
 
 .dropdown-triangle {
   font-size: 17px;
-}
-
-.player {
-  height: 90px;
-  background-color: gray;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
 }
