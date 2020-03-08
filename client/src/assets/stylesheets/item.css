@@ -41,12 +41,13 @@
   display: none;
   bottom: 17px;
   right: 17px;
-  background-color:#026faa;
+  background-color: #02aa0f;
   padding: 6px;
   border-radius: 50%;
   width: 35px;
   height: 35px;
   cursor: pointer;
+  text-align: center;
  }
   
  .music-card:hover .play-icon {
