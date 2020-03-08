@@ -37,18 +37,20 @@
   
  .play-icon {
   color: white;
-  /* position: absolute; */
-  /* display: none; */
+  position: absolute;
+  display: none;
   bottom: 17px;
   right: 17px;
-  background-color:#026faa;
+  background-color: #1FD75F;
   padding: 6px;
   border-radius: 50%;
   width: 35px;
   height: 35px;
+  cursor: pointer;
+  text-align: center;
  }
   
- /* .music-card:hover .play-icon {
+ .music-card:hover .play-icon {
   display: block;
- } */
+ }
  
