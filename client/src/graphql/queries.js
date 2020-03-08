@@ -143,6 +143,24 @@ export default {
         }
       }
     }
+  `,
+  SEARCH: gql`
+    query search($filter: String!) {
+      search(filter: $filter) {
+        ... on AlbumType {
+          _id,
+          name,
+        }
+        ... on ArtistType {
+          _id,
+          name
+        }
+        ... on PlaylistType {
+          _id,
+          name
+        }
+      }
+    }
   `
 }
 
