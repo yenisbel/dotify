@@ -92,6 +92,13 @@ const RootQueryType = new GraphQLObjectType({
           name: { $regex: args.filter, $options: "i" }
         });
         return albums.concat(playlists).concat(artists);
+      },
+    },
+    playlist: {
+      type: PlaylistType,
+      args: { _id: { type: new GraphQLNonNull(GraphQLID) } },
+      resolve(parent, args) {
+        return Playlist.findById(args._id);
       }
     }
   })

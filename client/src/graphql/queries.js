@@ -33,6 +33,11 @@ export default {
       username @client
     }
   `,
+  GET_CURRENT_USER_ID: gql`
+    query GetCurrentUser {
+      userId @client
+    }
+  `,
   GET_CURRENT_ALBUM: gql`
     query GetCurrentAlbum {
       currentAlbum @client{
@@ -176,7 +181,38 @@ export default {
         }
       }
     }
-  `
+  `,
+  FETCH_PLAYLISTS: gql`
+    query fetchPlaylists {
+      playlists {
+        _id
+        name
+        songs {
+          title
+        }
+      }
+    }
+  `,
+  FETCH_PLAYLIST: gql`
+    query fetchPlaylist($id: ID!) {
+      playlist(_id: $id) {
+        name
+        creator {
+          username
+        }
+        songs {
+          _id
+          title
+          url
+          album {
+            name
+            url
+          }
+          artist {
+            name
+          }
+        }
+      }
+    }
+  `,
 }
-
-

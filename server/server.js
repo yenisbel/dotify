@@ -1,8 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const keys = require("../config2/keys");
 // const keys = require("../config2/keys");
+// const keys = require("../config2/keys");
+const keys = require("../config3/keys");
 const db = keys.MONGO_URI;
 const expressGraphQL = require("express-graphql");
 const Models = require("./models/index.js");
@@ -17,6 +18,20 @@ const multer = require("multer");
 const { singleFileUpload } = require("./services/s3")
 
 
+
+
+
+
+if (!db) {
+  throw new Error("You must provide a string to connect to MongoDB Atlas");
+}
+
+mongoose
+.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+.then(() => console.log("Connected to MongoDB successfully"))
+.catch(err => console.log(err));
+
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
   app.get("/", (req, res) => {
@@ -24,18 +39,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-
 app.use(cors());
-
-if (!db) {
-  throw new Error("You must provide a string to connect to MongoDB Atlas");
-}
-
-mongoose
-  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("Connected to MongoDB successfully"))
-  .catch(err => console.log(err));
-
 app.use(bodyParser.json());
 
 app.use(

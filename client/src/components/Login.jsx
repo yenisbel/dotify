@@ -25,7 +25,8 @@ class Login extends Component {
     client.writeData({
       data: { 
         isLoggedIn: data.login.loggedIn,
-        username: data.login.username
+        username: data.login.username,
+        userId: data.login._id
       }
     });
   }
@@ -35,9 +36,10 @@ class Login extends Component {
       <Mutation
         mutation={LOGIN_USER}
         onCompleted={data => {
-          const { token, username } = data.login;
+          const { token, username, _id } = data.login;
           localStorage.setItem("auth-token", token);
           localStorage.setItem("username", username);
+          localStorage.setItem("userId", _id);
           this.props.history.push("/");
         }}
         onError={errorsArray => {
@@ -87,6 +89,16 @@ class Login extends Component {
                   <Link to="signup"> 
                     Sign Up for Dotify
                   </Link>
+                  </button>
+                  <button className="demo-login" onClick={() => {
+                    loginUser({
+                      variables: {
+                        username: "Demon",
+                        password: "password"
+                      }
+                    })
+                  }}>
+                    Try the demo
                   </button>
                 </div>
               </form>

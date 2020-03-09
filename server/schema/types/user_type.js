@@ -15,26 +15,36 @@ const UserType = new GraphQLObjectType({
     birthYear: { type: GraphQLInt },
     birthDay: { type: GraphQLInt },
     gender: { type: GraphQLString },
-    createdPlaylists: { 
+    playlists: {
       type: new GraphQLList(require("./playlist_type")),
       resolve(parentValue) {
         return User.findById(parentValue._id)
-        .populate("createdPlaylists")
-        .then(user => {
-          return user.createdPlaylists;
-        })
-      }
-    },
-    likedPlaylists: {
-      type: new GraphQLList(require("./playlist_type")),
-      resolve(parentValue) {
-        return User.findById(parentValue._id)
-          .populate("likedPlaylists")
+          .populate("playlists")
           .then(user => {
-            return user.likedPlaylists;
+            return user.playlists;
           })
       }
     },
+    // createdPlaylists: { 
+    //   type: new GraphQLList(require("./playlist_type")),
+    //   resolve(parentValue) {
+    //     return User.findById(parentValue._id)
+    //     .populate("createdPlaylists")
+    //     .then(user => {
+    //       return user.createdPlaylists;
+    //     })
+    //   }
+    // },
+    // likedPlaylists: {
+    //   type: new GraphQLList(require("./playlist_type")),
+    //   resolve(parentValue) {
+    //     return User.findById(parentValue._id)
+    //       .populate("likedPlaylists")
+    //       .then(user => {
+    //         return user.likedPlaylists;
+    //       })
+    //   }
+    // },
     token: { type: GraphQLString },
     loggedIn: { type: GraphQLBoolean }
   })

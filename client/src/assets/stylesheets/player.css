@@ -137,11 +137,12 @@ display: inline-block;
 }
 .song-name {
   color: white;
+  font-size: 13px;
 }
 
 .artist-name {
   color: rgb(173, 173, 173);
-  font-size: 13px;
+  font-size: 12px;
   margin-top: 5px;
 }
 

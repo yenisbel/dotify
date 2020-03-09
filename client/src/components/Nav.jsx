@@ -83,6 +83,7 @@ class Nav extends React.Component {
                                   e.preventDefault();
                                   localStorage.removeItem("auth-token");
                                   localStorage.removeItem("username");
+                                  localStorage.removeItem("userId");
                                   client.writeData({
                                     data: { isLoggedIn: false }
                                   });

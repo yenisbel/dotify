@@ -49,10 +49,12 @@ const client = new ApolloClient({
 
 const token = localStorage.getItem("auth-token");
 const username = localStorage.getItem("username");
+const userId = localStorage.getItem("userId");
 cache.writeData({
   data: {
     isLoggedIn: Boolean(token),
     username,
+    userId,
     currentSong: {
       _id: "5e61356b92f664f411114216",
       title: "Oh My God",
