@@ -30,7 +30,8 @@ class Signup extends Component {
     client.writeData({
       data: { 
         isLoggedIn: data.signup.loggedIn,
-        username: data.signup.username
+        username: data.signup.username,
+        userId: data.signup._id
       }
     });
   }

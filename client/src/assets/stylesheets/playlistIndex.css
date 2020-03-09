@@ -1,0 +1,16 @@
+.user-playlists{
+  list-style: none;
+}
+
+.user-playlist-li {
+  padding-bottom: 13px;
+}
+
+.user-playlist-li:hover {
+  color: white;
+}
+
+.user-playlist-li-selected {
+  padding-bottom: 13px;
+  color: white;
+}

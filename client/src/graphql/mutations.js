@@ -39,6 +39,7 @@ export default {
       token
       loggedIn
       username
+      _id
     }
   }
   `,
@@ -46,6 +47,29 @@ export default {
     mutation VerifyUser($token: String!){
       verifyUser(token: $token){
         loggedIn
+      }
+    }
+  `,
+  NEW_PLAYLIST: gql `
+    mutation newPlaylist($name: String!, $creator: ID){
+      newPlaylist(name: $name, creator: $creator){
+        _id
+        name
+        creator {
+          username
+        }
+        songs {
+          _id
+          title
+          url
+          album {
+            name
+            url
+          }
+          artist {
+            name
+          }
+        }
       }
     }
   `
