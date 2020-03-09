@@ -24,9 +24,9 @@ class Splash extends React.Component {
             </div>
             <div className="header-no-session">
               <div className="link-container">
-                <button>Premium</button>
-                <button>Help</button>
-                <button>Download</button>
+                <a href="https://www.spotify.com/us/premium/" target="_blank"><button>Premium</button></a>
+                <a href="https://www.youtube.com/watch?v=2Q_ZzBGPdqE" target="_blank"><button>Help</button></a>
+                <a href="https://www.apple.com/ios/app-store/" target="_blank"><button>Download</button></a>
                 <p className="link-divider">｜</p>
                 <Link to="/signup" className="session-links">
                   Sign Up
@@ -44,7 +44,9 @@ class Splash extends React.Component {
               Millions of songs. No credit card needed.
             </h4>
             <div className="demo-button-div">
-              <button className="demo-button">GET DOTIFY FREE</button>
+              <Link to="/signup" className="session-links">
+                <button className="demo-button">GET DOTIFY FREE</button>
+              </Link>
             </div>
           </div>
         </div>

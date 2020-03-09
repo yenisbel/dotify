@@ -35,6 +35,7 @@ class Player extends Component {
     this.toggleHeart = this.toggleHeart.bind(this);
     this.handleLoop = this.handleLoop.bind(this);
     this.playNext = this.playNext.bind(this);
+    this.playPrev = this.playPrev.bind(this);
     this.handleShuffle = this.handleShuffle.bind(this);
     this.setAlbum = this.setAlbum.bind(this);
   }
@@ -61,29 +62,25 @@ class Player extends Component {
     // this.readCache()
   };
 
-  componentDidUpdate(oldProps){
-    // if (oldProps.currentSong !== this.props.currentSong){
-    //   // this.setState({song: {songUrl: this.props.currentSong.url, songTitle: this.props.currentSong.title}})
-    // }
+  // componentDidUpdate(oldProps){
+  //   // if (oldProps.currentSong !== this.props.currentSong){
+  //   //   // this.setState({song: {songUrl: this.props.currentSong.url, songTitle: this.props.currentSong.title}})
+  //   // }
     
-  }
+  // }
 
+  handlePlay(e){
+    this.setState({playing: true})
+  };
 
   togglePlay() {
-    const pause = document.getElementById("pause");
-    const play = document.getElementById("play");
-    
     if (this.state.playing) {
       this.audioRef.pause();
       this.setState({ playing: false });
-      play.style.zIndex = "1";
-      pause.style.zIndex = "0";
 
     } else {
       this.audioRef.play();
       this.setState({ playing: true });
-      pause.style.zIndex = "1";
-      play.style.zIndex = "0";
     }
   };
 
@@ -178,20 +175,20 @@ class Player extends Component {
   //   // console.log(song)
   // }
 
-  readCache(cache) {
-    // writeData
-    let result;
+  // readCache(cache) {
+  //   // writeData
+  //   let result;
 
-    try {
-      result = cache.readQuery({
-        query: FETCH_ALBUM,
-        variables: { id: this.props.match.params.id }
-      })
-    } catch (err) {
-      console.log(err);
-    }
-    if (result) {
-      console.log(result.album.songs)
+  //   try {
+  //     result = cache.readQuery({
+  //       query: FETCH_ALBUM,
+  //       variables: { id: this.props.match.params.id }
+  //     })
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  //   if (result) {
+  //     console.log(result.album.songs)
       // let songs = result.albums.songs.url;
 
       // for (let i= 0; i < result.album.songs.length; i++){
@@ -220,8 +217,8 @@ class Player extends Component {
       // return potato.album.songs[1].url
       // set the state for the other ones
       // on end event listener
-    }
-  }
+  //   }
+  // }
 
   // playPrev(){
   //   const currentSongIndex = this.state.queue.findIndex(el => { return el.url === this.state.song.songUrl});
@@ -235,17 +232,11 @@ class Player extends Component {
   // }
 
   playNext(client){
-    // for (let i= 0; i < result.album.songs.length; i++){
-
-    // }
-    // console.log(this.state.songs);
+   
     const randomSong = this.state.queue[Math.floor(Math.random() * this.state.queue.length)];
     const currentSongIndex = this.state.queue.findIndex(el => {
-      // console.log(el, this.state.song);
       return el.url === this.state.currentSong.url 
-      // this.state.song
     });
-    // console.log(this.state.queue[currentSongIndex + 1]);
     if (this.state.shuffle){
       client.writeData({
         data: {
@@ -259,7 +250,6 @@ class Player extends Component {
           currentSong: this.state.queue[currentSongIndex + 1] ? this.state.queue[currentSongIndex + 1] : this.state.queue[0]
         }
       })
-        // .then(() => this.audioRef.play())
       this.setState({
         currentSong: this.state.queue[currentSongIndex + 1] ? this.state.queue[currentSongIndex + 1] : this.state.queue[0]},
         () => { this.audioRef.play() }
@@ -267,7 +257,33 @@ class Player extends Component {
     }
   }
 
-    // write data with current song pointing to this
+  playPrev(client){
+    const randomSong = this.state.queue[Math.floor(Math.random() * this.state.queue.length)];
+    const currentSongIndex = this.state.queue.findIndex(el => {
+      return el.url === this.state.currentSong.url
+    });
+    // console.log(this.state.queue[currentSongIndex + 1]);
+    if (this.state.shuffle) {
+      client.writeData({
+        data: {
+          currentSong: randomSong
+        }
+      })
+      this.setState({ currentSong: randomSong }, () => { this.audioRef.play() })
+    } else {
+      client.writeData({
+        data: {
+          currentSong: this.state.queue[currentSongIndex - 1] ? this.state.queue[currentSongIndex - 1] : this.state.queue[this.state.queue.length-1]
+        }
+      })
+      this.setState({
+        currentSong: this.state.queue[currentSongIndex - 1] ? this.state.queue[currentSongIndex - 1] : this.state.queue[this.state.queue.length - 1]
+      },
+        () => { this.audioRef.play() }
+      )
+    }
+  }
+
     
 
     // this.setState({
@@ -322,6 +338,8 @@ class Player extends Component {
     //   // this.readCache(client.cache);
     //   return null;
     // }
+    const playButton = <button onClick={this.togglePlay} id="play" className="play"><i className="fas fa-play"></i></button>;
+    const pauseButton = <button onClick={this.togglePlay} id="pause" className="pause"><i className="fas fa-pause"></i></button>;
     return <Query query={GET_CURRENT_ALBUM}>
       {
         ({loading, data, error}) => {
@@ -363,9 +381,10 @@ class Player extends Component {
               <div className="footer-center">
                 <div className="play-pause-buttons">
                   <button onClick={this.handleShuffle}><i id="shuffle" className="fas fa-random"></i></button>
-                  <button><i className="fas fa-step-backward"></i></button>
-                  <button onClick={this.togglePlay} id="play" className="play"><i className="fas fa-play"></i></button>
-                  <button onClick={this.togglePlay} id="pause" className="pause"><i className="fas fa-pause"></i></button>
+                  <button onClick={() => this.playPrev(client)}><i className="fas fa-step-backward"></i></button>
+                  {this.state.playing ? pauseButton : playButton}
+                  {/* <button onClick={this.togglePlay} id="play" className="play"><i className="fas fa-play"></i></button>
+                  <button onClick={this.togglePlay} id="pause" className="pause"><i className="fas fa-pause"></i></button> */}
                   <button onClick={() => this.playNext(client)}><i className="fas fa-step-forward"></i></button>
                   <button onClick={this.handleLoop}><i id="repeat" className="fas fa-sync"></i></button>
                 </div>
@@ -373,7 +392,7 @@ class Player extends Component {
                 {/* <p onClick={e => this.audio.play()} className="play">Play</p> */}
                 <div className="timeline-time">
                   <span className="currentSongTime">{this.getCurrentTime()}</span>
-                  <audio ref={audio => this.audioRef = audio} src={this.state.currentSong.url} id="song" preload="metadata" onEnded={this.togglePlay}></audio>
+                  <audio ref={audio => this.audioRef = audio} src={this.state.currentSong.url} id="song" preload="metadata" onEnded={this.togglePlay} onPlay={e => this.handlePlay(e)} autoPlay></audio>
                   <input
                     type="range"
                     id="timeline"
@@ -382,12 +401,6 @@ class Player extends Component {
                     max={this.audioRef.duration ? this.audioRef.duration : 0}
                     value={this.audioRef.currentTime ? this.audioRef.currentTime : 0}
                     onChange={this.handleTimeline}
-                  // style={{
-                  //   backgroundImage: '-webkit-gradient(linear, left top, right top, '
-                  //     + 'color-stop(' + (this.audioRef.currentTime) + ', #666666), '
-                  //     + 'color-stop(' + (this.audioRef.currrentTime) + ', #666666)'
-                  //     + ')'
-                  // }}
                   />
                   <span className="songDuration">{this.getSongDuration()}</span>
                 </div>

@@ -55,8 +55,20 @@ export default {
       newPlaylist(name: $name, creator: $creator){
         _id
         name
+        creator {
+          username
+        }
         songs {
+          _id
           title
+          url
+          album {
+            name
+            url
+          }
+          artist {
+            name
+          }
         }
       }
     }

@@ -44,12 +44,12 @@ class Nav extends React.Component {
                           <div className="undoredo">
                             <button className="undo">
                               <div>
-                                <i class="fas fa-angle-left" onClick={() => this.props.history.goBack()}></i>
+                                <i className="fas fa-angle-left" onClick={() => this.props.history.goBack()}></i>
                               </div>
                             </button>
                             <button className="redo">
                               <div>
-                                <i class="fas fa-angle-right" onClick={() => this.props.history.goForward()}></i>
+                                <i className="fas fa-angle-right" onClick={() => this.props.history.goForward()}></i>
                               </div>
                             </button>
                           </div>
