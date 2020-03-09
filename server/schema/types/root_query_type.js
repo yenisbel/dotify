@@ -1,11 +1,14 @@
 const mongoose = require("mongoose");
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLNonNull } = graphql;
+const { 
+  GraphQLObjectType, GraphQLList, GraphQLID, GraphQLNonNull, GraphQLString 
+} = graphql;
 
 const UserType = require("./user_type");
 const SongType = require("./song_type");
 const ArtistType = require("./artist_type");
 const AlbumType = require("./album_type");
+const SearchType = require("./search_type");
 const PlaylistType = require("./playlist_type");
 
 const User = mongoose.model("users");
@@ -75,16 +78,22 @@ const RootQueryType = new GraphQLObjectType({
         return Playlist.find({});
       }
     },
-    // userPlaylists: {
-    //   type: new GraphQLList(PlaylistType),
-    //   args: { user: { type: new GraphQLNonNull(GraphQLID) } },
-    //   resolve(parent, { user }) {
-    //     return User.findById(user)
-    //       .then(user => {
-    //         return user.likedPlaylists.concat(user.createdPlaylists)
-    //       });
-    //   }
-    // },
+    search: {
+      type: new GraphQLList(SearchType),
+      args: { filter: { type: new GraphQLNonNull(GraphQLString) } },
+      async resolve(parentValue, args) {
+        const albums = await Album.find({ 
+          name: { $regex: args.filter, $options: "i" }
+        });
+        const artists = await Artist.find({
+          name: { $regex: args.filter, $options: "i" } 
+        });
+        const playlists = await Playlist.find( {
+          name: { $regex: args.filter, $options: "i" }
+        });
+        return albums.concat(playlists).concat(artists);
+      },
+    },
     playlist: {
       type: PlaylistType,
       args: { _id: { type: new GraphQLNonNull(GraphQLID) } },

@@ -150,6 +150,38 @@ export default {
       }
     }
   `,
+  SEARCH: gql`
+    query search($filter: String!) {
+      search(filter: $filter) {
+        ... on AlbumType {
+          __typename
+          _id
+          name
+          genre
+          artist{
+            _id
+            name
+          }
+          url
+          songs{
+            _id
+            title
+            url
+          }
+        }
+        ... on ArtistType {
+          __typename
+          _id
+          name
+        }
+        ... on PlaylistType {
+          __typename
+          _id,
+          name
+        }
+      }
+    }
+  `,
   FETCH_PLAYLISTS: gql`
     query fetchPlaylists {
       playlists {
@@ -183,7 +215,4 @@ export default {
       }
     }
   `,
-
 }
-
-

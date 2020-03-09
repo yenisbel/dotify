@@ -3,7 +3,8 @@ import { Query, ApolloConsumer } from "react-apollo";
 import "../assets/stylesheets/Nav.css";
 import Sidebar from "./Sidebar";
 import Queries from "../graphql/queries";
-import { withRouter } from "react-router-dom";
+import { withRouter, Route } from "react-router-dom";
+import SearchBar from "./SearchBar";
 const { GET_CURRENT_USER } = Queries;
 
 
@@ -53,7 +54,10 @@ class Nav extends React.Component {
                               </div>
                             </button>
                           </div>
+                          <Route path="/search" component={SearchBar} />
                         </div>
+                        {/* <div className="header-middle">
+                        </div> */}
                         <div className="header-right">
                           <button
                             className="username-btn"

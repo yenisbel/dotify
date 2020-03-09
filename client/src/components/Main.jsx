@@ -15,6 +15,7 @@ class Main extends React.Component {
         <div className="player"><Player /></div>
         <Switch>
           <Route path="/album/:id" component={AlbumShow} />
+          {/* <Route path="/" component={Feed} /> */}
           <Route path="/playlist/:id" component={PlaylistShow} />
           <Feed/>
           {/* <Route path="/search" component={}/> */}
