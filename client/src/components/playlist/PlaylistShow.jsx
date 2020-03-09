@@ -50,7 +50,7 @@ class AlbumShow extends Component {
                       <p className="album-name">{data.playlist.name}</p>
                       <p className="left-artist-name">{data.playlist.creator.username}</p>
                       <p className="album-show-play-button" onClick={e => this.handlePlay(client, data)}>PLAY</p>
-                      <p className="song-count">{data.playlist.songs.length}</p>
+                      <p className="song-count">{data.playlist.songs.length} songs</p>
                     </div>
                     <div className="right-side">
                       <ul>

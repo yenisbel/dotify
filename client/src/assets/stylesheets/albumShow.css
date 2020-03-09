@@ -11,7 +11,7 @@
 .songInfo{
   display: flex;
   margin-bottom: 20px;
-  width: 400px;
+  width: 50vw;
   height: 6.5vh;
   padding: 5px;
   cursor: default;
