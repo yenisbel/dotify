@@ -1,7 +1,7 @@
 import React from "react";
 import Item from "./Item";
 import SearchResults from "./SearchResults";
-import { Route } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import { Query } from "react-apollo";
 import Queries from "../graphql/queries";
 import "../assets/stylesheets/feed.css";
@@ -40,4 +40,4 @@ class Feed extends React.Component{
  
 };
  
-export default Feed;
+export default withRouter(Feed);
