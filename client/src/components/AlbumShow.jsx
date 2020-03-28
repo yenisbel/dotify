@@ -16,11 +16,20 @@ class AlbumShow extends Component {
   }
 
   handlePlay(client, data, song){
-    console.log(song);
     client.writeData({
       data: {
         currentAlbum: data.album,
         currentSong: song
+      }
+    })
+  }
+
+  handlePlayAlbum(client, data, song) {
+    console.log(data);
+    client.writeData({
+      data: {
+        currentAlbum: data.album,
+        currentSong: data.album.songs[0]
       }
     })
   }
@@ -38,7 +47,7 @@ class AlbumShow extends Component {
                     <img className="left-album-cover" src={data.album.url}></img>
                     <p className="album-name">{data.album.name}</p>
                     <p className="left-artist-name">{data.album.artist.name}</p>
-                    <p className="album-show-play-button" onClick={e => this.handlePlay(client, data)}>PLAY</p>
+                    <p className="album-show-play-button" onClick={() => this.handlePlayAlbum(client, data)}>PLAY</p>
                     <p className="song-count">{data.album.songs.length} songs</p>
                   </div>
                   <div className="right-side">
