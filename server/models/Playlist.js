@@ -36,7 +36,8 @@ PlaylistSchema.statics.deletePlaylist = (playlistId) => {
 
   return Playlist.findByIdAndDelete(playlistId)
     .then(playlist => {
-      return User.findByIdAndUpdate(playlist.creator, { $pull: { createdPlaylists: playlist._id}})
+      User.findByIdAndUpdate(playlist.creator, { $pull: { createdPlaylists: playlist._id}})
+      return playlist;
     })
 };
 
