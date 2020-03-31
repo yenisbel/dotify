@@ -35,7 +35,6 @@ class PlaylistForm extends React.Component {
     if (playlists) {
       let playlistsArray = playlists.playlists;
       let newPlaylist = data.newPlaylist;
-      debugger
       cache.writeQuery({
         query: FETCH_PLAYLISTS,
         data: { playlists: playlistsArray.concat(newPlaylist) }

@@ -3,8 +3,10 @@ import { Mutation, Query, ApolloConsumer } from "react-apollo";
 import Queries from "../../graphql/queries";
 import Player from "../Player";
 import Default from "../../assets/images/default.png";
+import Mutations from "../../graphql/mutations";
 
-const { FETCH_PLAYLIST } = Queries;
+const { DELETE_PLAYLIST } = Mutations;
+const { FETCH_PLAYLIST, FETCH_PLAYLISTS } = Queries;
 
 class AlbumShow extends Component {
   constructor(props) {
@@ -21,6 +23,33 @@ class AlbumShow extends Component {
     })
   }
 
+  handleDelete(deletePlaylist) {
+    deletePlaylist({
+      variables: {
+        playlistId: this.props.match.params.id
+      }
+    });
+    this.props.history.push("/");
+  }
+
+  updateCache(cache, { data }) {
+    let playlists;
+    try {
+      playlists = cache.readQuery({ query: FETCH_PLAYLISTS });
+    } catch (err) {
+      console.log(err)
+    }
+    
+    if (playlists) {
+      let playlistId = data.deletePlaylist._id;
+      playlists = playlists.playlists.filter(playlist => playlist._id !== playlistId)
+      cache.writeQuery({
+        query: FETCH_PLAYLISTS,
+        data: { playlists }
+      });
+    }
+  }
+
   render() {
     return (
       <ApolloConsumer>
@@ -32,7 +61,6 @@ class AlbumShow extends Component {
               {({ loading, error, data }) => {
                 if (loading) return <p>Loading...</p>;
                 if (error) return <p>Error</p>;
-                console.log(data)
                 return (
                   <div className="playlist-show"
                     style={{
@@ -51,6 +79,18 @@ class AlbumShow extends Component {
                       <p className="left-artist-name">{data.playlist.creator.username}</p>
                       <p className="album-show-play-button" onClick={e => this.handlePlay(client, data)}>PLAY</p>
                       <p className="song-count">{data.playlist.songs.length} songs</p>
+                      <Mutation
+                        mutation={DELETE_PLAYLIST}
+                        update={(cache, data) => this.updateCache(cache, data)} 
+                      >
+                        {(deletePlaylist, { data }) => {
+                          return (
+                            <button onClick={() => this.handleDelete(deletePlaylist)}>
+                              DELETE
+                            </button>
+                          )
+                        }}
+                      </Mutation>
                     </div>
                     <div className="right-side">
                       <ul>

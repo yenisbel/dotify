@@ -72,5 +72,16 @@ export default {
         }
       }
     }
-  `
+  `,
+  DELETE_PLAYLIST: gql `
+    mutation deletePlaylist($playlistId: ID!){
+      deletePlaylist(playlist: $playlistId) {
+        _id
+      }
+    }
+  `,
+  // ADD_PLAYLIST_SONG: gql `
+  // `,
+  // DELETE_PLAYLIST_SONG: gql `
+  // `
 }
