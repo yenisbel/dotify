@@ -365,6 +365,8 @@ class Player extends Component {
               }
               if (loading || !this.state.currentSong) return null;
               if (error) return `${error}`;
+              console.log(data.currentSong);
+              // const albumCover = data ? data.currentSong.url : "";
               // console.log(data);
               // console.log(this.state.currentSong);
               return(

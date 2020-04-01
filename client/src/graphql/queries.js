@@ -196,6 +196,7 @@ export default {
   FETCH_PLAYLIST: gql`
     query fetchPlaylist($id: ID!) {
       playlist(_id: $id) {
+        _id
         name
         creator {
           username

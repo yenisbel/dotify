@@ -17,8 +17,17 @@ class AlbumShow extends Component {
     console.log(song);
     client.writeData({
       data: {
-        currentAlbum: data.album,
+        currentAlbum: data.playlist,
         currentSong: song
+      }
+    })
+  }
+
+  handlePlayPlaylist(client, data, song) {
+    client.writeData({
+      data: {
+        currentAlbum: data.playlist,
+        currentSong: data.playlist.songs[0]
       }
     })
   }
@@ -77,7 +86,7 @@ class AlbumShow extends Component {
                       <img className="left-album-cover" src={Default}/>
                       <p className="album-name">{data.playlist.name}</p>
                       <p className="left-artist-name">{data.playlist.creator.username}</p>
-                      <p className="album-show-play-button" onClick={e => this.handlePlay(client, data)}>PLAY</p>
+                      <p className="album-show-play-button" onClick={e => this.handlePlayPlaylist(client, data)}>PLAY</p>
                       <p className="song-count">{data.playlist.songs.length} songs</p>
                       <Mutation
                         mutation={DELETE_PLAYLIST}

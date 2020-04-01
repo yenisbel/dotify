@@ -8,7 +8,7 @@ import { ApolloClient } from 'apollo-client';
 
 
 
-const { FETCH_ALBUM} = Queries;
+const { FETCH_ALBUM } = Queries;
 
 class AlbumShow extends Component {
   constructor(props){
@@ -16,6 +16,7 @@ class AlbumShow extends Component {
   }
 
   handlePlay(client, data, song){
+    console.log(data);
     client.writeData({
       data: {
         currentAlbum: data.album,

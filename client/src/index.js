@@ -58,7 +58,10 @@ cache.writeData({
     currentSong: {
       _id: "5e61356b92f664f411114216",
       title: "Oh My God",
-      url: "https://dotify-aa-dev.s3.us-east-2.amazonaws.com/Oh+My+God.mp3"
+      url: "https://dotify-aa-dev.s3.us-east-2.amazonaws.com/Oh+My+God.mp3",
+      album: {
+        url: ""
+      }
     },
     currentAlbum: {
       _id: "5e61353192f664f411114215",
