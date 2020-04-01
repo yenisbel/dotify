@@ -24,11 +24,41 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // const httpLink = createHttpLink({
-//   uri,
-//   headers: {
-//     authorization: localStorage.getItem("auth-token")
-//   }
-// });
+  //   uri,
+  //   headers: {
+    //     authorization: localStorage.getItem("auth-token")
+    //   }
+    // });
+const token = localStorage.getItem("auth-token");
+const username = localStorage.getItem("username");
+const userId = localStorage.getItem("userId");
+cache.writeData({
+  data: {
+    isLoggedIn: Boolean(token),
+    username,
+    userId,
+    currentSong: {
+      _id: "5e61356b92f664f411114216",
+      title: "Oh My God",
+      url: "https://dotify-aa-dev.s3.us-east-2.amazonaws.com/Oh+My+God.mp3",
+      album: {
+        url: ""
+      },
+      __typename: "song"
+    },
+    currentAlbum: {
+      _id: "5e61353192f664f411114215",
+      songs: {_id: "", url:"", title:"", __typename: "songs"},
+      artist: {
+        _id: "5e6134b292f664f411114214", 
+        name: "Alec Benjamin",
+        __typename: "artist"
+      },
+      url: "https://dotify-aa-dev.s3.us-east-2.amazonaws.com/ohMyGod_album.png",
+      __typename: "album"
+    }
+  }
+});
 
 const client = new ApolloClient({
   cache,
@@ -47,32 +77,6 @@ const client = new ApolloClient({
   }
 });
 
-const token = localStorage.getItem("auth-token");
-const username = localStorage.getItem("username");
-const userId = localStorage.getItem("userId");
-cache.writeData({
-  data: {
-    isLoggedIn: Boolean(token),
-    username,
-    userId,
-    currentSong: {
-      _id: "5e61356b92f664f411114216",
-      title: "Oh My God",
-      url: "https://dotify-aa-dev.s3.us-east-2.amazonaws.com/Oh+My+God.mp3",
-      album: {
-        url: ""
-      }
-    },
-    currentAlbum: {
-      _id: "5e61353192f664f411114215",
-      songs: {_id: "", url:"", title:""},
-      artist: {
-        _id: "5e6134b292f664f411114214", 
-        name: "Alec Benjamin"},
-      url: "https://dotify-aa-dev.s3.us-east-2.amazonaws.com/ohMyGod_album.png"
-    }
-  }
-});
 
 //preload song 
 

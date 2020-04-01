@@ -344,6 +344,7 @@ class Player extends Component {
       {
         ({loading, data, error}) => {
           // check if key is set yet. use the data to set all the keys 
+          if (!data) return null;
           if (loading) return "loading";
           if (error) return `${error}`;
           if ((!this.state.album && data) || (this.state.album !== data.currentAlbum.url)){
