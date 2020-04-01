@@ -90,7 +90,8 @@ class Login extends Component {
                     Sign Up for Dotify
                   </Link>
                   </button>
-                  <button className="demo-login" onClick={() => {
+                  <button className="demo-login" onClick={(e) => {
+                    e.preventDefault();
                     loginUser({
                       variables: {
                         username: "Demon",
