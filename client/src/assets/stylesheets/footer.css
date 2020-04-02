@@ -34,6 +34,10 @@
   text-decoration: underline;
 }
 
+.fa-github, .fa-linkedin{
+  margin-right: 3px;
+}
+
 @media (max-width: 900px) {
   .inner-container {
     margin: 0 18.5%;
