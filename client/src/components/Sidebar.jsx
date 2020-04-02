@@ -85,10 +85,10 @@ class Sidebar extends React.Component {
               Create Playlist
             </div> 
           </button>
-          <button className="liked-songs">
+          {/* <button className="liked-songs">
             <img src={liked} className="liked-image"/>
             <div className="liked">Liked Songs</div> 
-          </button>
+          </button> */}
           <hr className="playlist-divider" />
           <PlaylistIndex props={props}/>
         </div>

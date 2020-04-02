@@ -326,7 +326,7 @@ class Player extends Component {
     // console.log(data.currentAlbum.songs);
     this.setState({
       queue: data.currentAlbum.songs,
-      album: data.currentAlbum.url
+      album: data.currentAlbum
     })
   }
   // .map(song => { return { song: { songTitle: song.title, songUrl: song.url } } })
@@ -347,11 +347,13 @@ class Player extends Component {
           if (!data) return null;
           if (loading) return "loading";
           if (error) return `${error}`;
-          if ((!this.state.album && data) || (this.state.album !== data.currentAlbum.url)){
+          console.log("album", this.state.album);
+          console.log("currentAlbum", data.currentAlbum);
+          if ((!this.state.album && data) || (this.state.album !== data.currentAlbum)){
             this.setAlbum(data)
           }
-          const albumCover = data ? data.currentAlbum.url : "";
-          const artistName = data ? data.currentAlbum.artist.name : "";
+          // const albumCover = data ? data.currentAlbum.url : "";
+          // const artistName = data ? data.currentAlbum.artist.name : "";
           // console.log(data);
           return (
             <ApolloConsumer>
@@ -366,6 +368,9 @@ class Player extends Component {
               }
               if (loading || !this.state.currentSong) return null;
               if (error) return `${error}`;
+              const albumCover = data ? data.currentSong.album.url : "";
+              const artistName = data ? data.currentSong.artist.name : "";
+              // const albumCover = data ? data.currentSong.url : "";
               // console.log(data);
               // console.log(this.state.currentSong);
               return(

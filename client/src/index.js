@@ -41,6 +41,14 @@ cache.writeData({
       _id: "5e61356b92f664f411114216",
       title: "Oh My God",
       url: "https://dotify-aa-dev.s3.us-east-2.amazonaws.com/Oh+My+God.mp3",
+      album: {
+        url: "https://dotify-aa-dev.s3.us-east-2.amazonaws.com/ohMyGod_album.png",
+        __typename: "album"
+      },
+      artist: {
+        name: "Alec Benjamin",
+        __typename: "artist"
+      },
       __typename: "song"
     },
     currentAlbum: {
@@ -51,7 +59,7 @@ cache.writeData({
         name: "Alec Benjamin",
         __typename: "artist"
       },
-      url: "https://dotify-aa-dev.s3.us-east-2.amazonaws.com/ohMyGod_album.png",
+      url: "hello",
       __typename: "album"
     }
   }

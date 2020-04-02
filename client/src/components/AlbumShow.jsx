@@ -8,7 +8,7 @@ import { ApolloClient } from 'apollo-client';
 
 
 
-const { FETCH_ALBUM} = Queries;
+const { FETCH_ALBUM } = Queries;
 
 class AlbumShow extends Component {
   constructor(props){

@@ -42,15 +42,10 @@ export default {
     query GetCurrentAlbum {
       currentAlbum @client{
         _id
-        url
         songs {
           _id
           title
           url
-        }
-        artist{
-          _id
-          name
         }
       }
     }
@@ -61,6 +56,12 @@ export default {
         _id
         title
         url
+        album {
+          url
+        }
+        artist {
+          name
+        }
       }
     }
   `,
@@ -142,6 +143,12 @@ export default {
           _id
           title
           url
+          album {
+            url
+          }
+          artist {
+            name
+          }
         }
         artist{
           _id
@@ -196,6 +203,7 @@ export default {
   FETCH_PLAYLIST: gql`
     query fetchPlaylist($id: ID!) {
       playlist(_id: $id) {
+        _id
         name
         creator {
           username
