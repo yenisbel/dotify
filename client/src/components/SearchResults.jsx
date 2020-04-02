@@ -17,7 +17,6 @@ class SearchResults extends Component {
           {({ loading, error, data }) => {
             if (loading) return "Loading...";
             if (error) return `Error! ${error.message}`;
-            console.log(data);
             let albums;
             if (data) {
               albums = data.search.filter(obj => (

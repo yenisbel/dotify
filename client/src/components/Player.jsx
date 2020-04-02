@@ -347,8 +347,6 @@ class Player extends Component {
           if (!data) return null;
           if (loading) return "loading";
           if (error) return `${error}`;
-          console.log("album", this.state.album);
-          console.log("currentAlbum", data.currentAlbum);
           if ((!this.state.album && data) || (this.state.album !== data.currentAlbum)){
             this.setAlbum(data)
           }

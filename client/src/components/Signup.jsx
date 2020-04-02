@@ -26,7 +26,6 @@ class Signup extends Component {
   }
 
   updateCache(client, { data }) {
-    console.log(data);
     client.writeData({
       data: { 
         isLoggedIn: data.signup.loggedIn,
