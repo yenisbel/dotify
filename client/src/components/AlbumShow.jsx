@@ -16,7 +16,6 @@ class AlbumShow extends Component {
   }
 
   handlePlay(client, data, song){
-    console.log(data);
     client.writeData({
       data: {
         currentAlbum: data.album,
