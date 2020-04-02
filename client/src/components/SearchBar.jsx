@@ -29,7 +29,7 @@ export default class SearchBar extends Component {
             value={this.state.filter}
             onChange={this.handleChange}
             className="search-bar"
-            placeholder="Search for Artists, Albums, or Playlists"
+            placeholder="Type 3+ characters and press enter to search"
           >
           </input>
         </div>
