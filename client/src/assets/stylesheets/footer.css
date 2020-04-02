@@ -14,8 +14,8 @@
 
 .footer-links > h3 {
   margin-top: 40px;
-  font-weight: 600;
-  font-size: 12px;
+  font-weight: 400;
+  font-size: 16px;
 }
 
 .github-img, .linkedin-img {
@@ -32,6 +32,10 @@
 
 .github-img > a:hover, .linkedin-img > a:hover {
   text-decoration: underline;
+}
+
+.fa-github, .fa-linkedin{
+  margin-right: 3px;
 }
 
 @media (max-width: 900px) {

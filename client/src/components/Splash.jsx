@@ -60,7 +60,7 @@ class Splash extends React.Component {
               </div>
               <div className="linkedin-img">
                 <i className="fab fa-linkedin"></i>
-                <a href="#"> LinkedIn</a>
+                <a href="https://www.linkedin.com/in/cindy-kuo-92621a1a5/"> LinkedIn</a>
               </div>
             </div>
             <div className="footer-links">
@@ -71,7 +71,7 @@ class Splash extends React.Component {
               </div>
               <div className="linkedin-img">
                 <i className="fab fa-linkedin"></i>
-                <a href="#"> LinkedIn</a>
+                <a href="https://www.linkedin.com/in/kieran-scannell-31326574/"> LinkedIn</a>
               </div>
             </div>
             <div className="footer-links">
@@ -82,7 +82,7 @@ class Splash extends React.Component {
               </div>
               <div className="linkedin-img">
                 <i className="fab fa-linkedin"></i>
-                <a href="#"> LinkedIn</a>
+                <a href="https://www.linkedin.com/in/max-lin-dev/"> LinkedIn</a>
               </div>
             </div>
             <div className="footer-links">
@@ -93,7 +93,7 @@ class Splash extends React.Component {
               </div>
               <div className="linkedin-img">
                 <i className="fab fa-linkedin"></i>
-                <a href="#"> LinkedIn</a>
+                <a href="https://www.linkedin.com/in/yenisbelv/"> LinkedIn</a>
               </div>
             </div>
           </div>
