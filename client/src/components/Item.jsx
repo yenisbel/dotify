@@ -17,6 +17,7 @@ class Item extends React.Component {
        currentSong: this.props.album.songs[0]
        }
    });
+   
  }
  
  render(){

@@ -34,7 +34,7 @@ class AlbumShow extends Component {
     })
   }
 
-  render(){
+  render(){ //react-apollo uses render prop pattern to share GraphQL data with the UI
     return (
       <ApolloConsumer>
         {(client) => {

@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 // const keys = require("../config2/keys");
 const keys = require("../config3/keys");
 const db = keys.MONGO_URI;
-const expressGraphQL = require("express-graphql");
+const expressGraphQL = require("express-graphql"); // middleware between express and graphQL
 const Models = require("./models/index.js");
 const schema = require("./schema/schema");
 const cors = require("cors");
@@ -16,10 +16,6 @@ const app = express();
 const multer = require("multer");
 // const { graphqlUploadExpress } = require("graphql-upload");
 const { singleFileUpload } = require("./services/s3")
-
-
-
-
 
 
 if (!db) {
@@ -33,21 +29,21 @@ mongoose
 
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+  app.use(express.static("client/build")); // built in middleware function to serve static files
   app.get("/", (req, res) => {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
 
-app.use(cors());
-app.use(bodyParser.json());
+app.use(cors()); //let servers describe which origins are permitted to read that information from a web browser.
+app.use(bodyParser.json()); // use bodyParser to parse requests into json
 
 app.use(
   "/graphql",
   // graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 }),
   expressGraphQL({
     schema,
-    graphiql: true
+    graphiql: true //lets us use GraphiQl tool
   })
 );
 

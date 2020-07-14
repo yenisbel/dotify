@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 
 import ApolloClient from "apollo-boost";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import { ApolloProvider } from "react-apollo";
+import { ApolloProvider } from "react-apollo"; // connect apollo to react, gives all components access to ApolloProvider
 import Mutations from "./graphql/mutations";
 import { HashRouter } from "react-router-dom";
 const { VERIFY_USER } = Mutations;
@@ -23,12 +23,6 @@ if (process.env.NODE_ENV === "production") {
   uri = "http://localhost:5000/graphql";
 }
 
-// const httpLink = createHttpLink({
-  //   uri,
-  //   headers: {
-    //     authorization: localStorage.getItem("auth-token")
-    //   }
-    // });
 const token = localStorage.getItem("auth-token");
 const username = localStorage.getItem("username");
 const userId = localStorage.getItem("userId");
@@ -82,7 +76,6 @@ const client = new ApolloClient({
   }
 });
 
-
 //preload song 
 
 if (token) {
@@ -105,7 +98,7 @@ if (token) {
 
 const Root = () => {
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={client}> 
       <HashRouter>
         <App />
       </HashRouter>
@@ -119,3 +112,10 @@ ReactDOM.render(<Root />, document.getElementById("root"));
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+// const httpLink = createHttpLink({
+  //   uri,
+  //   headers: {
+    //     authorization: localStorage.getItem("auth-token")
+    //   }
+    // });

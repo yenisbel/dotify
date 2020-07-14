@@ -12,7 +12,7 @@ const AlbumType = new GraphQLObjectType({
     genre: { type: GraphQLString },
     artist: {
       type: require("./artist_type"),
-      resolve(parentValue) {
+      resolve(parentValue) { // the resolve function will be where we tell GraphQL how to get data from our database.
         return Album.findById(parentValue._id)
         .populate("artist")
         .then(album => {

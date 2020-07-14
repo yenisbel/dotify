@@ -8,7 +8,6 @@ import Player from "./Player";
 import Splash from "./Splash";
 import AlbumShow from "./AlbumShow";
 
-
 const App = () => {
   return (
     <div>
@@ -17,6 +16,7 @@ const App = () => {
         <AuthRoute exact path="/signup" component={Signup} routeType="auth" />
         <AuthRoute exact path="/splash" component={Splash} routeType="auth" />
         <AuthRoute path="/" component={Main} />
+
       </Switch>
     </div>
   );

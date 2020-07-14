@@ -15,6 +15,8 @@ const PlaylistSchema = new Schema({
   }]
 });
 
+//statics allow for defining functions that exist directly on the model.
+
 PlaylistSchema.statics.addPlaylistSong = (playlistId, songId) => {
   const Playlist = mongoose.model('playlists');
 
