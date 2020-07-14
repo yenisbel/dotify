@@ -5,7 +5,7 @@ const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLInt } = graphql;
 
 const SongType = new GraphQLObjectType({
   name: "SongType",
-  // to wrap the fields in a thunk to avoid circular dependency issues
+  // to wrap the fields in a thunk to avoid circular dependency issues where two types reference each other
   fields: () => ({
     _id: { type: GraphQLID },
     title: { type: GraphQLString },
